@@ -129,6 +129,15 @@
       </button>
     </nav>
 
+    <!-- BARRA INSTRUCTOR PASO A PASO (SIN POPUPS) -->
+    <div id="instructorBar" class="rounded-2xl bg-sky-50 border border-sky-200 px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs">
+      <div class="min-w-0">
+        <span id="instructorStepBadge" class="inline-block px-2 py-0.5 rounded-md bg-sky-700 text-white font-bold text-[10px] mr-1.5">Paso 1</span>
+        <span id="instructorStepText" class="text-slate-800 font-medium">Escribe el nombre de tu obra y cliente, luego toca <strong>+ Agregar Ventana</strong>.</span>
+      </div>
+      <button type="button" id="instructorActionBtn" onclick="switchAppTab('design')" class="px-2.5 py-1 rounded-lg bg-sky-700 text-white font-semibold text-[11px] shrink-0">Siguiente</button>
+    </div>
+
     <!-- PESTAÑA 2: DISEÑAR (CONFIGURADOR + CAD + PRECIO) -->
     <div id="tabPanelDesign" class="hidden space-y-4 max-w-full overflow-hidden">
       <!-- Barra de Obra Activa en Diseñar -->
@@ -583,8 +592,7 @@
       <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 text-xs">
         <div class="flex items-center gap-2">
           <button type="button" onclick="startNewBlankProject()" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700">Nueva Obra</button>
-          <button type="button" onclick="loadSampleCasa140(); closeProjectsModal();" class="px-3 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/35 text-sky-700 border border-amber-400/30">Ejemplo Casa 140m²</button>
-          <button type="button" onclick="exportBackupJSON()" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-600/40 text-emerald-700 border border-emerald-300">Exportar JSON</button>
+          <button type="button" onclick="exportBackupJSON()" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300">Exportar JSON</button>
           <label class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">
             Importar JSON
             <input type="file" accept=".json" onchange="importBackupJSON(event)" class="hidden">
@@ -895,8 +903,9 @@
        MOTOR TÉCNICO DE CANCELERÍA, PERSISTENCIA Y OPTIMIZACIÓN
        ======================================================== -->
   <script>
-    const STORAGE_KEY_STATE = 'alupro_suite_state_v2';
-    const STORAGE_KEY_HISTORY = 'alupro_suite_history_v2';
+    const TALLER_ID = (new URLSearchParams(window.location.search).get('taller') || 'default').toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'default';
+    const STORAGE_KEY_STATE = 'alupro_suite_state_v2_' + TALLER_ID;
+    const STORAGE_KEY_HISTORY = 'alupro_suite_history_v2_' + TALLER_ID;
 
     const DEFAULT_SETTINGS = {
       workshopName: 'MI TALLER DE CANCELERÍA',
@@ -1527,7 +1536,7 @@
       });
     }
 
-    const TELEMETRY_KEY = 'alupro_telemetry_v1';
+    const TELEMETRY_KEY = 'alupro_telemetry_v1_' + TALLER_ID;
     function getTelemetry() {
       try {
         return JSON.parse(localStorage.getItem(TELEMETRY_KEY) || '{"steps":{},"events":[]}');
@@ -1540,6 +1549,7 @@
         t.events.push({ at: new Date().toLocaleTimeString('es-MX'), action: stepKey, detail: detail || '' });
         if (t.events.length > 40) t.events = t.events.slice(-40);
         localStorage.setItem(TELEMETRY_KEY, JSON.stringify(t));
+        updateInstructorBar();
       } catch (e) {}
     }
     function openGuideModal() {
@@ -1580,19 +1590,49 @@
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
+    function updateInstructorBar() {
+      const t = getTelemetry();
+      const badge = document.getElementById('instructorStepBadge');
+      const text = document.getElementById('instructorStepText');
+      const btn = document.getElementById('instructorActionBtn');
+      if (!badge || !text || !btn) return;
+      if (!t.steps.obra_nombrada && projectPieces.length === 0) {
+        badge.textContent = 'Paso 1 de 4';
+        text.innerHTML = 'Escribe el <strong>Nombre de la Obra</strong> y <strong>Cliente</strong>, luego toca <strong>+ Agregar Ventana</strong>.';
+        btn.textContent = 'Ir a Agregar';
+        btn.onclick = () => switchAppTab('design');
+      } else if (!t.steps.precios_editados) {
+        badge.textContent = 'Paso 2 de 4';
+        text.innerHTML = 'Revisa tus <strong>precios de aluminio, vidrio y mano de obra</strong> en Mi Taller.';
+        btn.textContent = 'Ir a Mi Taller';
+        btn.onclick = () => switchAppTab('settings');
+      } else if (projectPieces.length === 0) {
+        badge.textContent = 'Paso 3 de 4';
+        text.innerHTML = 'Elige el tipo de ventana, medidas y toca <strong>+ Agregar a la Obra</strong>.';
+        btn.textContent = 'Ir a Agregar';
+        btn.onclick = () => switchAppTab('design');
+      } else if (!t.steps.pdf_abierto) {
+        badge.textContent = 'Paso 4 de 4';
+        text.innerHTML = '¡Listo! Revisa los cortes en <strong>Taller</strong> o genera tu <strong>Cotización PDF</strong>.';
+        btn.textContent = 'Ver PDF';
+        btn.onclick = () => showLetterheadModal();
+      } else {
+        badge.textContent = '✓ Completo';
+        text.innerHTML = `Llevas <strong>${projectPieces.length} partida(s)</strong>. Puedes guardar en <strong>Mis Obras</strong> o iniciar una <strong>+ Nueva</strong>.`;
+        btn.textContent = 'Mis Obras';
+        btn.onclick = () => openProjectsModal();
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       loadSavedState();
       applyWorkshopBranding();
       populateWorkshopSelect();
       setupWorkshopControls();
       setupEconomicControls();
-      if (new URLSearchParams(window.location.search).get('casa140') === '1') {
-        loadSampleCasa140(true);
-      } else if (!localStorage.getItem('alupro_seen_guide_v1')) {
-        setTimeout(openGuideModal, 400);
-      }
       updateProjectUI();
       updateCalculations();
+      updateInstructorBar();
     });
 
     function loadSampleCasa140(silent) {
