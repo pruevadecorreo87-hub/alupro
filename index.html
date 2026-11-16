@@ -39,35 +39,43 @@
     }
 
     body {
-      background-color: #0b0d10;
+      background-color: #0d1218;
+      background-image:
+        linear-gradient(180deg, rgba(13, 18, 24, 0.45) 0%, rgba(10, 14, 18, 0.78) 100%),
+        url('./hero-bg.jpg');
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
       color: #f5f5f7;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     .zen-glass {
-      background: rgba(28, 28, 30, 0.96);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      background: rgba(18, 24, 31, 0.86);
+      backdrop-filter: blur(30px) saturate(150%);
+      -webkit-backdrop-filter: blur(30px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
     }
 
     .zen-card {
-      background: #1c1c1e;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32);
+      background: rgba(20, 26, 33, 0.56);
+      backdrop-filter: blur(26px) saturate(145%);
+      -webkit-backdrop-filter: blur(26px) saturate(145%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
     }
 
     .btn-zen-cream {
-      background: #e5c99b;
-      color: #111315;
+      background: rgba(242, 226, 200, 0.94);
+      color: #11161c;
       font-weight: 700;
-      box-shadow: 0 4px 16px rgba(229, 201, 155, 0.20);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       transition: transform 0.15s ease, background-color 0.15s ease;
     }
     .btn-zen-cream:hover {
-      background: #f0d7ad;
+      background: #fff3df;
     }
     .btn-zen-cream:active {
       transform: scale(0.97);
@@ -79,8 +87,8 @@
 </head>
 <body class="min-h-screen antialiased relative overflow-x-hidden pb-12">
 
-  <!-- ================= BARRA SUPERIOR LIMPIA ESTILO iOS ================= -->
-  <header class="relative z-30 w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3 border-b border-white/10 bg-[#121214]/90 backdrop-blur-xl sticky top-0">
+  <!-- ================= BARRA SUPERIOR MINIMALISTA ================= -->
+  <header class="relative z-30 w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3 border-b border-white/10 bg-black/20 backdrop-blur-xl sticky top-0">
     <div class="flex items-center gap-3 min-w-0">
       <div id="hdrLogoBox" class="w-10 h-10 rounded-2xl bg-[#e5c99b] text-[#111315] flex items-center justify-center font-bold text-sm shadow shrink-0 overflow-hidden">
         <img id="hdrWorkshopLogo" src="" alt="Logo" class="hidden w-full h-full object-contain bg-white p-0.5">
@@ -526,20 +534,20 @@
 
   </main>
 
-  <!-- BARRA INFERIOR TIPO APP NATIVA IPHONE -->
-  <footer class="no-print md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#121214]/95 backdrop-blur-2xl border-t border-white/10 px-2 pt-1.5 pb-2">
+  <!-- BARRA INFERIOR FLOTANTE GLASSMORPHISM ESTILO IPHONE -->
+  <footer class="no-print md:hidden fixed bottom-2.5 inset-x-3 z-40 bg-white/12 backdrop-blur-2xl border border-white/20 rounded-3xl px-2 py-1.5 shadow-2xl">
     <div class="max-w-3xl mx-auto grid grid-cols-4 gap-1 text-[10px] font-semibold">
-      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-xl bg-[#e5c99b] text-[#111315] font-bold flex flex-col items-center justify-center gap-0.5 relative transition">
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-2xl bg-[#e5c99b] text-[#111315] font-bold flex flex-col items-center justify-center gap-0.5 relative transition">
         <span class="text-base leading-none">🏠</span><span>Obras</span>
         <span class="app-obra-badge absolute top-0.5 right-3 px-1.5 rounded-full bg-[#30D158] text-[#111315] text-[9px] font-bold font-mono">0</span>
       </button>
-      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-400 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-2xl text-stone-200 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
         <span class="text-base leading-none">📐</span><span>Agregar</span>
       </button>
-      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-400 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-2xl text-stone-200 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
         <span class="text-base leading-none">✂️</span><span>Taller</span>
       </button>
-      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-400 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-1.5 px-1 rounded-2xl text-stone-200 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
         <span class="text-base leading-none">⚙️</span><span>Mi Taller</span>
       </button>
     </div>

@@ -1,5 +1,5 @@
-const CACHE_NAME = 'alupro-suite-v7';
-const ASSETS = ['./', './index.html', './manifest.json', './icon.svg', './tailwindcss.min.js'];
+const CACHE_NAME = 'alupro-suite-v8';
+const ASSETS = ['./', './index.html', './manifest.json', './icon.svg', './icon-app.jpg', './hero-bg.jpg', './tailwindcss.min.js'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
