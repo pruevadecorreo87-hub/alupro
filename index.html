@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="AluPro">
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/svg+xml" href="./icon.svg">
-  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="icon" type="image/jpeg" href="./icon-app.jpg">
+  <link rel="apple-touch-icon" href="./icon-app.jpg">
   <title>AluPro Suite Industrial • Cancelería y Taller de Precisión</title>
   <script src="./tailwindcss.min.js"></script>
   <style>
@@ -82,50 +82,50 @@
 <body class="min-h-screen antialiased relative overflow-x-hidden pb-12">
 
   <!-- ================= BARRA SUPERIOR UNIVERSAL ================= -->
-  <header class="relative z-30 w-full px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[#151813]/95 backdrop-blur-md sticky top-0 shadow-lg">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl bg-[#d6c5b0] text-[#181b15] flex items-center justify-center font-bold text-sm shadow">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+  <header class="relative z-30 w-full px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 border-b border-white/10 bg-[#151813]/95 backdrop-blur-md sticky top-0 shadow-lg">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#d6c5b0] text-[#181b15] flex items-center justify-center font-bold text-sm shadow shrink-0">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h1m3-4v8m3-12v16m3-10v4m3-8v12m3-6h1"/>
         </svg>
       </div>
-      <div>
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-sm font-bold tracking-tight text-white">AluPro Suite Industrial</span>
-          <span id="hdrActiveProjectBadge" class="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-[#d6c5b0]/20 text-[#e8dfd2] border border-[#d6c5b0]/30">Obra Actual</span>
+      <div class="min-w-0">
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs sm:text-sm font-bold tracking-tight text-white truncate">AluPro</span>
+          <span id="hdrActiveProjectBadge" class="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-[#d6c5b0]/20 text-[#e8dfd2] border border-[#d6c5b0]/30 truncate max-w-[110px] sm:max-w-none">Obra Actual</span>
         </div>
-        <p class="text-[11px] text-stone-300">Despiece Milimétrico • Optimización 6.00 m • Costeo Real</p>
+        <p class="hidden sm:block text-[11px] text-stone-300">Despiece Milimétrico • Optimización 6.00 m • Costeo Real</p>
       </div>
     </div>
 
-    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-      <button type="button" onclick="openProjectsModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-white border border-white/15 hover:bg-white/20 transition">
-        <span>📂 Mis Obras</span>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button type="button" onclick="openProjectsModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-white border border-white/15 hover:bg-white/20 transition">
+        <span>📂</span><span class="hidden sm:inline">Mis</span><span>Obras</span>
       </button>
 
-      <button type="button" onclick="openSettingsModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-[#d6c5b0] border border-white/15 hover:bg-white/20 transition">
-        <span>⚙️ Precios y Fórmulas</span>
+      <button type="button" onclick="openSettingsModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-white/10 text-[#d6c5b0] border border-white/15 hover:bg-white/20 transition" title="Precios y Fórmulas">
+        <span>⚙️</span><span class="hidden sm:inline">Precios</span>
       </button>
 
-      <button type="button" onclick="showMatecoModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600/25 text-emerald-200 border border-emerald-500/40 hover:bg-emerald-600/35 transition">
+      <button type="button" onclick="showMatecoModal()" class="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600/25 text-emerald-200 border border-emerald-500/40 hover:bg-emerald-600/35 transition">
         <span>📋 Surtido 6m</span>
       </button>
 
-      <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/25 hover:bg-amber-500/40 text-amber-200 border border-amber-400/40 transition">
-        <span>📲 Instalar App</span>
+      <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1 px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-amber-500/25 hover:bg-amber-500/40 text-amber-200 border border-amber-400/40 transition">
+        <span>📲</span><span class="hidden sm:inline">Instalar</span>
       </button>
 
-      <button type="button" onclick="showLetterheadModal()" class="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold btn-zen-cream">
-        <span>📄 Cotización PDF</span>
+      <button type="button" onclick="showLetterheadModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold btn-zen-cream">
+        <span>📄</span><span>PDF</span>
       </button>
     </div>
   </header>
 
   <!-- ================= CUERPO PRINCIPAL (MODO APP POR PESTAÑAS) ================= -->
-  <main class="relative z-10 w-full max-w-7xl mx-auto p-3 sm:p-5 pb-24 space-y-4">
+  <main class="relative z-10 w-full max-w-7xl mx-auto p-2.5 sm:p-5 pb-24 md:pb-8 space-y-3 sm:space-y-4">
 
-    <!-- BARRA DE PESTAÑAS DE APP -->
-    <nav class="zen-card rounded-2xl p-1.5 grid grid-cols-4 gap-1.5 text-[11px] sm:text-xs font-semibold">
+    <!-- BARRA DE PESTAÑAS DE APP (SOLO ESCRITORIO) -->
+    <nav class="hidden md:grid zen-card rounded-2xl p-1.5 grid-cols-4 gap-1.5 text-xs font-semibold">
       <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-2 px-2 rounded-xl bg-[#d6c5b0] text-[#181b15] font-bold flex items-center justify-center gap-1.5 transition">
         <span>📐</span><span class="truncate">Diseñar</span>
       </button>
@@ -144,78 +144,78 @@
     <!-- PESTAÑA 1: DISEÑAR (CONFIGURADOR + CAD + PRECIO) -->
     <div id="tabPanelDesign" class="space-y-4">
     <!-- PANEL 1: CONFIGURADOR DE VANO Y LÍNEA -->
-    <section class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+    <section class="zen-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 space-y-3">
+      <div class="flex items-center justify-between gap-2 border-b border-white/10 pb-2">
         <div>
-          <h2 class="text-sm sm:text-base font-bold text-white">1. Configuración de Ventana / Vano</h2>
-          <p class="text-xs text-stone-300">Ingresa ubicación, línea, medidas en cm y tipo de cristal. Todo se guarda automáticamente.</p>
+          <h2 class="text-xs sm:text-base font-bold text-white">1. Configuración de Vano</h2>
+          <p class="hidden sm:block text-xs text-stone-300">Ingresa ubicación, línea, medidas en cm y tipo de cristal. Todo se guarda automáticamente.</p>
         </div>
-        <div class="flex items-center gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10 text-stone-200">Disco: <strong id="lblTopKerf" class="text-emerald-300">3.0 mm</strong></span>
-          <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">Auto-Guardado ✓</span>
+        <div class="flex items-center gap-1.5 text-[10px] sm:text-xs">
+          <span class="px-2 py-0.5 rounded-lg bg-black/40 border border-white/10 text-stone-200">Disco: <strong id="lblTopKerf" class="text-emerald-300">3.0 mm</strong></span>
+          <span class="px-2 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">✓ Guardado</span>
         </div>
       </div>
 
-      <!-- Fila 1 de Controles -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 items-end">
+      <!-- Fila 1 de Controles (2 columnas compactas en celular) -->
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-2.5 sm:gap-3.5 items-end">
         
-        <!-- Etiqueta / Ubicación -->
-        <div class="space-y-1 lg:col-span-2">
-          <label for="expInputTag" class="text-xs font-semibold text-stone-200 block">Ubicación / Clave:</label>
-          <input type="text" id="expInputTag" value="V-01 Sala" placeholder="Ej. V-01 Sala" class="w-full p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-semibold text-[#d6c5b0] focus:outline-none focus:border-[#d6c5b0]">
-        </div>
-
-        <!-- Sistema / Línea -->
-        <div class="space-y-1 sm:col-span-2 lg:col-span-4">
-          <label for="expSelModel" class="text-xs font-semibold text-stone-200 block">Sistema / Línea de Aluminio:</label>
-          <select id="expSelModel" class="w-full p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-medium text-white focus:outline-none focus:border-[#d6c5b0]">
+        <!-- Sistema / Línea (primero y ancho completo en celular) -->
+        <div class="space-y-1 min-w-0 col-span-2 lg:col-span-4 lg:order-2">
+          <label for="expSelModel" class="text-[11px] sm:text-xs font-semibold text-stone-200 block">Sistema / Línea de Aluminio:</label>
+          <select id="expSelModel" class="w-full p-2 sm:p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-medium text-white focus:outline-none focus:border-[#d6c5b0]">
           </select>
         </div>
 
+        <!-- Etiqueta / Ubicación -->
+        <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-1">
+          <label for="expInputTag" class="text-[11px] sm:text-xs font-semibold text-stone-200 block truncate">Ubicación / Clave:</label>
+          <input type="text" id="expInputTag" value="V-01 Sala" placeholder="Ej. V-01 Sala" class="w-full min-w-0 p-2 sm:p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-semibold text-[#d6c5b0] focus:outline-none focus:border-[#d6c5b0]">
+        </div>
+
+        <!-- Cantidad de Piezas -->
+        <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-5">
+          <label for="expInputQty" class="text-[11px] sm:text-xs font-semibold text-stone-200 block truncate">Cantidad (Pzas):</label>
+          <div class="flex items-center gap-1 min-w-0">
+            <button type="button" onclick="adjustQty(-1)" class="px-2 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-stone-200 font-bold text-xs border border-white/10 shrink-0">-</button>
+            <input type="number" id="expInputQty" min="1" max="100" step="1" value="1" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustQty(1)" class="px-2 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10 shrink-0">+</button>
+          </div>
+        </div>
+
         <!-- Ancho (W) -->
-        <div class="space-y-1 lg:col-span-2">
-          <div class="flex items-center justify-between text-xs">
-            <label for="expInputW" class="font-semibold text-stone-200">Ancho (W):</label>
+        <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-3">
+          <div class="flex items-center justify-between text-[11px] sm:text-xs">
+            <label for="expInputW" class="font-semibold text-stone-200">Ancho:</label>
             <span id="expBadgeW" class="font-mono text-[#d6c5b0] font-bold">150.0</span>
           </div>
-          <div class="flex items-center gap-1">
-            <button type="button" onclick="adjustDimension('w', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">-5</button>
-            <input type="number" id="expInputW" min="30" max="500" step="0.1" value="150" class="flex-1 min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
-            <button type="button" onclick="adjustDimension('w', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">+5</button>
+          <div class="flex items-center gap-1 min-w-0">
+            <button type="button" onclick="adjustDimension('w', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">-5</button>
+            <input type="number" id="expInputW" min="30" max="500" step="0.1" value="150" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustDimension('w', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">+5</button>
           </div>
           <input type="range" id="expRngW" min="50" max="350" step="1" value="150" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded cursor-pointer mt-1">
         </div>
 
         <!-- Alto (H) -->
-        <div class="space-y-1 lg:col-span-2">
-          <div class="flex items-center justify-between text-xs">
-            <label for="expInputH" class="font-semibold text-stone-200">Alto (H):</label>
+        <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-4">
+          <div class="flex items-center justify-between text-[11px] sm:text-xs">
+            <label for="expInputH" class="font-semibold text-stone-200">Alto:</label>
             <span id="expBadgeH" class="font-mono text-[#d6c5b0] font-bold">120.0</span>
           </div>
-          <div class="flex items-center gap-1">
-            <button type="button" onclick="adjustDimension('h', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">-5</button>
-            <input type="number" id="expInputH" min="30" max="400" step="0.1" value="120" class="flex-1 min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
-            <button type="button" onclick="adjustDimension('h', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">+5</button>
+          <div class="flex items-center gap-1 min-w-0">
+            <button type="button" onclick="adjustDimension('h', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">-5</button>
+            <input type="number" id="expInputH" min="30" max="400" step="0.1" value="120" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustDimension('h', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">+5</button>
           </div>
           <input type="range" id="expRngH" min="40" max="300" step="1" value="120" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded cursor-pointer mt-1">
         </div>
-
-        <!-- Cantidad de Piezas -->
-        <div class="space-y-1 lg:col-span-2">
-          <label for="expInputQty" class="text-xs font-semibold text-stone-200 block">Cantidad (Pzas):</label>
-          <div class="flex items-center gap-1">
-            <button type="button" onclick="adjustQty(-1)" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-stone-200 font-bold text-xs border border-white/10">-</button>
-            <input type="number" id="expInputQty" min="1" max="100" step="1" value="1" class="flex-1 min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
-            <button type="button" onclick="adjustQty(1)" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">+</button>
-          </div>
-        </div>
       </div>
 
-      <!-- Fila 2 de configuración -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 pt-2 border-t border-white/10 items-center">
-        <div class="lg:col-span-3 flex items-center gap-2">
-          <label for="expSelColor" class="text-xs font-semibold text-stone-200 whitespace-nowrap">Aluminio:</label>
-          <select id="expSelColor" class="w-full p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
+      <!-- Fila 2 de configuración (2 columnas compactas en celular) -->
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-2.5 sm:gap-3.5 pt-2 border-t border-white/10 items-center">
+        <div class="min-w-0 col-span-1 lg:col-span-3 space-y-1 lg:space-y-0 lg:flex lg:items-center lg:gap-2">
+          <label for="expSelColor" class="text-[11px] sm:text-xs font-semibold text-stone-200 whitespace-nowrap block">Aluminio:</label>
+          <select id="expSelColor" class="w-full min-w-0 p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
             <option value="Negro Mate">Negro Mate (Anodizado)</option>
             <option value="Blanco">Blanco (Electrostático)</option>
             <option value="Champagne">Champagne / Titanio</option>
@@ -224,9 +224,9 @@
           </select>
         </div>
 
-        <div class="lg:col-span-3 flex items-center gap-2">
-          <label for="expSelGlass" class="text-xs font-semibold text-stone-200 whitespace-nowrap">Cristal:</label>
-          <select id="expSelGlass" class="w-full p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
+        <div class="min-w-0 col-span-1 lg:col-span-3 space-y-1 lg:space-y-0 lg:flex lg:items-center lg:gap-2">
+          <label for="expSelGlass" class="text-[11px] sm:text-xs font-semibold text-stone-200 whitespace-nowrap block">Cristal:</label>
+          <select id="expSelGlass" class="w-full min-w-0 p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
             <option value="Claro 6mm">Claro Flotado 6mm</option>
             <option value="Claro 4mm">Claro Flotado 4mm</option>
             <option value="Filtrasol 6mm">Filtrasol Humo 6mm</option>
@@ -236,7 +236,7 @@
           </select>
         </div>
 
-        <div class="lg:col-span-6 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="col-span-2 lg:col-span-6 flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs">
           <div class="flex flex-wrap items-center gap-4">
             <label class="flex items-center gap-1.5 cursor-pointer text-stone-200 select-none">
               <input type="checkbox" id="expChkMosquitero" class="w-4 h-4 accent-[#d6c5b0] rounded">
@@ -494,8 +494,8 @@
 
   </main>
 
-  <!-- BARRA INFERIOR TIPO APP NATIVA -->
-  <footer class="no-print fixed bottom-0 inset-x-0 z-40 bg-[#141712]/95 backdrop-blur-xl border-t border-white/15 px-2 py-1.5">
+  <!-- BARRA INFERIOR TIPO APP NATIVA (MÓVIL / VENTANA ANGOSTA) -->
+  <footer class="no-print md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#141712]/95 backdrop-blur-xl border-t border-white/15 px-2 py-1.5">
     <div class="max-w-3xl mx-auto grid grid-cols-4 gap-1 text-[10px] font-semibold">
       <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-xl bg-[#d6c5b0] text-[#181b15] font-bold flex flex-col items-center justify-center gap-0.5 transition">
         <span class="text-sm">📐</span><span>Diseñar</span>
