@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#181b15">
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="AluPro">
@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="./icon-app.jpg">
   <title>AluPro Suite Industrial • Cancelería y Taller de Precisión</title>
   <script src="./tailwindcss.min.js"></script>
-  <style>
+    <style>
     @media print {
       body > *:not(#printContainer) { display: none !important; }
       #printContainer {
@@ -39,46 +39,36 @@
     }
 
     body {
-      background-color: #0d1218;
-      background-image:
-        linear-gradient(180deg, rgba(13, 18, 24, 0.45) 0%, rgba(10, 14, 18, 0.78) 100%),
-        url('./hero-bg.jpg');
-      background-position: center center;
-      background-size: cover;
-      background-attachment: fixed;
-      color: #f5f5f7;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     .zen-glass {
-      background: rgba(18, 24, 31, 0.86);
-      backdrop-filter: blur(30px) saturate(150%);
-      -webkit-backdrop-filter: blur(30px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
     }
 
     .zen-card {
-      background: rgba(20, 26, 33, 0.56);
-      backdrop-filter: blur(26px) saturate(145%);
-      -webkit-backdrop-filter: blur(26px) saturate(145%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 4px 14px rgba(15, 23, 42, 0.03);
     }
 
     .btn-zen-cream {
-      background: rgba(242, 226, 200, 0.94);
-      color: #11161c;
-      font-weight: 700;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.16);
       transition: transform 0.15s ease, background-color 0.15s ease;
     }
     .btn-zen-cream:hover {
-      background: #fff3df;
+      background: #1e293b;
     }
     .btn-zen-cream:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -87,43 +77,48 @@
 </head>
 <body class="min-h-screen antialiased relative overflow-x-hidden pb-12">
 
-  <!-- ================= BARRA SUPERIOR MINIMALISTA ================= -->
-  <header class="relative z-30 w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3 border-b border-white/10 bg-black/20 backdrop-blur-xl sticky top-0">
+    <!-- ================= BARRA SUPERIOR ESTUDIO CLARO ================= -->
+  <header class="relative z-30 w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3 border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0">
     <div class="flex items-center gap-3 min-w-0">
-      <div id="hdrLogoBox" class="w-10 h-10 rounded-2xl bg-[#e5c99b] text-[#111315] flex items-center justify-center font-bold text-sm shadow shrink-0 overflow-hidden">
+      <div id="hdrLogoBox" class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-sm shrink-0 overflow-hidden">
         <img id="hdrWorkshopLogo" src="" alt="Logo" class="hidden w-full h-full object-contain bg-white p-0.5">
-        <svg id="hdrDefaultIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h1m3-4v8m3-12v16m3-10v4m3-8v12m3-6h1"/>
+        <svg id="hdrDefaultIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75h16.5v16.5H3.75V3.75zm8.25 0v16.5M3.75 12h16.5"/>
         </svg>
       </div>
       <div class="min-w-0">
-        <span id="hdrWorkshopName" class="text-[15px] font-bold tracking-tight text-white block truncate">Mi Taller de Cancelería</span>
-        <span id="hdrActiveProjectBadge" class="text-xs font-medium text-[#e5c99b] block truncate">Obra Actual</span>
+        <span id="hdrWorkshopName" class="text-[15px] font-bold tracking-tight text-slate-900 block truncate">Mi Taller de Cancelería</span>
+        <span id="hdrActiveProjectBadge" class="text-xs font-medium text-sky-700 block truncate">Obra Actual</span>
       </div>
     </div>
 
-    <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-[#0A84FF] text-white shadow shrink-0">
-      <span>📲 Instalar</span>
+    <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white shadow-sm shrink-0">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+      <span>Instalar App</span>
     </button>
   </header>
 
   <!-- ================= CUERPO PRINCIPAL (ESTILO iPHONE 4 PESTAÑAS) ================= -->
   <main class="relative z-10 w-full max-w-5xl mx-auto p-3.5 sm:p-6 pb-28 md:pb-10 space-y-4">
 
-    <!-- BARRA DE PESTAÑAS DE APP (SOLO ESCRITORIO) -->
-    <nav class="hidden md:grid bg-[#1c1c1e] border border-white/10 rounded-2xl p-1.5 grid-cols-4 gap-1.5 text-xs font-semibold">
-      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-2.5 px-3 rounded-xl bg-[#e5c99b] text-[#111315] font-bold flex items-center justify-center gap-2 transition">
-        <span>🏠</span><span>Obras</span>
-        <span class="app-obra-badge px-2 py-0.5 rounded-full bg-black/15 text-[11px] font-mono">0</span>
+        <!-- BARRA DE PESTAÑAS DE APP (SOLO ESCRITORIO) -->
+    <nav class="hidden md:grid bg-white border border-slate-200 rounded-2xl p-1.5 grid-cols-4 gap-1.5 text-xs font-semibold shadow-sm">
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-2.5 px-3 rounded-xl bg-slate-900 text-white font-semibold flex items-center justify-center gap-2 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75"/></svg>
+        <span>Obras</span>
+        <span class="app-obra-badge px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-mono font-bold">0</span>
       </button>
-      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-2.5 px-3 rounded-xl text-stone-300 hover:text-white flex items-center justify-center gap-2 transition">
-        <span>📐</span><span>Agregar</span>
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        <span>Agregar</span>
       </button>
-      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-2.5 px-3 rounded-xl text-stone-300 hover:text-white flex items-center justify-center gap-2 transition">
-        <span>✂️</span><span>Taller</span>
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085"/></svg>
+        <span>Taller</span>
       </button>
-      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-2.5 px-3 rounded-xl text-stone-300 hover:text-white flex items-center justify-center gap-2 transition">
-        <span>⚙️</span><span>Mi Taller</span>
+      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <span>Mi Taller</span>
       </button>
     </nav>
 
@@ -132,23 +127,23 @@
       <!-- Barra de Obra Activa en Diseñar -->
       <div class="zen-card rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs">
         <div class="min-w-0 truncate">
-          <span class="text-stone-400">Obra:</span>
-          <strong id="designActiveWorkLabel" class="text-white">Obra Actual</strong>
+          <span class="text-slate-500">Obra:</span>
+          <strong id="designActiveWorkLabel" class="text-slate-900">Obra Actual</strong>
           <span class="text-stone-500 mx-1">•</span>
-          <span id="designActiveClientLabel" class="text-[#d6c5b0]">Cliente Residencial</span>
+          <span id="designActiveClientLabel" class="text-slate-900">Cliente Residencial</span>
         </div>
-        <button type="button" onclick="switchAppTab('project')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-stone-200 text-[11px] font-semibold shrink-0">Cambiar Obra</button>
+        <button type="button" onclick="switchAppTab('project')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold shrink-0">Cambiar Obra</button>
       </div>
     <!-- PANEL 1: CONFIGURADOR DE VANO Y LÍNEA -->
     <section class="zen-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 space-y-3 max-w-full overflow-hidden">
-      <div class="flex items-center justify-between gap-2 border-b border-white/10 pb-2">
+      <div class="flex items-center justify-between gap-2 border-b border-slate-200 pb-2">
         <div>
-          <h2 class="text-xs sm:text-base font-bold text-white">Medidas de Tu Ventana o Puerta</h2>
-          <p class="hidden sm:block text-xs text-stone-300">Elige el modelo, las medidas en cm y el cristal. Todo se guarda automático.</p>
+          <h2 class="text-xs sm:text-base font-bold text-slate-900">Medidas de Tu Ventana o Puerta</h2>
+          <p class="hidden sm:block text-xs text-slate-600">Elige el modelo, las medidas en cm y el cristal. Todo se guarda automático.</p>
         </div>
         <div class="flex items-center gap-1.5 text-[10px] sm:text-xs">
-          <span class="px-2 py-0.5 rounded-lg bg-black/40 border border-white/10 text-stone-200">Disco: <strong id="lblTopKerf" class="text-emerald-300">3.0 mm</strong></span>
-          <span class="px-2 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">✓ Listo</span>
+          <span class="px-2 py-0.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700">Disco: <strong id="lblTopKerf" class="text-emerald-700">3.0 mm</strong></span>
+          <span class="px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-300 font-semibold">✓ Listo</span>
         </div>
       </div>
 
@@ -157,61 +152,61 @@
         
         <!-- Sistema / Línea (primero y ancho completo en celular) -->
         <div class="space-y-1 min-w-0 col-span-2 lg:col-span-4 lg:order-2">
-          <label for="expSelModel" class="text-[11px] sm:text-xs font-semibold text-stone-200 block">Tipo de Ventana o Puerta:</label>
-          <select id="expSelModel" class="w-full p-2 sm:p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-medium text-white focus:outline-none focus:border-[#d6c5b0]">
+          <label for="expSelModel" class="text-[11px] sm:text-xs font-semibold text-slate-700 block">Tipo de Ventana o Puerta:</label>
+          <select id="expSelModel" class="w-full p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-medium text-slate-900 focus:outline-none focus:border-[#d6c5b0]">
           </select>
         </div>
 
         <!-- Etiqueta / Ubicación -->
         <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-1">
-          <label for="expInputTag" class="text-[11px] sm:text-xs font-semibold text-stone-200 block truncate">¿Dónde va? (Ej. Sala):</label>
-          <input type="text" id="expInputTag" value="V-01 Sala" placeholder="Ej. V-01 Sala" class="w-full min-w-0 p-2 sm:p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-semibold text-[#d6c5b0] focus:outline-none focus:border-[#d6c5b0]">
+          <label for="expInputTag" class="text-[11px] sm:text-xs font-semibold text-slate-700 block truncate">¿Dónde va? (Ej. Sala):</label>
+          <input type="text" id="expInputTag" value="V-01 Sala" placeholder="Ej. V-01 Sala" class="w-full min-w-0 p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-semibold text-slate-900 focus:outline-none focus:border-[#d6c5b0]">
         </div>
 
         <!-- Cantidad de Piezas -->
         <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-5">
-          <label for="expInputQty" class="text-[11px] sm:text-xs font-semibold text-stone-200 block truncate">Cantidad (Pzas):</label>
+          <label for="expInputQty" class="text-[11px] sm:text-xs font-semibold text-slate-700 block truncate">Cantidad (Pzas):</label>
           <div class="flex items-center gap-1 min-w-0">
-            <button type="button" onclick="adjustQty(-1)" class="px-2 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-stone-200 font-bold text-xs border border-white/10 shrink-0">-</button>
-            <input type="number" id="expInputQty" min="1" max="100" step="1" value="1" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
-            <button type="button" onclick="adjustQty(1)" class="px-2 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10 shrink-0">+</button>
+            <button type="button" onclick="adjustQty(-1)" class="px-2 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 shrink-0">-</button>
+            <input type="number" id="expInputQty" min="1" max="100" step="1" value="1" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-slate-50 border border-slate-300 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustQty(1)" class="px-2 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs border border-slate-200 shrink-0">+</button>
           </div>
         </div>
 
         <!-- Ancho (W) -->
         <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-3">
           <div class="flex items-center justify-between text-[11px] sm:text-xs">
-            <label for="expInputW" class="font-semibold text-stone-200">Ancho:</label>
-            <span id="expBadgeW" class="font-mono text-[#d6c5b0] font-bold">150.0</span>
+            <label for="expInputW" class="font-semibold text-slate-700">Ancho:</label>
+            <span id="expBadgeW" class="font-mono text-slate-900 font-bold">150.0</span>
           </div>
           <div class="flex items-center gap-1 min-w-0">
-            <button type="button" onclick="adjustDimension('w', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">-5</button>
-            <input type="number" id="expInputW" min="30" max="500" step="0.1" value="150" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
-            <button type="button" onclick="adjustDimension('w', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">+5</button>
+            <button type="button" onclick="adjustDimension('w', -5)" class="px-1.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-[11px] border border-slate-200 shrink-0">-5</button>
+            <input type="number" id="expInputW" min="30" max="500" step="0.1" value="150" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-slate-50 border border-slate-300 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustDimension('w', 5)" class="px-1.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-[11px] border border-slate-200 shrink-0">+5</button>
           </div>
-          <input type="range" id="expRngW" min="50" max="350" step="1" value="150" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded cursor-pointer mt-1">
+          <input type="range" id="expRngW" min="50" max="350" step="1" value="150" class="w-full accent-[#d6c5b0] bg-slate-200 h-1.5 rounded cursor-pointer mt-1">
         </div>
 
         <!-- Alto (H) -->
         <div class="space-y-1 min-w-0 col-span-1 lg:col-span-2 lg:order-4">
           <div class="flex items-center justify-between text-[11px] sm:text-xs">
-            <label for="expInputH" class="font-semibold text-stone-200">Alto:</label>
-            <span id="expBadgeH" class="font-mono text-[#d6c5b0] font-bold">120.0</span>
+            <label for="expInputH" class="font-semibold text-slate-700">Alto:</label>
+            <span id="expBadgeH" class="font-mono text-slate-900 font-bold">120.0</span>
           </div>
           <div class="flex items-center gap-1 min-w-0">
-            <button type="button" onclick="adjustDimension('h', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">-5</button>
-            <input type="number" id="expInputH" min="30" max="400" step="0.1" value="120" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
-            <button type="button" onclick="adjustDimension('h', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-[11px] border border-white/10 shrink-0">+5</button>
+            <button type="button" onclick="adjustDimension('h', -5)" class="px-1.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-[11px] border border-slate-200 shrink-0">-5</button>
+            <input type="number" id="expInputH" min="30" max="400" step="0.1" value="120" class="w-full min-w-0 p-1.5 text-center rounded-lg bg-slate-50 border border-slate-300 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustDimension('h', 5)" class="px-1.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-[11px] border border-slate-200 shrink-0">+5</button>
           </div>
-          <input type="range" id="expRngH" min="40" max="300" step="1" value="120" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded cursor-pointer mt-1">
+          <input type="range" id="expRngH" min="40" max="300" step="1" value="120" class="w-full accent-[#d6c5b0] bg-slate-200 h-1.5 rounded cursor-pointer mt-1">
         </div>
       </div>
 
       <!-- Fila 2 de configuración (2 columnas compactas en celular) -->
-      <div class="grid grid-cols-2 lg:grid-cols-12 gap-2.5 sm:gap-3.5 pt-2 border-t border-white/10 items-center">
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-2.5 sm:gap-3.5 pt-2 border-t border-slate-200 items-center">
         <div class="min-w-0 col-span-1 lg:col-span-3 space-y-1 lg:space-y-0 lg:flex lg:items-center lg:gap-2">
-          <label for="expSelColor" class="text-[11px] sm:text-xs font-semibold text-stone-200 whitespace-nowrap block">Aluminio:</label>
-          <select id="expSelColor" class="w-full min-w-0 p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
+          <label for="expSelColor" class="text-[11px] sm:text-xs font-semibold text-slate-700 whitespace-nowrap block">Aluminio:</label>
+          <select id="expSelColor" class="w-full min-w-0 p-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900">
             <option value="Negro Mate">Negro Mate (Anodizado)</option>
             <option value="Blanco">Blanco (Electrostático)</option>
             <option value="Champagne">Champagne / Titanio</option>
@@ -221,8 +216,8 @@
         </div>
 
         <div class="min-w-0 col-span-1 lg:col-span-3 space-y-1 lg:space-y-0 lg:flex lg:items-center lg:gap-2">
-          <label for="expSelGlass" class="text-[11px] sm:text-xs font-semibold text-stone-200 whitespace-nowrap block">Cristal:</label>
-          <select id="expSelGlass" class="w-full min-w-0 p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
+          <label for="expSelGlass" class="text-[11px] sm:text-xs font-semibold text-slate-700 whitespace-nowrap block">Cristal:</label>
+          <select id="expSelGlass" class="w-full min-w-0 p-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900">
             <option value="Claro 6mm">Claro Flotado 6mm</option>
             <option value="Claro 4mm">Claro Flotado 4mm</option>
             <option value="Filtrasol 6mm">Filtrasol Humo 6mm</option>
@@ -234,18 +229,18 @@
 
         <div class="col-span-2 lg:col-span-6 flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs">
           <div class="flex flex-wrap items-center gap-4">
-            <label class="flex items-center gap-1.5 cursor-pointer text-stone-200 select-none">
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 select-none">
               <input type="checkbox" id="expChkMosquitero" class="w-4 h-4 accent-[#d6c5b0] rounded">
               <span>Mosquitero Corredizo</span>
             </label>
-            <label class="flex items-center gap-1.5 cursor-pointer text-stone-200 select-none">
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 select-none">
               <input type="checkbox" id="expChkFelpa" checked class="w-4 h-4 accent-[#d6c5b0] rounded">
               <span>Felpa Fin-Seal</span>
             </label>
           </div>
           <div class="flex items-center gap-3 font-mono text-[11px]">
-            <span class="text-stone-300">Área: <strong id="expMetricArea" class="text-white">1.80 m²</strong></span>
-            <span class="text-stone-300">Peso: <strong id="expMetricKg" class="text-emerald-300">0.0 kg</strong></span>
+            <span class="text-slate-600">Área: <strong id="expMetricArea" class="text-slate-900">1.80 m²</strong></span>
+            <span class="text-slate-600">Peso: <strong id="expMetricKg" class="text-emerald-700">0.0 kg</strong></span>
           </div>
         </div>
       </div>
@@ -258,18 +253,18 @@
       <div class="lg:col-span-7">
         <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-white">📐 Elevación CAD en Vivo</h3>
-            <span class="text-[11px] font-mono text-[#e8dfd2] bg-black/50 px-2.5 py-0.5 rounded-full border border-white/15" id="expBadgeDimsTop">
+            <h3 class="text-sm font-bold text-slate-900">Plano CAD en Vivo</h3>
+            <span class="text-[11px] font-mono text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200" id="expBadgeDimsTop">
               150.0 × 120.0 cm
             </span>
           </div>
 
-          <div id="expCadCanvas" class="w-full h-64 sm:h-72 bg-[#141813] rounded-2xl border border-white/15 flex items-center justify-center p-2 relative overflow-hidden">
+          <div id="expCadCanvas" class="w-full h-64 sm:h-72 bg-[#141813] rounded-2xl border border-slate-200 flex items-center justify-center p-2 relative overflow-hidden">
           </div>
 
-          <div class="p-2.5 rounded-xl bg-black/50 border border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <span class="text-stone-300">🪟 Corte de Cristal:</span>
-            <strong id="expGlassDimsCallout" class="font-mono text-amber-300">2 pzas de 69.7 × 109.0 cm</strong>
+          <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span class="text-slate-600">Cristal a cortar:</span>
+            <strong id="expGlassDimsCallout" class="font-mono text-sky-700">2 pzas de 69.7 × 109.0 cm</strong>
           </div>
         </div>
       </div>
@@ -277,37 +272,37 @@
       <!-- Costeo Profesional Detallado (5 cols en desktop) -->
       <div class="lg:col-span-5">
         <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
             <div>
-              <span class="text-xs text-stone-300 block">Precio Venta Sugerido (<span id="expPieceQtyLabel">1 pza</span>):</span>
-              <p id="expPiecePriceTag" class="text-2xl font-black text-[#d6c5b0]">$0 MXN</p>
+              <span class="text-xs text-slate-600 block">Precio Venta Sugerido (<span id="expPieceQtyLabel">1 pza</span>):</span>
+              <p id="expPiecePriceTag" class="text-2xl font-black text-slate-900">$0 MXN</p>
             </div>
-            <div class="text-right text-xs text-stone-300">
+            <div class="text-right text-xs text-slate-600">
               <span>Anticipo 60%:</span>
-              <p id="expPieceDownPayment" class="text-base font-bold text-white font-mono">$0 MXN</p>
+              <p id="expPieceDownPayment" class="text-base font-bold text-slate-900 font-mono">$0 MXN</p>
             </div>
           </div>
 
           <!-- Desglose real: Material + Mano de Obra + Instalación -->
-          <div class="grid grid-cols-3 gap-2 text-[11px] bg-black/35 p-2.5 rounded-xl border border-white/10">
+          <div class="grid grid-cols-3 gap-2 text-[11px] bg-slate-50 p-2.5 rounded-xl border border-slate-200">
             <div>
-              <span class="text-stone-400 block">Material Neto</span>
-              <strong id="expCostMat" class="text-emerald-300 font-mono">$0</strong>
+              <span class="text-slate-500 block">Material Neto</span>
+              <strong id="expCostMat" class="text-emerald-700 font-mono">$0</strong>
             </div>
             <div>
-              <span class="text-stone-400 block">Mano de Obra</span>
-              <strong id="expCostLabor" class="text-white font-mono">$0</strong>
+              <span class="text-slate-500 block">Mano de Obra</span>
+              <strong id="expCostLabor" class="text-slate-900 font-mono">$0</strong>
             </div>
             <div>
-              <span class="text-stone-400 block">Instalación/Flete</span>
-              <strong id="expCostInstall" class="text-white font-mono">$0</strong>
+              <span class="text-slate-500 block">Instalación/Flete</span>
+              <strong id="expCostInstall" class="text-slate-900 font-mono">$0</strong>
             </div>
           </div>
 
           <button type="button" id="btnAddPiece" onclick="addCurrentPieceToProject()" class="w-full py-3 rounded-xl btn-zen-cream font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg">
-            <span>➕ Agregar al Proyecto de Obra</span>
+            <span>+ Agregar a la Obra</span>
           </button>
-          <div id="toastAdded" class="hidden text-center text-xs font-semibold text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 rounded-lg py-1.5">
+          <div id="toastAdded" class="hidden text-center text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-300 rounded-lg py-1.5">
             ✓ Partida guardada en la obra automáticamente
           </div>
         </div>
@@ -318,37 +313,37 @@
 
     <!-- Switcher Global de Alcance (Visible en Cortes y Vidrio/Herrajes) -->
     <div id="scopeBanner" class="hidden zen-card rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2">
-      <span class="text-xs font-semibold text-stone-200">Mostrando cálculo técnico de:</span>
-      <div class="flex items-center gap-1 bg-black/60 p-1 rounded-xl border border-white/15 text-xs">
-        <button type="button" id="btnScopeCurrent" onclick="setBarsScope('current')" class="px-3 py-1 rounded-lg font-bold bg-[#d6c5b0] text-[#181b15]">Pieza Actual</button>
-        <button type="button" id="btnScopeProject" onclick="setBarsScope('project')" class="px-3 py-1 rounded-lg font-medium text-stone-300 hover:text-white">Toda la Obra Consolidada</button>
+      <span class="text-xs font-semibold text-slate-700">Mostrando cálculo técnico de:</span>
+      <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+        <button type="button" id="btnScopeCurrent" onclick="setBarsScope('current')" class="px-3 py-1 rounded-lg font-bold bg-slate-900 text-white">Pieza Actual</button>
+        <button type="button" id="btnScopeProject" onclick="setBarsScope('project')" class="px-3 py-1 rounded-lg font-medium text-slate-600 hover:text-slate-900">Toda la Obra Consolidada</button>
       </div>
     </div>
 
     <!-- PESTAÑA 3: TALLER (SEGMENTED CONTROL ESTILO iPHONE) -->
     <div id="tabPanelCuts" class="hidden space-y-4">
-      <div class="bg-[#1c1c1e] border border-white/10 rounded-2xl p-1.5 grid grid-cols-4 gap-1 text-xs font-semibold">
+      <div class="bg-white border border-slate-200 rounded-2xl p-1.5 grid grid-cols-4 gap-1 text-xs font-semibold">
         <button type="button" data-tallertab="cuts" onclick="switchTallerSubTab('cuts')" class="taller-sub-btn py-2 rounded-xl bg-[#e5c99b] text-[#111315] font-bold transition">Cortes</button>
-        <button type="button" data-tallertab="bars" onclick="switchTallerSubTab('bars')" class="taller-sub-btn py-2 rounded-xl text-stone-300 hover:text-white transition">Barras 6m</button>
-        <button type="button" data-tallertab="glass" onclick="switchTallerSubTab('glass')" class="taller-sub-btn py-2 rounded-xl text-stone-300 hover:text-white transition">Cristales</button>
-        <button type="button" data-tallertab="hw" onclick="switchTallerSubTab('hw')" class="taller-sub-btn py-2 rounded-xl text-stone-300 hover:text-white transition">Herrajes</button>
+        <button type="button" data-tallertab="bars" onclick="switchTallerSubTab('bars')" class="taller-sub-btn py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Barras 6m</button>
+        <button type="button" data-tallertab="glass" onclick="switchTallerSubTab('glass')" class="taller-sub-btn py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Cristales</button>
+        <button type="button" data-tallertab="hw" onclick="switchTallerSubTab('hw')" class="taller-sub-btn py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Herrajes</button>
       </div>
 
       <!-- SUB-VISTA 1: CORTES -->
       <div id="tallerSubCuts" class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
             <div>
-              <h3 class="text-sm font-bold text-white">✂️ Cortes en Taller</h3>
-              <p class="text-xs text-stone-400">Medidas exactas y ángulo de sierra.</p>
+              <h3 class="text-sm font-bold text-slate-900">Cortes en Taller</h3>
+              <p class="text-xs text-slate-500">Medidas exactas y ángulo de sierra.</p>
             </div>
-            <button type="button" onclick="printWorkshopSheet(barsScope === 'project')" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white flex items-center gap-1.5 transition">
-              <span>🖨️ Imprimir Hoja</span>
+            <button type="button" onclick="printWorkshopSheet(barsScope === 'project')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-900 flex items-center gap-1.5 transition">
+              <span>Imprimir Hoja</span>
             </button>
           </div>
 
-          <div class="overflow-x-auto rounded-xl border border-white/10 bg-black/30 max-h-96 overflow-y-auto">
+          <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white max-h-96 overflow-y-auto">
             <table class="w-full text-left text-xs">
-              <thead class="bg-[#141416] text-stone-300 font-semibold border-b border-white/10 sticky top-0">
+              <thead class="bg-slate-100 text-slate-600 font-semibold border-b border-slate-200 sticky top-0">
                 <tr>
                   <th class="p-2.5">Ubic.</th>
                   <th class="p-2.5">Perfil</th>
@@ -359,7 +354,7 @@
                   <th class="p-2.5">Ángulo</th>
                 </tr>
               </thead>
-              <tbody id="tblExpCutsBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+              <tbody id="tblExpCutsBody" class="divide-y divide-slate-200 text-slate-900 font-mono">
               </tbody>
             </table>
           </div>
@@ -367,19 +362,19 @@
 
       <!-- SUB-VISTA 2: BARRAS 6.00 M -->
       <div id="tallerSubBars" class="hidden zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
             <div>
-              <h3 class="text-sm font-bold text-white">📦 Barras de 6.00 m a Comprar</h3>
-              <p class="text-xs text-stone-400">Optimización barra por barra.</p>
+              <h3 class="text-sm font-bold text-slate-900">Barras de 6.00 m a Comprar</h3>
+              <p class="text-xs text-slate-500">Optimización barra por barra.</p>
             </div>
-            <button type="button" onclick="showMatecoModal()" class="px-3.5 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
-              📋 Pedir por WhatsApp
+            <button type="button" onclick="showMatecoModal()" class="px-3.5 py-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-300 text-xs font-bold">
+              Pedir por WhatsApp
             </button>
           </div>
 
-          <div class="overflow-x-auto rounded-xl border border-white/10 bg-black/30">
+          <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
             <table class="w-full text-left text-xs">
-              <thead class="bg-[#141416] text-stone-300 font-semibold border-b border-white/10">
+              <thead class="bg-slate-100 text-slate-600 font-semibold border-b border-slate-200">
                 <tr>
                   <th class="p-2.5">Perfil (Clave)</th>
                   <th class="p-2.5">Metros</th>
@@ -388,7 +383,7 @@
                   <th class="p-2.5 text-right">Peso</th>
                 </tr>
               </thead>
-              <tbody id="tblExpBarsBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+              <tbody id="tblExpBarsBody" class="divide-y divide-slate-200 text-slate-900 font-mono">
               </tbody>
             </table>
           </div>
@@ -396,20 +391,20 @@
 
       <!-- SUB-VISTA 3: CRISTALES -->
       <div id="tallerSubGlass" class="hidden zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-            <div class="border-b border-white/10 pb-2.5">
-              <h4 class="text-sm font-bold text-white">🪟 Cristales a Medida (Vidriería)</h4>
-              <p class="text-xs text-stone-400" id="lblSelectedGlassDesc">Medidas exactas de corte + m² totales.</p>
+            <div class="border-b border-slate-200 pb-2.5">
+              <h4 class="text-sm font-bold text-slate-900">Cristales a Medida (Vidriería)</h4>
+              <p class="text-xs text-slate-500" id="lblSelectedGlassDesc">Medidas exactas de corte + m² totales.</p>
             </div>
             <div class="overflow-x-auto max-h-96 overflow-y-auto">
               <table class="w-full text-left text-xs">
-                <thead class="text-stone-400 text-[11px] border-b border-white/10">
+                <thead class="text-slate-500 text-[11px] border-b border-slate-200">
                   <tr>
                     <th class="py-2">Pzas / Tipo</th>
                     <th class="py-2">Medida (W × H)</th>
                     <th class="py-2 text-right">Área</th>
                   </tr>
                 </thead>
-                <tbody id="tblExpGlassBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+                <tbody id="tblExpGlassBody" class="divide-y divide-slate-200 text-slate-900 font-mono">
                 </tbody>
               </table>
             </div>
@@ -417,19 +412,19 @@
 
       <!-- SUB-VISTA 4: HERRAJES -->
       <div id="tallerSubHw" class="hidden zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-            <div class="border-b border-white/10 pb-2.5">
-              <h4 class="text-sm font-bold text-white">🔩 Herrajes y Consumibles</h4>
-              <p class="text-xs text-stone-400">Carretillas, jaladeras, felpa, vinil y silicón.</p>
+            <div class="border-b border-slate-200 pb-2.5">
+              <h4 class="text-sm font-bold text-slate-900">Herrajes y Consumibles</h4>
+              <p class="text-xs text-slate-500">Carretillas, jaladeras, felpa, vinil y silicón.</p>
             </div>
             <div class="overflow-x-auto max-h-96 overflow-y-auto">
               <table class="w-full text-left text-xs">
-                <thead class="text-stone-400 text-[11px] border-b border-white/10">
+                <thead class="text-slate-500 text-[11px] border-b border-slate-200">
                   <tr>
                     <th class="py-2">Insumo / Herraje</th>
                     <th class="py-2 text-right">Cant.</th>
                   </tr>
                 </thead>
-                <tbody id="tblExpHwBody" class="divide-y divide-white/10 text-stone-100">
+                <tbody id="tblExpHwBody" class="divide-y divide-slate-200 text-slate-900">
                 </tbody>
               </table>
             </div>
@@ -442,53 +437,53 @@
         <!-- Tarjeta Obra Activa -->
         <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3.5">
           <div class="flex items-center justify-between gap-2">
-            <h2 class="text-base font-bold text-white">Obra Activa</h2>
+            <h2 class="text-base font-bold text-slate-900">Obra Activa</h2>
             <div class="flex items-center gap-2">
-              <button type="button" onclick="openProjectsModal()" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold text-white">📂 Mis Obras</button>
-              <button type="button" onclick="startNewWorkFromHome()" class="px-3 py-1.5 rounded-full bg-[#0A84FF] hover:bg-[#0A84FF]/90 text-xs font-semibold text-white">＋ Nueva</button>
+              <button type="button" onclick="openProjectsModal()" class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-900">Mis Obras</button>
+              <button type="button" onclick="startNewWorkFromHome()" class="px-3 py-1.5 rounded-full bg-[#0A84FF] hover:bg-[#0A84FF]/90 text-xs font-semibold text-white">+ Nueva</button>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
             <div>
-              <label for="inpQuickProjectName" class="text-[11px] font-medium text-stone-400 block mb-1">Nombre de la Obra</label>
-              <input type="text" id="inpQuickProjectName" oninput="syncQuickWorkInputs()" placeholder="Ej. Casa Familia Pérez" class="w-full p-3 rounded-xl bg-[#111214] border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-[#e5c99b]">
+              <label for="inpQuickProjectName" class="text-[11px] font-medium text-slate-500 block mb-1">Nombre de la Obra</label>
+              <input type="text" id="inpQuickProjectName" oninput="syncQuickWorkInputs()" placeholder="Ej. Casa Familia Pérez" class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm font-semibold focus:outline-none focus:border-[#e5c99b]">
             </div>
             <div>
-              <label for="inpQuickClientName" class="text-[11px] font-medium text-stone-400 block mb-1">Cliente</label>
-              <input type="text" id="inpQuickClientName" oninput="syncQuickWorkInputs()" placeholder="Ej. Arq. Juan Pérez" class="w-full p-3 rounded-xl bg-[#111214] border border-white/10 text-white text-sm focus:outline-none focus:border-[#e5c99b]">
+              <label for="inpQuickClientName" class="text-[11px] font-medium text-slate-500 block mb-1">Cliente</label>
+              <input type="text" id="inpQuickClientName" oninput="syncQuickWorkInputs()" placeholder="Ej. Arq. Juan Pérez" class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-[#e5c99b]">
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-2.5 pt-1">
             <button type="button" onclick="switchAppTab('design')" class="py-3.5 px-3 rounded-2xl btn-zen-cream text-xs sm:text-sm flex items-center justify-center gap-1.5">
-              <span>＋ Agregar Ventana</span>
+              <span>+ Agregar Ventana</span>
             </button>
-            <button type="button" onclick="showLetterheadModal()" class="py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5">
-              <span>📄 Cotización PDF</span>
+            <button type="button" onclick="showLetterheadModal()" class="py-3.5 px-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5">
+              <span>Cotización PDF</span>
             </button>
           </div>
         </div>
 
         <!-- Partidas Acumuladas en Obra -->
         <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
             <div class="flex items-center gap-2">
-              <span class="text-sm font-bold text-white">Partidas</span>
-              <span id="expProjectCount" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-[#e5c99b]">0 pzas</span>
+              <span class="text-sm font-bold text-slate-900">Partidas</span>
+              <span id="expProjectCount" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-900">0 pzas</span>
             </div>
-            <span id="expTotalProjectSale" class="text-base font-bold text-[#30D158] font-mono">$0 MXN</span>
+            <span id="expTotalProjectSale" class="text-base font-bold text-emerald-600 font-mono">$0 MXN</span>
           </div>
 
           <div id="expProjectPiecesList" class="space-y-2 max-h-96 overflow-y-auto no-scrollbar">
           </div>
 
-          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
-            <button type="button" onclick="printWorkshopSheet(true)" class="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs flex items-center justify-center gap-1.5">
-              <span>🖨️ Hoja de Corte</span>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
+            <button type="button" onclick="printWorkshopSheet(true)" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold text-xs flex items-center justify-center gap-1.5">
+              <span>Hoja de Corte</span>
             </button>
-            <button type="button" onclick="showMatecoModal()" class="py-2.5 px-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 font-semibold text-xs flex items-center justify-center gap-1.5">
-              <span>📋 Pedir Barras 6m</span>
+            <button type="button" onclick="showMatecoModal()" class="py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-500/30 border border-emerald-300 text-emerald-700 font-semibold text-xs flex items-center justify-center gap-1.5">
+              <span>Pedir Barras 6m</span>
             </button>
           </div>
         </div>
@@ -497,58 +492,62 @@
         <!-- PESTAÑA 4: MI TALLER Y PRECIOS -->
         <div id="tabPanelSettings" class="hidden space-y-4">
           <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-            <h2 class="text-base font-bold text-white">Mi Negocio y Marca</h2>
-            <p class="text-xs text-stone-400">Personaliza tu logo, nombre, precios por kg de aluminio y precios de cristal para tus cotizaciones PDF.</p>
+            <h2 class="text-base font-bold text-slate-900">Mi Negocio y Marca</h2>
+            <p class="text-xs text-slate-500">Personaliza tu logo, nombre, precios por kg de aluminio y precios de cristal para tus cotizaciones PDF.</p>
             <button type="button" onclick="openSettingsModal()" class="w-full py-3.5 rounded-2xl btn-zen-cream text-sm flex items-center justify-center gap-2">
-              <span>⚙️ Editar Logo, Nombre y Precios</span>
+              <span>Editar Logo, Nombre y Precios</span>
             </button>
           </div>
 
           <!-- Márgenes y Costos Rápidos -->
           <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-4">
-            <h3 class="text-sm font-bold text-white">Márgenes de Ganancia e Instalación</h3>
+            <h3 class="text-sm font-bold text-slate-900">Márgenes de Ganancia e Instalación</h3>
             <div>
               <div class="flex items-center justify-between text-xs">
-                <label for="expProfitRange" class="text-stone-200 font-medium">Mano de Obra (%):</label>
-                <span id="expProfitVal" class="font-bold text-[#e5c99b]">50%</span>
+                <label for="expProfitRange" class="text-slate-700 font-medium">Mano de Obra (%):</label>
+                <span id="expProfitVal" class="font-bold text-slate-900">50%</span>
               </div>
-              <input type="range" id="expProfitRange" min="15" max="150" value="50" class="w-full accent-[#e5c99b] bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
+              <input type="range" id="expProfitRange" min="15" max="150" value="50" class="w-full accent-[#e5c99b] bg-slate-200 h-1.5 rounded mt-2 cursor-pointer">
             </div>
 
             <div>
               <div class="flex items-center justify-between text-xs">
-                <label for="expMatecoDiscount" class="text-stone-200 font-medium">Descuento Proveedor (%):</label>
-                <span id="expMatecoDiscountVal" class="font-bold text-[#30D158]">10%</span>
+                <label for="expMatecoDiscount" class="text-slate-700 font-medium">Descuento Proveedor (%):</label>
+                <span id="expMatecoDiscountVal" class="font-bold text-emerald-600">10%</span>
               </div>
-              <input type="range" id="expMatecoDiscount" min="0" max="35" value="10" class="w-full accent-[#30D158] bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
+              <input type="range" id="expMatecoDiscount" min="0" max="35" value="10" class="w-full accent-[#30D158] bg-slate-200 h-1.5 rounded mt-2 cursor-pointer">
             </div>
 
             <div>
               <div class="flex items-center justify-between text-xs mb-1">
-                <label for="expInstallFee" class="text-stone-200 font-medium">Instalación / Flete por pieza ($ MXN):</label>
+                <label for="expInstallFee" class="text-slate-700 font-medium">Instalación / Flete por pieza ($ MXN):</label>
               </div>
-              <input type="number" id="expInstallFee" min="0" step="50" value="350" class="w-full p-2.5 rounded-xl bg-[#111214] border border-white/15 text-sm font-mono text-white">
+              <input type="number" id="expInstallFee" min="0" step="50" value="350" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-mono text-slate-900">
             </div>
           </div>
         </div> <!-- /tabPanelSettings -->
 
   </main>
 
-  <!-- BARRA INFERIOR FLOTANTE GLASSMORPHISM ESTILO IPHONE -->
-  <footer class="no-print md:hidden fixed bottom-2.5 inset-x-3 z-40 bg-white/12 backdrop-blur-2xl border border-white/20 rounded-3xl px-2 py-1.5 shadow-2xl">
+    <!-- BARRA INFERIOR ESTILO iOS CLARO -->
+  <footer class="no-print md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-2 pt-1.5 pb-2 shadow-lg">
     <div class="max-w-3xl mx-auto grid grid-cols-4 gap-1 text-[10px] font-semibold">
-      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-2xl bg-[#e5c99b] text-[#111315] font-bold flex flex-col items-center justify-center gap-0.5 relative transition">
-        <span class="text-base leading-none">🏠</span><span>Obras</span>
-        <span class="app-obra-badge absolute top-0.5 right-3 px-1.5 rounded-full bg-[#30D158] text-[#111315] text-[9px] font-bold font-mono">0</span>
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-xl bg-slate-900 text-white font-semibold flex flex-col items-center justify-center gap-0.5 relative transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75"/></svg>
+        <span>Obras</span>
+        <span class="app-obra-badge absolute top-0.5 right-3 px-1.5 rounded-full bg-emerald-500 text-white text-[9px] font-bold font-mono">0</span>
       </button>
-      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-2xl text-stone-200 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
-        <span class="text-base leading-none">📐</span><span>Agregar</span>
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-xl text-slate-600 hover:text-slate-900 flex flex-col items-center justify-center gap-0.5 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        <span>Agregar</span>
       </button>
-      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-2xl text-stone-200 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
-        <span class="text-base leading-none">✂️</span><span>Taller</span>
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-xl text-slate-600 hover:text-slate-900 flex flex-col items-center justify-center gap-0.5 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085"/></svg>
+        <span>Taller</span>
       </button>
-      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-1.5 px-1 rounded-2xl text-stone-200 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
-        <span class="text-base leading-none">⚙️</span><span>Mi Taller</span>
+      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-1.5 px-1 rounded-xl text-slate-600 hover:text-slate-900 flex flex-col items-center justify-center gap-0.5 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <span>Mi Taller</span>
       </button>
     </div>
   </footer>
@@ -556,151 +555,151 @@
   <div id="printContainer" class="hidden"></div>
 
   <!-- MODAL: GESTOR DE OBRAS / HISTORIAL -->
-  <div id="modalProjects" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+  <div id="modalProjects" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-md flex items-center justify-center p-4">
     <div class="zen-glass rounded-3xl max-w-xl w-full p-5 sm:p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div>
-          <h3 class="text-base font-bold text-white">📂 Historial y Respaldo de Obras</h3>
-          <p class="text-xs text-stone-300">Guarda cotizaciones, reabre obras anteriores o exporta respaldo JSON.</p>
+          <h3 class="text-base font-bold text-slate-900">Historial y Respaldo de Obras</h3>
+          <p class="text-xs text-slate-600">Guarda cotizaciones, reabre obras anteriores o exporta respaldo JSON.</p>
         </div>
-        <button type="button" onclick="closeProjectsModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-stone-200 hover:text-white">✕</button>
+        <button type="button" onclick="closeProjectsModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-slate-900">✕</button>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-        <input type="text" id="inpSaveProjectName" placeholder="Nombre de Obra / Cliente (ej. Casa Lomas)" class="p-2.5 rounded-xl bg-black/60 border border-white/20 text-white">
-        <button type="button" onclick="saveCurrentProjectToHistory()" class="py-2.5 px-4 rounded-xl btn-zen-cream font-bold">💾 Guardar Obra en Historial</button>
+        <input type="text" id="inpSaveProjectName" placeholder="Nombre de Obra / Cliente (ej. Casa Lomas)" class="p-2.5 rounded-xl bg-slate-100 border border-slate-300 text-slate-900">
+        <button type="button" onclick="saveCurrentProjectToHistory()" class="py-2.5 px-4 rounded-xl btn-zen-cream font-bold">Guardar en Historial</button>
       </div>
 
       <div id="savedProjectsList" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar">
       </div>
 
-      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10 text-xs">
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 text-xs">
         <div class="flex items-center gap-2">
-          <button type="button" onclick="startNewBlankProject()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200">🆕 Nueva Obra</button>
-          <button type="button" onclick="loadSampleCasa140(); closeProjectsModal();" class="px-3 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/35 text-amber-200 border border-amber-400/30">🏠 Casa 140m²</button>
-          <button type="button" onclick="exportBackupJSON()" class="px-3 py-2 rounded-xl bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-200 border border-emerald-500/30">⬇ Exportar Respaldo</button>
-          <label class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200 cursor-pointer">
-            ⬆ Importar
+          <button type="button" onclick="startNewBlankProject()" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700">Nueva Obra</button>
+          <button type="button" onclick="loadSampleCasa140(); closeProjectsModal();" class="px-3 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/35 text-sky-700 border border-amber-400/30">Ejemplo Casa 140m²</button>
+          <button type="button" onclick="exportBackupJSON()" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-600/40 text-emerald-700 border border-emerald-300">Exportar JSON</button>
+          <label class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">
+            Importar JSON
             <input type="file" accept=".json" onchange="importBackupJSON(event)" class="hidden">
           </label>
         </div>
-        <button type="button" onclick="closeProjectsModal()" class="px-4 py-2 text-stone-300 hover:text-white">Cerrar</button>
+        <button type="button" onclick="closeProjectsModal()" class="px-4 py-2 text-slate-600 hover:text-slate-900">Cerrar</button>
       </div>
     </div>
   </div>
 
   <!-- MODAL: CONFIGURACIÓN DE PRECIOS REALES Y DESCUENTOS DEL TALLER -->
-  <div id="modalSettings" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+  <div id="modalSettings" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div class="zen-glass rounded-3xl max-w-2xl w-full p-5 sm:p-6 space-y-4 my-6">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div>
-          <h3 class="text-base font-bold text-white">⚙️ Mis Precios Reales y Fórmulas de Taller</h3>
-          <p class="text-xs text-stone-300">Calibra tus costos de aluminio/vidrio y tus descuentos milimétricos de corte.</p>
+          <h3 class="text-base font-bold text-slate-900">Precios Reales y Fórmulas de Taller</h3>
+          <p class="text-xs text-slate-600">Calibra tus costos de aluminio/vidrio y tus descuentos milimétricos de corte.</p>
         </div>
-        <button type="button" onclick="closeSettingsModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-stone-200 hover:text-white">✕</button>
+        <button type="button" onclick="closeSettingsModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-slate-900">✕</button>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
         <!-- Precios Aluminio & Mano de Obra -->
-        <div class="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2.5">
-          <h4 class="font-bold text-[#d6c5b0]">1. Costos de Aluminio y Taller</h4>
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <h4 class="font-bold text-slate-900">1. Costos de Aluminio y Taller</h4>
           <div class="flex justify-between items-center gap-2">
-            <label class="text-stone-300">Aluminio Base ($ / kg lista):</label>
-            <input type="number" id="cfgAluPriceKg" class="w-24 p-1.5 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+            <label class="text-slate-600">Aluminio Base ($ / kg lista):</label>
+            <input type="number" id="cfgAluPriceKg" class="w-24 p-1.5 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
           </div>
           <div class="flex justify-between items-center gap-2">
-            <label class="text-stone-300">Cobro de Aluminio:</label>
-            <select id="cfgAluBillingMode" class="w-40 p-1.5 rounded bg-[#121511] border border-white/20 text-white text-[11px]">
+            <label class="text-slate-600">Cobro de Aluminio:</label>
+            <select id="cfgAluBillingMode" class="w-40 p-1.5 rounded bg-slate-50 border border-slate-300 text-slate-900 text-[11px]">
               <option value="bars">Barras Completas 6.00 m</option>
               <option value="net_waste">Kg Netos + % Merma</option>
             </select>
           </div>
           <div class="flex justify-between items-center gap-2">
-            <label class="text-stone-300">% Merma (si Kg Netos) / Silicón ($):</label>
+            <label class="text-slate-600">% Merma (si Kg Netos) / Silicón ($):</label>
             <div class="flex gap-1">
-              <input type="number" id="cfgAluWastePct" class="w-16 p-1.5 rounded bg-[#121511] border border-white/20 text-right font-mono text-white" title="% Merma">
-              <input type="number" id="cfgSiliconPrice" class="w-16 p-1.5 rounded bg-[#121511] border border-white/20 text-right font-mono text-white" title="Silicón $/cartucho">
+              <input type="number" id="cfgAluWastePct" class="w-16 p-1.5 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900" title="% Merma">
+              <input type="number" id="cfgSiliconPrice" class="w-16 p-1.5 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900" title="Silicón $/cartucho">
             </div>
           </div>
           <div class="flex justify-between items-center gap-2">
-            <label class="text-stone-300">Nombre de Tu Taller:</label>
-            <input type="text" id="cfgWorkshopName" class="w-40 p-1.5 rounded bg-[#121511] border border-white/20 text-white">
+            <label class="text-slate-600">Nombre de Tu Taller:</label>
+            <input type="text" id="cfgWorkshopName" class="w-40 p-1.5 rounded bg-slate-50 border border-slate-300 text-slate-900">
           </div>
           <div class="flex justify-between items-center gap-2">
-            <label class="text-stone-300">Eslogan / Tel. en PDF:</label>
-            <input type="text" id="cfgWorkshopSubtitle" class="w-40 p-1.5 rounded bg-[#121511] border border-white/20 text-white text-[11px]">
+            <label class="text-slate-600">Eslogan / Tel. en PDF:</label>
+            <input type="text" id="cfgWorkshopSubtitle" class="w-40 p-1.5 rounded bg-slate-50 border border-slate-300 text-slate-900 text-[11px]">
           </div>
           <div class="flex justify-between items-center gap-2 pt-1">
-            <label class="text-stone-300">Logo de Tu Taller:</label>
+            <label class="text-slate-600">Logo de Tu Taller:</label>
             <div class="flex items-center gap-1.5">
               <img id="cfgLogoPreview" src="" alt="" class="hidden w-7 h-7 rounded object-contain bg-white p-0.5">
-              <label class="px-2.5 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-white cursor-pointer text-[11px] font-semibold">
-                📷 Subir Logo
+              <label class="px-2.5 py-1 rounded-lg bg-slate-200 hover:bg-white/25 text-slate-900 cursor-pointer text-[11px] font-semibold">
+                Subir Logo
                 <input type="file" id="cfgLogoInput" accept="image/*" onchange="handleLogoUpload(event)" class="hidden">
               </label>
-              <button type="button" onclick="clearWorkshopLogo()" class="px-2 py-1 rounded-lg bg-white/5 hover:bg-red-500/20 text-stone-300 text-[11px]">Quitar</button>
+              <button type="button" onclick="clearWorkshopLogo()" class="px-2 py-1 rounded-lg bg-white/5 hover:bg-red-500/20 text-slate-600 text-[11px]">Quitar</button>
             </div>
           </div>
           <div class="flex justify-between items-center gap-2">
-            <label class="text-stone-300">WhatsApp Proveedor:</label>
-            <input type="text" id="cfgSupplierPhone" class="w-36 p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+            <label class="text-slate-600">WhatsApp Proveedor:</label>
+            <input type="text" id="cfgSupplierPhone" class="w-36 p-1.5 rounded bg-slate-50 border border-slate-300 font-mono text-slate-900">
           </div>
         </div>
 
         <!-- Precios Vidrio por m² -->
-        <div class="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2">
-          <h4 class="font-bold text-amber-300">2. Precios de Cristal ($ MXN / m²)</h4>
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <h4 class="font-bold text-sky-700">2. Precios de Cristal ($ MXN / m²)</h4>
           <div class="flex justify-between items-center">
-            <label class="text-stone-300">Claro 6mm / 4mm:</label>
+            <label class="text-slate-600">Claro 6mm / 4mm:</label>
             <div class="flex gap-1">
-              <input type="number" id="cfgGlassClaro6" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
-              <input type="number" id="cfgGlassClaro4" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+              <input type="number" id="cfgGlassClaro6" class="w-16 p-1 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
+              <input type="number" id="cfgGlassClaro4" class="w-16 p-1 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
             </div>
           </div>
           <div class="flex justify-between items-center">
-            <label class="text-stone-300">Filtrasol 6mm / Tintex:</label>
+            <label class="text-slate-600">Filtrasol 6mm / Tintex:</label>
             <div class="flex gap-1">
-              <input type="number" id="cfgGlassFiltrasol" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
-              <input type="number" id="cfgGlassTintex" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+              <input type="number" id="cfgGlassFiltrasol" class="w-16 p-1 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
+              <input type="number" id="cfgGlassTintex" class="w-16 p-1 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
             </div>
           </div>
           <div class="flex justify-between items-center">
-            <label class="text-stone-300">Esmerilado / Templado:</label>
+            <label class="text-slate-600">Esmerilado / Templado:</label>
             <div class="flex gap-1">
-              <input type="number" id="cfgGlassEsmeril" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
-              <input type="number" id="cfgGlassTemplado" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+              <input type="number" id="cfgGlassEsmeril" class="w-16 p-1 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
+              <input type="number" id="cfgGlassTemplado" class="w-16 p-1 rounded bg-slate-50 border border-slate-300 text-right font-mono text-slate-900">
             </div>
           </div>
         </div>
 
         <!-- Calibración de Fórmulas de Corte -->
-        <div class="sm:col-span-2 p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2.5">
-          <h4 class="font-bold text-emerald-300">3. Calibración Milimétrica de Corte (Opcional)</h4>
+        <div class="sm:col-span-2 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <h4 class="font-bold text-emerald-700">3. Calibración Milimétrica de Corte (Opcional)</h4>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
-              <label class="text-stone-300 block mb-1">Disco Sierra (mm):</label>
-              <input type="number" step="0.1" id="cfgKerfMm" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+              <label class="text-slate-600 block mb-1">Disco Sierra (mm):</label>
+              <input type="number" step="0.1" id="cfgKerfMm" class="w-full p-1.5 rounded bg-slate-50 border border-slate-300 font-mono text-slate-900">
             </div>
             <div>
-              <label class="text-stone-300 block mb-1">Útil Barra 6m (cm):</label>
-              <input type="number" step="1" id="cfgBarUsableCm" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+              <label class="text-slate-600 block mb-1">Útil Barra 6m (cm):</label>
+              <input type="number" step="1" id="cfgBarUsableCm" class="w-full p-1.5 rounded bg-slate-50 border border-slate-300 font-mono text-slate-900">
             </div>
             <div>
-              <label class="text-stone-300 block mb-1">Desc. Cerco 3" (cm):</label>
-              <input type="number" step="0.1" id="cfgDescCerco3" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+              <label class="text-slate-600 block mb-1">Desc. Cerco 3" (cm):</label>
+              <input type="number" step="0.1" id="cfgDescCerco3" class="w-full p-1.5 rounded bg-slate-50 border border-slate-300 font-mono text-slate-900">
             </div>
             <div>
-              <label class="text-stone-300 block mb-1">Desc. Zoclo 3" (cm):</label>
-              <input type="number" step="0.1" id="cfgDescZoclo3" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+              <label class="text-slate-600 block mb-1">Desc. Zoclo 3" (cm):</label>
+              <input type="number" step="0.1" id="cfgDescZoclo3" class="w-full p-1.5 rounded bg-slate-50 border border-slate-300 font-mono text-slate-900">
             </div>
           </div>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
-        <button type="button" onclick="resetSettingsToDefault()" class="px-3 py-2 rounded-xl text-xs text-stone-300 hover:text-white bg-white/5">Restaurar Valores Cuprum</button>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200">
+        <button type="button" onclick="resetSettingsToDefault()" class="px-3 py-2 rounded-xl text-xs text-slate-600 hover:text-slate-900 bg-white/5">Restaurar Valores Cuprum</button>
         <div class="flex gap-2">
-          <button type="button" onclick="closeSettingsModal()" class="px-4 py-2 rounded-xl text-xs text-stone-300">Cancelar</button>
+          <button type="button" onclick="closeSettingsModal()" class="px-4 py-2 rounded-xl text-xs text-slate-600">Cancelar</button>
           <button type="button" onclick="saveSettingsModal()" class="px-5 py-2 rounded-xl btn-zen-cream font-bold text-xs">Guardar y Recalcular</button>
         </div>
       </div>
@@ -708,27 +707,27 @@
   </div>
 
   <!-- MODAL: REQUISICIÓN OFICIAL MATECO -->
-  <div id="modalMatecoOrder" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+  <div id="modalMatecoOrder" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-md flex items-center justify-center p-4">
     <div class="zen-glass rounded-3xl max-w-xl w-full p-5 sm:p-6 space-y-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="text-2xl">📋</span>
           <div>
-            <h3 class="text-base font-bold text-white">Requisición Oficial para Mostrador</h3>
-            <p class="text-xs text-stone-300">Consolidado exacto por clave, color y tramos de 6.00 m</p>
+            <h3 class="text-base font-bold text-slate-900">Requisición Oficial para Mostrador</h3>
+            <p class="text-xs text-slate-600">Consolidado exacto por clave, color y tramos de 6.00 m</p>
           </div>
         </div>
-        <button type="button" onclick="closeMatecoModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-stone-200 hover:text-white">✕</button>
+        <button type="button" onclick="closeMatecoModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-slate-900">✕</button>
       </div>
 
       <div class="space-y-1.5">
-        <label for="selMatecoBranch" class="text-xs font-medium text-stone-200">WhatsApp de Proveedor / Mostrador:</label>
-        <input type="text" id="selMatecoBranch" value="5215512345678" class="w-full p-2.5 rounded-xl bg-black/60 border border-white/15 text-xs font-mono text-white">
+        <label for="selMatecoBranch" class="text-xs font-medium text-slate-700">WhatsApp de Proveedor / Mostrador:</label>
+        <input type="text" id="selMatecoBranch" value="5215512345678" class="w-full p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono text-slate-900">
       </div>
 
-      <div class="overflow-x-auto rounded-xl border border-white/15 bg-black/50 p-2 max-h-64 overflow-y-auto">
+      <div class="overflow-x-auto rounded-xl border border-slate-200 bg-slate-100 p-2 max-h-64 overflow-y-auto">
         <table class="w-full text-left text-xs">
-          <thead class="text-stone-300 border-b border-white/15">
+          <thead class="text-slate-600 border-b border-slate-200">
             <tr>
               <th class="p-2">Perfil (Clave)</th>
               <th class="p-2">Acabado</th>
@@ -736,22 +735,22 @@
               <th class="p-2 text-right">Peso Est.</th>
             </tr>
           </thead>
-          <tbody id="tblMatecoOrderBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+          <tbody id="tblMatecoOrderBody" class="divide-y divide-slate-200 text-slate-900 font-mono">
           </tbody>
         </table>
       </div>
 
       <div class="flex items-center justify-end gap-3 pt-2">
-        <button type="button" onclick="closeMatecoModal()" class="px-4 py-2 rounded-xl text-xs text-stone-300 hover:text-white">Cerrar</button>
+        <button type="button" onclick="closeMatecoModal()" class="px-4 py-2 rounded-xl text-xs text-slate-600 hover:text-slate-900">Cerrar</button>
         <button type="button" id="btnConfirmSendMateco" class="px-5 py-2.5 rounded-xl btn-zen-cream font-bold text-xs flex items-center gap-2">
-          <span>📲 Enviar Pedido por WhatsApp</span>
+          <span>Enviar por WhatsApp</span>
         </button>
       </div>
     </div>
   </div>
 
   <!-- MODAL: COTIZACIÓN FORMAL PDF -->
-  <div id="modalLetterhead" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+  <div id="modalLetterhead" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div id="printableLetterhead" class="bg-white text-slate-900 rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-5 shadow-2xl relative my-8">
       
       <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-slate-900 pb-4">
@@ -814,10 +813,10 @@
 
       <div class="flex flex-wrap items-center justify-end gap-3 pt-4 border-t border-slate-200 no-print">
         <button type="button" onclick="closeLetterheadModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900">Cerrar</button>
-        <button type="button" onclick="printClientQuote()" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-slate-800">
+        <button type="button" onclick="printClientQuote()" class="px-5 py-2.5 rounded-xl bg-slate-900 text-slate-900 font-bold text-xs flex items-center gap-1.5 hover:bg-slate-800">
           <span>🖨️ Imprimir / Guardar PDF</span>
         </button>
-        <button type="button" id="btnLetterheadSendWa" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-emerald-700">
+        <button type="button" id="btnLetterheadSendWa" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-slate-900 font-bold text-xs flex items-center gap-1.5 hover:bg-emerald-700">
           <span>📲 Enviar por WhatsApp</span>
         </button>
       </div>
@@ -1532,8 +1531,8 @@
 
       sel.innerHTML = categories.map(cat => {
         const items = SYSTEM_CATALOG.filter(m => m.cat === cat.key);
-        return `<optgroup label="${cat.label}" class="bg-[#121511] text-[#d6c5b0] font-bold">
-          ${items.map(m => `<option value="${m.id}" class="text-white font-normal">${m.name}</option>`).join('')}
+        return `<optgroup label="${cat.label}" class="bg-slate-50 text-slate-900 font-bold">
+          ${items.map(m => `<option value="${m.id}" class="text-slate-900 font-normal">${m.name}</option>`).join('')}
         </optgroup>`;
       }).join('');
 
@@ -1647,11 +1646,11 @@
       const bCur = document.getElementById('btnScopeCurrent');
       const bProj = document.getElementById('btnScopeProject');
       if (scope === 'current') {
-        bCur.className = 'px-3 py-1 rounded-lg font-bold bg-[#d6c5b0] text-[#181b15]';
-        bProj.className = 'px-3 py-1 rounded-lg font-medium text-stone-300 hover:text-white';
+        bCur.className = 'px-3 py-1 rounded-lg font-bold bg-slate-900 text-white';
+        bProj.className = 'px-3 py-1 rounded-lg font-medium text-slate-600 hover:text-slate-900';
       } else {
-        bProj.className = 'px-3 py-1 rounded-lg font-bold bg-[#d6c5b0] text-[#181b15]';
-        bCur.className = 'px-3 py-1 rounded-lg font-medium text-stone-300 hover:text-white';
+        bProj.className = 'px-3 py-1 rounded-lg font-bold bg-slate-900 text-white';
+        bCur.className = 'px-3 py-1 rounded-lg font-medium text-slate-600 hover:text-slate-900';
       }
       updateCalculations();
     }
@@ -1894,14 +1893,14 @@
 
       // 1. Tabla Cortes
       document.getElementById('tblExpCutsBody').innerHTML = sourceCuts.map(c => `
-        <tr class="hover:bg-white/[0.05]">
-          <td class="p-2 sm:p-2.5 text-[#d6c5b0] font-bold text-[11px]">${c.tag}</td>
-          <td class="p-2 sm:p-2.5 font-sans font-medium text-white">${c.name}</td>
-          <td class="p-2 sm:p-2.5 text-[#d6c5b0] font-bold">${c.key}</td>
-          <td class="p-2 sm:p-2.5 text-center font-bold text-white bg-white/5">${c.qty}</td>
-          <td class="p-2 sm:p-2.5 text-[#f3efe9] font-bold">${c.len} cm</td>
-          <td class="p-2 sm:p-2.5 hidden sm:table-cell text-stone-300 text-[11px]">${c.formula || '-'}</td>
-          <td class="p-2 sm:p-2.5 text-stone-200">${c.type}</td>
+        <tr class="hover:bg-slate-50">
+          <td class="p-2 sm:p-2.5 text-slate-900 font-bold text-[11px]">${c.tag}</td>
+          <td class="p-2 sm:p-2.5 font-sans font-medium text-slate-900">${c.name}</td>
+          <td class="p-2 sm:p-2.5 text-slate-900 font-bold">${c.key}</td>
+          <td class="p-2 sm:p-2.5 text-center font-bold text-slate-900 bg-white/5">${c.qty}</td>
+          <td class="p-2 sm:p-2.5 text-slate-900 font-bold">${c.len} cm</td>
+          <td class="p-2 sm:p-2.5 hidden sm:table-cell text-slate-600 text-[11px]">${c.formula || '-'}</td>
+          <td class="p-2 sm:p-2.5 text-slate-700">${c.type}</td>
         </tr>
       `).join('');
 
@@ -1925,16 +1924,16 @@
         ).join('<br>');
 
         return `
-          <tr class="hover:bg-white/[0.05] align-top">
-            <td class="p-2 sm:p-2.5 font-sans font-medium text-white">${g.name} <span class="font-mono text-[#d6c5b0]">(${g.key})</span></td>
-            <td class="p-2 sm:p-2.5 text-stone-200">${(g.totalCm / 100).toFixed(2)} m</td>
-            <td class="p-2 sm:p-2.5 font-bold text-emerald-200">
-              <span class="px-2 py-0.5 rounded-lg bg-emerald-500/25 border border-emerald-400/40 whitespace-nowrap">
+          <tr class="hover:bg-slate-50 align-top">
+            <td class="p-2 sm:p-2.5 font-sans font-medium text-slate-900">${g.name} <span class="font-mono text-slate-900">(${g.key})</span></td>
+            <td class="p-2 sm:p-2.5 text-slate-700">${(g.totalCm / 100).toFixed(2)} m</td>
+            <td class="p-2 sm:p-2.5 font-bold text-emerald-700">
+              <span class="px-2 py-0.5 rounded-lg bg-emerald-100 border border-emerald-300 whitespace-nowrap">
                 ${barsNeeded} barra${barsNeeded > 1 ? 's' : ''}
               </span>
             </td>
-            <td class="p-2 sm:p-2.5 hidden sm:table-cell text-[10px] text-stone-300 leading-relaxed">${planSummary}</td>
-            <td class="p-2 sm:p-2.5 text-right text-stone-200">${totalKg} kg</td>
+            <td class="p-2 sm:p-2.5 hidden sm:table-cell text-[10px] text-slate-600 leading-relaxed">${planSummary}</td>
+            <td class="p-2 sm:p-2.5 text-right text-slate-700">${totalKg} kg</td>
           </tr>
         `;
       }).join('');
@@ -1942,15 +1941,15 @@
       // 3. Tabla Cristales consolidada
       const tblGlass = document.getElementById('tblExpGlassBody');
       if (sourceGlasses.length === 0) {
-        tblGlass.innerHTML = '<tr><td colspan="3" class="py-3 text-center text-stone-300 text-xs">No requiere cristal</td></tr>';
+        tblGlass.innerHTML = '<tr><td colspan="3" class="py-3 text-center text-slate-600 text-xs">No requiere cristal</td></tr>';
       } else {
         tblGlass.innerHTML = sourceGlasses.map(g => {
           const area = ((g.w * g.h * g.qty) / 10000).toFixed(2);
           return `
-            <tr class="hover:bg-white/[0.05]">
-              <td class="py-2 text-white font-bold">${g.qty} pza${g.qty > 1 ? 's' : ''} <span class="block text-[10px] font-normal text-stone-300">${g.glassType} (${g.tag})</span></td>
-              <td class="py-2 text-amber-300 font-bold">${g.w} × ${g.h} cm</td>
-              <td class="py-2 text-right text-[#d6c5b0]">${area} m²</td>
+            <tr class="hover:bg-slate-50">
+              <td class="py-2 text-slate-900 font-bold">${g.qty} pza${g.qty > 1 ? 's' : ''} <span class="block text-[10px] font-normal text-slate-600">${g.glassType} (${g.tag})</span></td>
+              <td class="py-2 text-sky-700 font-bold">${g.w} × ${g.h} cm</td>
+              <td class="py-2 text-right text-slate-900">${area} m²</td>
             </tr>
           `;
         }).join('');
@@ -1958,9 +1957,9 @@
 
       // 4. Tabla Herrajes consolidada
       document.getElementById('tblExpHwBody').innerHTML = Object.values(sourceHardware).map(hw => `
-        <tr class="hover:bg-white/[0.05]">
-          <td class="py-1.5 text-stone-200">${hw.name}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-[#d6c5b0]">${Number(hw.qty.toFixed(2))} ${hw.unit}</td>
+        <tr class="hover:bg-slate-50">
+          <td class="py-1.5 text-slate-700">${hw.name}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-slate-900">${Number(hw.qty.toFixed(2))} ${hw.unit}</td>
         </tr>
       `).join('');
     }
@@ -2056,7 +2055,7 @@
         btn.classList.toggle('bg-[#e5c99b]', isTarget);
         btn.classList.toggle('text-[#111315]', isTarget);
         btn.classList.toggle('font-bold', isTarget);
-        btn.classList.toggle('text-stone-400', !isTarget);
+        btn.classList.toggle('text-slate-500', !isTarget);
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2078,7 +2077,7 @@
         btn.classList.toggle('bg-[#e5c99b]', isTarget);
         btn.classList.toggle('text-[#111315]', isTarget);
         btn.classList.toggle('font-bold', isTarget);
-        btn.classList.toggle('text-stone-300', !isTarget);
+        btn.classList.toggle('text-slate-600', !isTarget);
       });
     }
 
@@ -2093,22 +2092,65 @@
 
       const listEl = document.getElementById('expProjectPiecesList');
       if (projectPieces.length === 0) {
-        listEl.innerHTML = '<div class="text-center py-5 text-stone-300 text-xs bg-black/25 rounded-xl border border-white/5 px-3">Aún no agregas ventanas a la lista de obra. Presiona <strong>"Agregar al Proyecto"</strong> para sumar piezas.</div>';
+        listEl.innerHTML = '<div class="text-center py-5 text-slate-600 text-xs bg-slate-50 rounded-xl border border-white/5 px-3">Aún no agregas ventanas a la lista de obra. Presiona <strong>"Agregar al Proyecto"</strong> para sumar piezas.</div>';
       } else {
         listEl.innerHTML = projectPieces.map(p => `
-          <div class="p-2.5 rounded-xl bg-black/40 border border-white/15 flex items-center justify-between gap-2">
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
             <div>
-              <p class="text-xs font-bold text-white"><span class="text-[#d6c5b0]">[${p.tag}]</span> ${p.qty}× ${p.model}</p>
-              <p class="text-[11px] text-stone-300 font-mono">${p.w} × ${p.h} cm • ${p.color} • ${p.glass}</p>
+              <p class="text-xs font-bold text-slate-900"><span class="text-slate-900">[${p.tag}]</span> ${p.qty}× ${p.model}</p>
+              <p class="text-[11px] text-slate-600 font-mono">${p.w} × ${p.h} cm • ${p.color} • ${p.glass}</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-[#d6c5b0] font-mono">$${p.subtotal.toLocaleString()}</span>
-              <button type="button" onclick="removePiece(${p.id})" title="Eliminar partida" class="text-stone-300 hover:text-red-400 text-xs px-2 py-1 rounded bg-white/10">✕</button>
+              <span class="text-xs font-bold text-slate-900 font-mono">$${p.subtotal.toLocaleString()}</span>
+              <button type="button" onclick="editPiece(${p.id})" title="Editar partida" class="text-slate-600 hover:text-slate-900 text-[11px] font-semibold px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200">Editar</button>
+              <button type="button" onclick="duplicatePiece(${p.id})" title="Duplicar partida" class="text-slate-600 hover:text-slate-900 text-[11px] font-semibold px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200">Copiar</button>
+              <button type="button" onclick="removePiece(${p.id})" title="Eliminar partida" class="text-slate-400 hover:text-red-600 text-xs px-2 py-1 rounded-lg bg-slate-100 hover:bg-red-50">✕</button>
             </div>
           </div>
         `).join('');
       }
       if (barsScope === 'project') updateCalculations();
+    }
+
+    function editPiece(id) {
+      const p = projectPieces.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById('expSelModel').value = p.modelId;
+      selectModel(p.modelId);
+      document.getElementById('expInputTag').value = p.tag;
+      document.getElementById('expInputW').value = p.w;
+      document.getElementById('expRngW').value = Math.min(350, p.w);
+      document.getElementById('expBadgeW').textContent = Number(p.w).toFixed(1);
+      document.getElementById('expInputH').value = p.h;
+      document.getElementById('expRngH').value = Math.min(300, p.h);
+      document.getElementById('expBadgeH').textContent = Number(p.h).toFixed(1);
+      document.getElementById('expInputQty').value = p.qty;
+      document.getElementById('expSelColor').value = p.color;
+      selectedColor = p.color;
+      document.getElementById('expSelGlass').value = p.glass;
+      selectedGlass = p.glass;
+      document.getElementById('expChkMosquitero').checked = !!p.mosquitero;
+      addMosquitero = !!p.mosquitero;
+      document.getElementById('expChkFelpa').checked = !!p.felpa;
+      addFelpa = !!p.felpa;
+      projectPieces = projectPieces.filter(item => item.id !== id);
+      persistState();
+      updateProjectUI();
+      updateCalculations();
+      switchAppTab('design');
+    }
+
+    function duplicatePiece(id) {
+      const p = projectPieces.find(item => item.id === id);
+      if (!p) return;
+      const copy = JSON.parse(JSON.stringify(p));
+      copy.id = Date.now();
+      copy.tag = p.tag + ' (Copia)';
+      copy.cuts = (copy.cuts || []).map(c => ({ ...c, tag: copy.tag }));
+      projectPieces.push(copy);
+      persistState();
+      updateProjectUI();
+      updateCalculations();
     }
 
     function removePiece(id) {
@@ -2155,18 +2197,18 @@
       const history = getSavedHistory();
       const el = document.getElementById('savedProjectsList');
       if (history.length === 0) {
-        el.innerHTML = '<div class="text-center py-6 text-stone-300 text-xs">No hay obras guardadas en el historial todavía.</div>';
+        el.innerHTML = '<div class="text-center py-6 text-slate-600 text-xs">No hay obras guardadas en el historial todavía.</div>';
         return;
       }
       el.innerHTML = history.map(h => `
-        <div class="p-3 rounded-xl bg-black/45 border border-white/15 flex items-center justify-between gap-2 text-xs">
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2 text-xs">
           <div>
-            <p class="font-bold text-white">${h.name} <span class="text-stone-400 font-normal">(${h.date})</span></p>
-            <p class="text-[11px] text-stone-300">${h.pieces.length} partida(s) • Total: <strong class="text-emerald-300">$${h.total.toLocaleString()} MXN</strong></p>
+            <p class="font-bold text-slate-900">${h.name} <span class="text-slate-500 font-normal">(${h.date})</span></p>
+            <p class="text-[11px] text-slate-600">${h.pieces.length} partida(s) • Total: <strong class="text-emerald-700">$${h.total.toLocaleString()} MXN</strong></p>
           </div>
           <div class="flex gap-1.5">
-            <button type="button" onclick="loadProjectFromHistory(${h.id})" class="px-2.5 py-1 rounded-lg bg-[#d6c5b0] text-[#181b15] font-bold">Abrir</button>
-            <button type="button" onclick="deleteProjectFromHistory(${h.id})" class="px-2 py-1 rounded-lg bg-white/10 text-red-300 hover:bg-red-500/20">✕</button>
+            <button type="button" onclick="loadProjectFromHistory(${h.id})" class="px-2.5 py-1 rounded-lg bg-slate-900 text-white font-bold">Abrir</button>
+            <button type="button" onclick="deleteProjectFromHistory(${h.id})" class="px-2 py-1 rounded-lg bg-slate-100 text-red-300 hover:bg-red-500/20">✕</button>
           </div>
         </div>
       `).join('');
@@ -2371,10 +2413,10 @@
       const items = getConsolidatedMatecoList();
       document.getElementById('tblMatecoOrderBody').innerHTML = items.map(item => `
         <tr>
-          <td class="p-2 font-sans font-medium text-white">${item.name} <span class="font-mono text-[#d6c5b0]">(${item.key})</span></td>
-          <td class="p-2 text-stone-200">${item.color}</td>
-          <td class="p-2 font-bold text-emerald-300">${item.bars6m} tramo${item.bars6m > 1 ? 's' : ''}</td>
-          <td class="p-2 text-right text-stone-200">${item.kg} kg</td>
+          <td class="p-2 font-sans font-medium text-slate-900">${item.name} <span class="font-mono text-slate-900">(${item.key})</span></td>
+          <td class="p-2 text-slate-700">${item.color}</td>
+          <td class="p-2 font-bold text-emerald-700">${item.bars6m} tramo${item.bars6m > 1 ? 's' : ''}</td>
+          <td class="p-2 text-right text-slate-700">${item.kg} kg</td>
         </tr>
       `).join('');
       document.getElementById('modalMatecoOrder').classList.remove('hidden');
