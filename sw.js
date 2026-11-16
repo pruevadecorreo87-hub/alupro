@@ -1,4 +1,4 @@
-const CACHE_NAME = 'alupro-suite-v5';
+const CACHE_NAME = 'alupro-suite-v6';
 const ASSETS = ['./', './index.html', './manifest.json', './icon.svg', './tailwindcss.min.js'];
 
 self.addEventListener('install', event => {
