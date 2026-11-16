@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#181b15">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="AluPro">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <title>AluPro Suite Industrial • Cancelería y Taller de Precisión</title>
+  <script src="./tailwindcss.min.js"></script>
+  <style>
+    @media print {
+      body > *:not(#printContainer) { display: none !important; }
+      #printContainer {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print { display: none !important; }
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    body {
+      background-color: #252a23;
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(214, 197, 176, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(160, 185, 155, 0.10) 0%, transparent 50%),
+        linear-gradient(180deg, #252a23 0%, #1a1e18 100%);
+      background-attachment: fixed;
+      color: #f3efe9;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      transition: background-color 0.3s ease;
+    }
+
+    .zen-glass {
+      background: rgba(22, 26, 21, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.60);
+    }
+
+    .zen-card {
+      background: rgba(24, 28, 23, 0.76);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.42);
+    }
+
+    .btn-zen-cream {
+      background: #e8dfd2;
+      color: #1a1d17;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-zen-cream:hover {
+      background: #f5eee4;
+      transform: translateY(-1px);
+    }
+    .btn-zen-cream:active {
+      transform: scale(0.98);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-screen antialiased relative overflow-x-hidden pb-12">
+
+  <!-- ================= BARRA SUPERIOR UNIVERSAL ================= -->
+  <header class="relative z-30 w-full px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[#151813]/95 backdrop-blur-md sticky top-0 shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#d6c5b0] text-[#181b15] flex items-center justify-center font-bold text-sm shadow">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h1m3-4v8m3-12v16m3-10v4m3-8v12m3-6h1"/>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-sm font-bold tracking-tight text-white">AluPro Suite Industrial</span>
+          <span id="hdrActiveProjectBadge" class="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-[#d6c5b0]/20 text-[#e8dfd2] border border-[#d6c5b0]/30">Obra Actual</span>
+        </div>
+        <p class="text-[11px] text-stone-300">Despiece Milimétrico • Optimización 6.00 m • Costeo Real</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+      <button type="button" onclick="openProjectsModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-white border border-white/15 hover:bg-white/20 transition">
+        <span>📂 Mis Obras</span>
+      </button>
+
+      <button type="button" onclick="openSettingsModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-[#d6c5b0] border border-white/15 hover:bg-white/20 transition">
+        <span>⚙️ Precios y Fórmulas</span>
+      </button>
+
+      <button type="button" onclick="showMatecoModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600/25 text-emerald-200 border border-emerald-500/40 hover:bg-emerald-600/35 transition">
+        <span>📋 Surtido 6m</span>
+      </button>
+
+      <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/25 hover:bg-amber-500/40 text-amber-200 border border-amber-400/40 transition">
+        <span>📲 Instalar App</span>
+      </button>
+
+      <button type="button" onclick="showLetterheadModal()" class="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold btn-zen-cream">
+        <span>📄 Cotización PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= CUERPO PRINCIPAL (MODO APP POR PESTAÑAS) ================= -->
+  <main class="relative z-10 w-full max-w-7xl mx-auto p-3 sm:p-5 pb-24 space-y-4">
+
+    <!-- BARRA DE PESTAÑAS DE APP -->
+    <nav class="zen-card rounded-2xl p-1.5 grid grid-cols-4 gap-1.5 text-[11px] sm:text-xs font-semibold">
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-2 px-2 rounded-xl bg-[#d6c5b0] text-[#181b15] font-bold flex items-center justify-center gap-1.5 transition">
+        <span>📐</span><span class="truncate">Diseñar</span>
+      </button>
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-2 px-2 rounded-xl text-stone-300 hover:text-white hover:bg-white/5 flex items-center justify-center gap-1.5 transition">
+        <span>✂️</span><span class="truncate">Cortes</span>
+      </button>
+      <button type="button" data-apptab="supply" onclick="switchAppTab('supply')" class="app-tab-btn py-2 px-2 rounded-xl text-stone-300 hover:text-white hover:bg-white/5 flex items-center justify-center gap-1.5 transition">
+        <span>🪟</span><span class="truncate">Vidrio/Herraje</span>
+      </button>
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-2 px-2 rounded-xl text-stone-300 hover:text-white hover:bg-white/5 flex items-center justify-center gap-1.5 transition">
+        <span>📋</span><span class="truncate">Obra</span>
+        <span class="app-obra-badge px-1.5 py-0.5 rounded-full bg-emerald-500/25 text-emerald-200 text-[10px] font-mono">0</span>
+      </button>
+    </nav>
+
+    <!-- PESTAÑA 1: DISEÑAR (CONFIGURADOR + CAD + PRECIO) -->
+    <div id="tabPanelDesign" class="space-y-4">
+    <!-- PANEL 1: CONFIGURADOR DE VANO Y LÍNEA -->
+    <section class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+        <div>
+          <h2 class="text-sm sm:text-base font-bold text-white">1. Configuración de Ventana / Vano</h2>
+          <p class="text-xs text-stone-300">Ingresa ubicación, línea, medidas en cm y tipo de cristal. Todo se guarda automáticamente.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10 text-stone-200">Disco: <strong id="lblTopKerf" class="text-emerald-300">3.0 mm</strong></span>
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">Auto-Guardado ✓</span>
+        </div>
+      </div>
+
+      <!-- Fila 1 de Controles -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 items-end">
+        
+        <!-- Etiqueta / Ubicación -->
+        <div class="space-y-1 lg:col-span-2">
+          <label for="expInputTag" class="text-xs font-semibold text-stone-200 block">Ubicación / Clave:</label>
+          <input type="text" id="expInputTag" value="V-01 Sala" placeholder="Ej. V-01 Sala" class="w-full p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-semibold text-[#d6c5b0] focus:outline-none focus:border-[#d6c5b0]">
+        </div>
+
+        <!-- Sistema / Línea -->
+        <div class="space-y-1 sm:col-span-2 lg:col-span-4">
+          <label for="expSelModel" class="text-xs font-semibold text-stone-200 block">Sistema / Línea de Aluminio:</label>
+          <select id="expSelModel" class="w-full p-2.5 rounded-xl bg-[#121511] border border-white/20 text-xs font-medium text-white focus:outline-none focus:border-[#d6c5b0]">
+          </select>
+        </div>
+
+        <!-- Ancho (W) -->
+        <div class="space-y-1 lg:col-span-2">
+          <div class="flex items-center justify-between text-xs">
+            <label for="expInputW" class="font-semibold text-stone-200">Ancho (W):</label>
+            <span id="expBadgeW" class="font-mono text-[#d6c5b0] font-bold">150.0</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <button type="button" onclick="adjustDimension('w', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">-5</button>
+            <input type="number" id="expInputW" min="30" max="500" step="0.1" value="150" class="flex-1 min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustDimension('w', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">+5</button>
+          </div>
+          <input type="range" id="expRngW" min="50" max="350" step="1" value="150" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded cursor-pointer mt-1">
+        </div>
+
+        <!-- Alto (H) -->
+        <div class="space-y-1 lg:col-span-2">
+          <div class="flex items-center justify-between text-xs">
+            <label for="expInputH" class="font-semibold text-stone-200">Alto (H):</label>
+            <span id="expBadgeH" class="font-mono text-[#d6c5b0] font-bold">120.0</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <button type="button" onclick="adjustDimension('h', -5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">-5</button>
+            <input type="number" id="expInputH" min="30" max="400" step="0.1" value="120" class="flex-1 min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustDimension('h', 5)" class="px-1.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">+5</button>
+          </div>
+          <input type="range" id="expRngH" min="40" max="300" step="1" value="120" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded cursor-pointer mt-1">
+        </div>
+
+        <!-- Cantidad de Piezas -->
+        <div class="space-y-1 lg:col-span-2">
+          <label for="expInputQty" class="text-xs font-semibold text-stone-200 block">Cantidad (Pzas):</label>
+          <div class="flex items-center gap-1">
+            <button type="button" onclick="adjustQty(-1)" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-stone-200 font-bold text-xs border border-white/10">-</button>
+            <input type="number" id="expInputQty" min="1" max="100" step="1" value="1" class="flex-1 min-w-0 p-1.5 text-center rounded-lg bg-[#121511] border border-white/25 text-xs font-mono font-bold text-white focus:outline-none focus:border-[#d6c5b0]">
+            <button type="button" onclick="adjustQty(1)" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#d6c5b0] font-bold text-xs border border-white/10">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 2 de configuración -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 pt-2 border-t border-white/10 items-center">
+        <div class="lg:col-span-3 flex items-center gap-2">
+          <label for="expSelColor" class="text-xs font-semibold text-stone-200 whitespace-nowrap">Aluminio:</label>
+          <select id="expSelColor" class="w-full p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
+            <option value="Negro Mate">Negro Mate (Anodizado)</option>
+            <option value="Blanco">Blanco (Electrostático)</option>
+            <option value="Champagne">Champagne / Titanio</option>
+            <option value="Madera Nogal">Madera Nogal Sublimado</option>
+            <option value="Natural Brillante">Natural Brillante</option>
+          </select>
+        </div>
+
+        <div class="lg:col-span-3 flex items-center gap-2">
+          <label for="expSelGlass" class="text-xs font-semibold text-stone-200 whitespace-nowrap">Cristal:</label>
+          <select id="expSelGlass" class="w-full p-2 rounded-xl bg-[#121511] border border-white/20 text-xs text-white">
+            <option value="Claro 6mm">Claro Flotado 6mm</option>
+            <option value="Claro 4mm">Claro Flotado 4mm</option>
+            <option value="Filtrasol 6mm">Filtrasol Humo 6mm</option>
+            <option value="Tintex Verde 6mm">Tintex Verde 6mm</option>
+            <option value="Esmerilado 6mm">Esmerilado / Privacidad 6mm</option>
+            <option value="Templado 9mm">Templado Seguridad 9-10mm</option>
+          </select>
+        </div>
+
+        <div class="lg:col-span-6 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex flex-wrap items-center gap-4">
+            <label class="flex items-center gap-1.5 cursor-pointer text-stone-200 select-none">
+              <input type="checkbox" id="expChkMosquitero" class="w-4 h-4 accent-[#d6c5b0] rounded">
+              <span>Mosquitero Corredizo</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer text-stone-200 select-none">
+              <input type="checkbox" id="expChkFelpa" checked class="w-4 h-4 accent-[#d6c5b0] rounded">
+              <span>Felpa Fin-Seal</span>
+            </label>
+          </div>
+          <div class="flex items-center gap-3 font-mono text-[11px]">
+            <span class="text-stone-300">Área: <strong id="expMetricArea" class="text-white">1.80 m²</strong></span>
+            <span class="text-stone-300">Peso: <strong id="expMetricKg" class="text-emerald-300">0.0 kg</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUERPO DISEÑO: CAD + COSTEO -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+      
+      <!-- Plano CAD (7 cols en desktop) -->
+      <div class="lg:col-span-7">
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">📐 Elevación CAD en Vivo</h3>
+            <span class="text-[11px] font-mono text-[#e8dfd2] bg-black/50 px-2.5 py-0.5 rounded-full border border-white/15" id="expBadgeDimsTop">
+              150.0 × 120.0 cm
+            </span>
+          </div>
+
+          <div id="expCadCanvas" class="w-full h-64 sm:h-72 bg-[#141813] rounded-2xl border border-white/15 flex items-center justify-center p-2 relative overflow-hidden">
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-black/50 border border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span class="text-stone-300">🪟 Corte de Cristal:</span>
+            <strong id="expGlassDimsCallout" class="font-mono text-amber-300">2 pzas de 69.7 × 109.0 cm</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Costeo Profesional Detallado (5 cols en desktop) -->
+      <div class="lg:col-span-5">
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between border-b border-white/10 pb-2">
+            <div>
+              <span class="text-xs text-stone-300 block">Precio Venta Sugerido (<span id="expPieceQtyLabel">1 pza</span>):</span>
+              <p id="expPiecePriceTag" class="text-2xl font-black text-[#d6c5b0]">$0 MXN</p>
+            </div>
+            <div class="text-right text-xs text-stone-300">
+              <span>Anticipo 60%:</span>
+              <p id="expPieceDownPayment" class="text-base font-bold text-white font-mono">$0 MXN</p>
+            </div>
+          </div>
+
+          <!-- Desglose real: Material + Mano de Obra + Instalación -->
+          <div class="grid grid-cols-3 gap-2 text-[11px] bg-black/35 p-2.5 rounded-xl border border-white/10">
+            <div>
+              <span class="text-stone-400 block">Material Neto</span>
+              <strong id="expCostMat" class="text-emerald-300 font-mono">$0</strong>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Mano de Obra</span>
+              <strong id="expCostLabor" class="text-white font-mono">$0</strong>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Instalación/Flete</span>
+              <strong id="expCostInstall" class="text-white font-mono">$0</strong>
+            </div>
+          </div>
+
+          <button type="button" id="btnAddPiece" onclick="addCurrentPieceToProject()" class="w-full py-3 rounded-xl btn-zen-cream font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg">
+            <span>➕ Agregar al Proyecto de Obra</span>
+          </button>
+          <div id="toastAdded" class="hidden text-center text-xs font-semibold text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 rounded-lg py-1.5">
+            ✓ Partida guardada en la obra automáticamente
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div> <!-- /tabPanelDesign -->
+
+    <!-- Switcher Global de Alcance (Visible en Cortes y Vidrio/Herrajes) -->
+    <div id="scopeBanner" class="hidden zen-card rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2">
+      <span class="text-xs font-semibold text-stone-200">Mostrando cálculo técnico de:</span>
+      <div class="flex items-center gap-1 bg-black/60 p-1 rounded-xl border border-white/15 text-xs">
+        <button type="button" id="btnScopeCurrent" onclick="setBarsScope('current')" class="px-3 py-1 rounded-lg font-bold bg-[#d6c5b0] text-[#181b15]">Pieza Actual</button>
+        <button type="button" id="btnScopeProject" onclick="setBarsScope('project')" class="px-3 py-1 rounded-lg font-medium text-stone-300 hover:text-white">Toda la Obra Consolidada</button>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 2: CORTES Y BARRAS 6.00 M -->
+    <div id="tabPanelCuts" class="hidden space-y-4">
+        
+        <!-- TABLA 1: GUÍA DE CORTE MILIMÉTRICO EN TALLER -->
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+            <div>
+              <h3 class="text-sm font-bold text-white">✂️ 1. Lista Exacta de Cortes en Taller</h3>
+              <p class="text-xs text-stone-300">Despiece con descuentos calibrados y ángulo de sierra.</p>
+            </div>
+            <button type="button" onclick="printWorkshopSheet(barsScope === 'project')" class="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-semibold text-white flex items-center gap-1.5 border border-white/15 transition">
+              <span>🖨️ Imprimir Hoja de Corte</span>
+            </button>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-white/15 bg-black/45 max-h-80 overflow-y-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#111410] text-stone-300 font-semibold border-b border-white/15 sticky top-0">
+                <tr>
+                  <th class="p-2 sm:p-2.5">Ubic.</th>
+                  <th class="p-2 sm:p-2.5">Perfil</th>
+                  <th class="p-2 sm:p-2.5">Clave</th>
+                  <th class="p-2 sm:p-2.5 text-center">Pzas</th>
+                  <th class="p-2 sm:p-2.5">Corte</th>
+                  <th class="p-2 sm:p-2.5 hidden sm:table-cell">Fórmula</th>
+                  <th class="p-2 sm:p-2.5">Ángulo</th>
+                </tr>
+              </thead>
+              <tbody id="tblExpCutsBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABLA 2: MATERIAL A COMPRAR EN BARRAS DE 6.00 M -->
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+            <div>
+              <h3 class="text-sm font-bold text-white">📦 2. Material a Comprar (Barras de 6.00 m)</h3>
+              <p class="text-xs text-stone-300">Optimización 1D barra por barra con etiquetas de ubicación para el cortador.</p>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-white/15 bg-black/45">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#111410] text-stone-300 font-semibold border-b border-white/15">
+                <tr>
+                  <th class="p-2 sm:p-2.5">Perfil (Clave)</th>
+                  <th class="p-2 sm:p-2.5">Metros</th>
+                  <th class="p-2 sm:p-2.5">A Comprar</th>
+                  <th class="p-2 sm:p-2.5 hidden sm:table-cell">Plan de Corte por Barra</th>
+                  <th class="p-2 sm:p-2.5 text-right">Peso</th>
+                </tr>
+              </thead>
+              <tbody id="tblExpBarsBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        </div> <!-- /tabPanelCuts -->
+
+        <!-- PESTAÑA 3: VIDRIO Y HERRAJES -->
+        <div id="tabPanelSupply" class="hidden space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 space-y-2.5">
+            <div class="border-b border-white/10 pb-2">
+              <h4 class="text-xs font-bold text-white">🪟 3. Cristales a Medida (Vidriería)</h4>
+              <p class="text-[11px] text-stone-300" id="lblSelectedGlassDesc">Medidas exactas de corte + m² totales.</p>
+            </div>
+            <div class="overflow-x-auto max-h-60 overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="text-stone-300 text-[11px] border-b border-white/10">
+                  <tr>
+                    <th class="py-1.5">Pzas / Tipo</th>
+                    <th class="py-1.5">Medida (W × H)</th>
+                    <th class="py-1.5 text-right">Área</th>
+                  </tr>
+                </thead>
+                <tbody id="tblExpGlassBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 space-y-2.5">
+            <div class="border-b border-white/10 pb-2">
+              <h4 class="text-xs font-bold text-white">🔩 4. Herrajes y Accesorios</h4>
+              <p class="text-[11px] text-stone-300">Consolidado de carretillas, jaladeras, felpa y vinil.</p>
+            </div>
+            <div class="overflow-x-auto max-h-60 overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="text-stone-300 text-[11px] border-b border-white/10">
+                  <tr>
+                    <th class="py-1.5">Insumo / Herraje</th>
+                    <th class="py-1.5 text-right">Cant.</th>
+                  </tr>
+                </thead>
+                <tbody id="tblExpHwBody" class="divide-y divide-white/10 text-stone-100">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        </div> <!-- /tabPanelSupply -->
+
+        <!-- PESTAÑA 4: OBRA Y FINANZAS -->
+        <div id="tabPanelProject" class="hidden space-y-4">
+        <!-- Partidas Acumuladas en Obra -->
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold text-white">Partidas en Obra</span>
+              <span id="expProjectCount" class="text-xs font-bold px-2 py-0.5 rounded-full bg-white/15 text-[#e8dfd2]">0 pzas</span>
+            </div>
+            <span id="expTotalProjectSale" class="text-sm font-bold text-emerald-300 font-mono">$0 MXN</span>
+          </div>
+
+          <div id="expProjectPiecesList" class="space-y-2 max-h-96 overflow-y-auto no-scrollbar">
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
+            <button type="button" onclick="printWorkshopSheet(true)" class="py-2.5 px-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-[11px] flex items-center justify-center gap-1 transition">
+              <span>🖨️ Corte Obra</span>
+            </button>
+            <button type="button" onclick="showMatecoModal()" class="py-2.5 px-2 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/45 border border-emerald-400/40 text-emerald-100 font-bold text-[11px] flex items-center justify-center gap-1 transition">
+              <span>📋 Mateco</span>
+            </button>
+            <button type="button" onclick="showLetterheadModal()" class="py-2.5 px-2 rounded-xl btn-zen-cream font-bold text-[11px] flex items-center justify-center gap-1">
+              <span>📄 PDF Cliente</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parámetros Económicos Rápidos -->
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <div class="flex items-center justify-between text-xs">
+              <label for="expProfitRange" class="text-stone-200 font-medium">Mano de Obra (%):</label>
+              <span id="expProfitVal" class="font-bold text-[#d6c5b0]">50%</span>
+            </div>
+            <input type="range" id="expProfitRange" min="15" max="150" value="50" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between text-xs">
+              <label for="expMatecoDiscount" class="text-stone-200 font-medium">Desc. Proveedor:</label>
+              <span id="expMatecoDiscountVal" class="font-bold text-emerald-300">10%</span>
+            </div>
+            <input type="range" id="expMatecoDiscount" min="0" max="35" value="10" class="w-full accent-emerald-400 bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between text-xs">
+              <label for="expInstallFee" class="text-stone-200 font-medium">Instalación/Flete (pza):</label>
+            </div>
+            <input type="number" id="expInstallFee" min="0" step="50" value="350" class="w-full mt-1.5 p-1.5 rounded-lg bg-[#121511] border border-white/20 text-xs font-mono text-white">
+          </div>
+        </div>
+        </div> <!-- /tabPanelProject -->
+
+  </main>
+
+  <!-- BARRA INFERIOR TIPO APP NATIVA -->
+  <footer class="no-print fixed bottom-0 inset-x-0 z-40 bg-[#141712]/95 backdrop-blur-xl border-t border-white/15 px-2 py-1.5">
+    <div class="max-w-3xl mx-auto grid grid-cols-4 gap-1 text-[10px] font-semibold">
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-xl bg-[#d6c5b0] text-[#181b15] font-bold flex flex-col items-center justify-center gap-0.5 transition">
+        <span class="text-sm">📐</span><span>Diseñar</span>
+      </button>
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-300 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+        <span class="text-sm">✂️</span><span>Cortes</span>
+      </button>
+      <button type="button" data-apptab="supply" onclick="switchAppTab('supply')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-300 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+        <span class="text-sm">🪟</span><span>Vidrio</span>
+      </button>
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-300 hover:text-white flex flex-col items-center justify-center gap-0.5 relative transition">
+        <span class="text-sm">📋</span><span>Obra</span>
+        <span class="app-obra-badge absolute top-0.5 right-3 px-1.5 rounded-full bg-emerald-500 text-[#121511] text-[9px] font-bold font-mono">0</span>
+      </button>
+    </div>
+  </footer>
+
+  <div id="printContainer" class="hidden"></div>
+
+  <!-- MODAL: GESTOR DE OBRAS / HISTORIAL -->
+  <div id="modalProjects" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="zen-glass rounded-3xl max-w-xl w-full p-5 sm:p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <h3 class="text-base font-bold text-white">📂 Historial y Respaldo de Obras</h3>
+          <p class="text-xs text-stone-300">Guarda cotizaciones, reabre obras anteriores o exporta respaldo JSON.</p>
+        </div>
+        <button type="button" onclick="closeProjectsModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-stone-200 hover:text-white">✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        <input type="text" id="inpSaveProjectName" placeholder="Nombre de Obra / Cliente (ej. Casa Lomas)" class="p-2.5 rounded-xl bg-black/60 border border-white/20 text-white">
+        <button type="button" onclick="saveCurrentProjectToHistory()" class="py-2.5 px-4 rounded-xl btn-zen-cream font-bold">💾 Guardar Obra en Historial</button>
+      </div>
+
+      <div id="savedProjectsList" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar">
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10 text-xs">
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="startNewBlankProject()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200">🆕 Nueva Obra</button>
+          <button type="button" onclick="loadSampleCasa140(); closeProjectsModal();" class="px-3 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/35 text-amber-200 border border-amber-400/30">🏠 Casa 140m²</button>
+          <button type="button" onclick="exportBackupJSON()" class="px-3 py-2 rounded-xl bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-200 border border-emerald-500/30">⬇ Exportar Respaldo</button>
+          <label class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200 cursor-pointer">
+            ⬆ Importar
+            <input type="file" accept=".json" onchange="importBackupJSON(event)" class="hidden">
+          </label>
+        </div>
+        <button type="button" onclick="closeProjectsModal()" class="px-4 py-2 text-stone-300 hover:text-white">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CONFIGURACIÓN DE PRECIOS REALES Y DESCUENTOS DEL TALLER -->
+  <div id="modalSettings" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="zen-glass rounded-3xl max-w-2xl w-full p-5 sm:p-6 space-y-4 my-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <h3 class="text-base font-bold text-white">⚙️ Mis Precios Reales y Fórmulas de Taller</h3>
+          <p class="text-xs text-stone-300">Calibra tus costos de aluminio/vidrio y tus descuentos milimétricos de corte.</p>
+        </div>
+        <button type="button" onclick="closeSettingsModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-stone-200 hover:text-white">✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <!-- Precios Aluminio & Mano de Obra -->
+        <div class="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2.5">
+          <h4 class="font-bold text-[#d6c5b0]">1. Costos de Aluminio y Taller</h4>
+          <div class="flex justify-between items-center gap-2">
+            <label class="text-stone-300">Aluminio Base ($ / kg lista):</label>
+            <input type="number" id="cfgAluPriceKg" class="w-24 p-1.5 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+          </div>
+          <div class="flex justify-between items-center gap-2">
+            <label class="text-stone-300">Cobro de Aluminio:</label>
+            <select id="cfgAluBillingMode" class="w-40 p-1.5 rounded bg-[#121511] border border-white/20 text-white text-[11px]">
+              <option value="bars">Barras Completas 6.00 m</option>
+              <option value="net_waste">Kg Netos + % Merma</option>
+            </select>
+          </div>
+          <div class="flex justify-between items-center gap-2">
+            <label class="text-stone-300">% Merma (si Kg Netos) / Silicón ($):</label>
+            <div class="flex gap-1">
+              <input type="number" id="cfgAluWastePct" class="w-16 p-1.5 rounded bg-[#121511] border border-white/20 text-right font-mono text-white" title="% Merma">
+              <input type="number" id="cfgSiliconPrice" class="w-16 p-1.5 rounded bg-[#121511] border border-white/20 text-right font-mono text-white" title="Silicón $/cartucho">
+            </div>
+          </div>
+          <div class="flex justify-between items-center gap-2">
+            <label class="text-stone-300">Nombre de Tu Taller:</label>
+            <input type="text" id="cfgWorkshopName" class="w-40 p-1.5 rounded bg-[#121511] border border-white/20 text-white">
+          </div>
+          <div class="flex justify-between items-center gap-2">
+            <label class="text-stone-300">WhatsApp Proveedor:</label>
+            <input type="text" id="cfgSupplierPhone" class="w-36 p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+          </div>
+        </div>
+
+        <!-- Precios Vidrio por m² -->
+        <div class="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2">
+          <h4 class="font-bold text-amber-300">2. Precios de Cristal ($ MXN / m²)</h4>
+          <div class="flex justify-between items-center">
+            <label class="text-stone-300">Claro 6mm / 4mm:</label>
+            <div class="flex gap-1">
+              <input type="number" id="cfgGlassClaro6" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+              <input type="number" id="cfgGlassClaro4" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <label class="text-stone-300">Filtrasol 6mm / Tintex:</label>
+            <div class="flex gap-1">
+              <input type="number" id="cfgGlassFiltrasol" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+              <input type="number" id="cfgGlassTintex" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <label class="text-stone-300">Esmerilado / Templado:</label>
+            <div class="flex gap-1">
+              <input type="number" id="cfgGlassEsmeril" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+              <input type="number" id="cfgGlassTemplado" class="w-16 p-1 rounded bg-[#121511] border border-white/20 text-right font-mono text-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- Calibración de Fórmulas de Corte -->
+        <div class="sm:col-span-2 p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2.5">
+          <h4 class="font-bold text-emerald-300">3. Calibración Milimétrica de Corte (Opcional)</h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <label class="text-stone-300 block mb-1">Disco Sierra (mm):</label>
+              <input type="number" step="0.1" id="cfgKerfMm" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+            </div>
+            <div>
+              <label class="text-stone-300 block mb-1">Útil Barra 6m (cm):</label>
+              <input type="number" step="1" id="cfgBarUsableCm" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+            </div>
+            <div>
+              <label class="text-stone-300 block mb-1">Desc. Cerco 3" (cm):</label>
+              <input type="number" step="0.1" id="cfgDescCerco3" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+            </div>
+            <div>
+              <label class="text-stone-300 block mb-1">Desc. Zoclo 3" (cm):</label>
+              <input type="number" step="0.1" id="cfgDescZoclo3" class="w-full p-1.5 rounded bg-[#121511] border border-white/20 font-mono text-white">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
+        <button type="button" onclick="resetSettingsToDefault()" class="px-3 py-2 rounded-xl text-xs text-stone-300 hover:text-white bg-white/5">Restaurar Valores Cuprum</button>
+        <div class="flex gap-2">
+          <button type="button" onclick="closeSettingsModal()" class="px-4 py-2 rounded-xl text-xs text-stone-300">Cancelar</button>
+          <button type="button" onclick="saveSettingsModal()" class="px-5 py-2 rounded-xl btn-zen-cream font-bold text-xs">Guardar y Recalcular</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REQUISICIÓN OFICIAL MATECO -->
+  <div id="modalMatecoOrder" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="zen-glass rounded-3xl max-w-xl w-full p-5 sm:p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📋</span>
+          <div>
+            <h3 class="text-base font-bold text-white">Requisición Oficial para Mostrador</h3>
+            <p class="text-xs text-stone-300">Consolidado exacto por clave, color y tramos de 6.00 m</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeMatecoModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-stone-200 hover:text-white">✕</button>
+      </div>
+
+      <div class="space-y-1.5">
+        <label for="selMatecoBranch" class="text-xs font-medium text-stone-200">WhatsApp de Proveedor / Mostrador:</label>
+        <input type="text" id="selMatecoBranch" value="5215512345678" class="w-full p-2.5 rounded-xl bg-black/60 border border-white/15 text-xs font-mono text-white">
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-white/15 bg-black/50 p-2 max-h-64 overflow-y-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="text-stone-300 border-b border-white/15">
+            <tr>
+              <th class="p-2">Perfil (Clave)</th>
+              <th class="p-2">Acabado</th>
+              <th class="p-2">Tramos 6.0m</th>
+              <th class="p-2 text-right">Peso Est.</th>
+            </tr>
+          </thead>
+          <tbody id="tblMatecoOrderBody" class="divide-y divide-white/10 text-stone-100 font-mono">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button type="button" onclick="closeMatecoModal()" class="px-4 py-2 rounded-xl text-xs text-stone-300 hover:text-white">Cerrar</button>
+        <button type="button" id="btnConfirmSendMateco" class="px-5 py-2.5 rounded-xl btn-zen-cream font-bold text-xs flex items-center gap-2">
+          <span>📲 Enviar Pedido por WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COTIZACIÓN FORMAL PDF -->
+  <div id="modalLetterhead" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div id="printableLetterhead" class="bg-white text-slate-900 rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-5 shadow-2xl relative my-8">
+      
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-slate-900 pb-4">
+        <div>
+          <input type="text" id="docWorkshopName" value="TALLER DE CANCELERÍA ALUPRO" class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-slate-900 w-full">
+          <p class="text-xs text-slate-600 font-medium">CANCELERÍA FINA • LÍNEAS CUPRUM, EUROVENT Y TEMPLADOS</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-mono font-bold text-slate-500">COTIZACIÓN FORMAL</span>
+          <p class="text-xs text-slate-700 font-semibold" id="docCurrentDate"></p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
+        <div>
+          <label class="font-semibold text-slate-500 uppercase block">Cliente:</label>
+          <input type="text" id="docClientName" value="Cliente Residencial" class="font-bold text-slate-900 bg-transparent border-b border-slate-300 w-full focus:outline-none focus:border-slate-900 py-0.5">
+        </div>
+        <div>
+          <label class="font-semibold text-slate-500 uppercase block">Obra / Ubicación:</label>
+          <input type="text" id="docProjectName" value="Casa Habitación" class="font-bold text-slate-900 bg-transparent border-b border-slate-300 w-full focus:outline-none focus:border-slate-900 py-0.5">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="border-b-2 border-slate-300 text-slate-700 font-semibold">
+            <tr>
+              <th class="py-2">Ubic. / Partida</th>
+              <th class="py-2">Medidas</th>
+              <th class="py-2 text-center">Cant</th>
+              <th class="py-2 text-right">P. Unitario</th>
+              <th class="py-2 text-right">Importe</th>
+            </tr>
+          </thead>
+          <tbody id="tblLetterheadBody" class="divide-y divide-slate-200 text-slate-800">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex flex-wrap items-end justify-between gap-4 border-t-2 border-slate-300 pt-4">
+        <div class="text-[11px] text-slate-600 max-w-xs space-y-2">
+          <label class="flex items-center gap-2 cursor-pointer font-semibold text-slate-800 no-print">
+            <input type="checkbox" id="chkIncludeIva" checked onchange="renderLetterheadTotals()" class="w-4 h-4">
+            <span>Desglosar IVA (16%) en cotización</span>
+          </label>
+          <p>• Incluye fabricación, sellado perimetral con silicón antihongos, herrajes e instalación.</p>
+          <p>• Condiciones: 60% de anticipo al autorizar, 40% contra entrega.</p>
+        </div>
+
+        <div class="text-right space-y-1">
+          <div class="text-xs text-slate-600" id="rowDocSubtotal">Subtotal: <span id="docSubtotal" class="font-bold text-slate-800 font-mono">$0</span></div>
+          <div class="text-xs text-slate-600" id="rowDocIva">IVA (16%): <span id="docIva" class="font-bold text-slate-800 font-mono">$0</span></div>
+          <div class="text-base font-bold text-slate-900">Total: <span id="docTotal" class="text-slate-900 font-black font-mono">$0 MXN</span></div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-end gap-3 pt-4 border-t border-slate-200 no-print">
+        <button type="button" onclick="closeLetterheadModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900">Cerrar</button>
+        <button type="button" onclick="printClientQuote()" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-slate-800">
+          <span>🖨️ Imprimir / Guardar PDF</span>
+        </button>
+        <button type="button" id="btnLetterheadSendWa" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-emerald-700">
+          <span>📲 Enviar por WhatsApp</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       MOTOR TÉCNICO DE CANCELERÍA, PERSISTENCIA Y OPTIMIZACIÓN
+       ======================================================== -->
+  <script>
+    const STORAGE_KEY_STATE = 'alupro_suite_state_v2';
+    const STORAGE_KEY_HISTORY = 'alupro_suite_history_v2';
+
+    const DEFAULT_SETTINGS = {
+      workshopName: 'TALLER DE CANCELERÍA ALUPRO',
+      supplierPhone: '5215512345678',
+      aluPriceKg: 155,
+      aluBillingMode: 'bars',
+      aluWastePct: 18,
+      siliconPrice: 115,
+      kerfMm: 3.0,
+      barUsableCm: 595,
+      descCerco3: 4.2,
+      descZoclo3: 6.5,
+      glassPrices: {
+        'Claro 6mm': 540,
+        'Claro 4mm': 410,
+        'Filtrasol 6mm': 690,
+        'Tintex Verde 6mm': 680,
+        'Esmerilado 6mm': 750,
+        'Templado 9mm': 1550
+      }
+    };
+
+    function getHardwareUnitPrice(name, unit) {
+      const n = name.toLowerCase();
+      if (n.includes('kit sistema europa')) return 1850;
+      if (n.includes('kit corredizo / bisagra')) return 1950;
+      if (n.includes('cerradura manija llave')) return 680;
+      if (n.includes('jaladera barra inox')) return 490;
+      if (n.includes('jaladera h acero inox')) return 420;
+      if (n.includes('cerradura central oxxo')) return 240;
+      if (n.includes('cerradura caracol')) return 145;
+      if (n.includes('brazos de proyección')) return 360;
+      if (n.includes('manija cremona')) return 260;
+      if (n.includes('bisagra tubular')) return 115;
+      if (n.includes('sellos magnéticos')) return 180;
+      if (n.includes('conector esquinero')) return 135;
+      if (n.includes('carretilla') && n.includes('excéntrica')) return 160;
+      if (n.includes('carretilla') && n.includes('doble')) return 75;
+      if (n.includes('carretilla')) return 48;
+      if (n.includes('jaladera botón')) return 110;
+      if (n.includes('jaladera embutida')) return 85;
+      if (n.includes('tope magnético')) return 75;
+      if (n.includes('escuadra') && n.includes('inyección')) return 28;
+      if (n.includes('escuadra')) return 12;
+      if (n.includes('felpa')) return 9;
+      if (n.includes('vinil') || n.includes('empaque')) return 12;
+      if (n.includes('tela mosquitera')) return 110;
+      if (n.includes('guías antifricción')) return 18;
+      if (n.includes('calzas')) return 8;
+      if (n.includes('tornill')) return 2.5;
+      if (n.includes('silicón')) return Number(appSettings.siliconPrice) || 115;
+      return unit === 'kit' ? 1200 : (unit === 'm²' ? 120 : 35);
+    }
+
+    function normalizeHardwareItem(name, unit) {
+      const n = name.toLowerCase();
+      if (n.includes('felpa')) return { name: 'Felpa Hermética Fin-Seal 7mm', unit: 'm' };
+      if (n.includes('vinil redondo')) return { name: 'Vinil Redondo Mosquitero', unit: 'm' };
+      if (n.includes('vinil') || n.includes('empaque')) return { name: 'Vinil / Empaque Cristal', unit: 'm' };
+      if (n.includes('tela mosquitera')) return { name: 'Tela Mosquitera Fibra Vidrio', unit: 'm²' };
+      if (n.includes('escuadra') && n.includes('mosquitero')) return { name: 'Escuadra Plástica Mosquitero', unit: 'pzas' };
+      return { name, unit };
+    }
+
+    function computePiecePricing(model, w, h, qty, color, glass, mosquitero, felpa, tag) {
+      const effectiveCuts = getEffectiveCuts(model, w, h, qty, mosquitero, tag);
+      let netAluminumKg = 0;
+      const grouped = {};
+      effectiveCuts.forEach(c => {
+        const kgPerM = PROFILE_WEIGHT_KG_M[c.key] || 0.85;
+        netAluminumKg += (c.len / 100) * c.qty * kgPerM;
+        if (!grouped[c.key]) grouped[c.key] = { key: c.key, items: [] };
+        for (let i = 0; i < c.qty; i++) grouped[c.key].items.push({ len: c.len, tag: c.tag });
+      });
+
+      let billedAluminumKg = netAluminumKg;
+      if ((appSettings.aluBillingMode || 'bars') === 'bars') {
+        billedAluminumKg = 0;
+        Object.values(grouped).forEach(g => {
+          const bins = optimizeBars1D(g.items);
+          const kgPerM = PROFILE_WEIGHT_KG_M[g.key] || 0.85;
+          billedAluminumKg += bins.length * 6 * kgPerM;
+        });
+      } else {
+        billedAluminumKg = netAluminumKg * (1 + (Number(appSettings.aluWastePct) || 18) / 100);
+      }
+
+      let colorMultiplier = 1.0;
+      if (color === 'Madera Nogal') colorMultiplier = 1.25;
+      else if (color === 'Champagne') colorMultiplier = 1.12;
+      else if (color === 'Blanco') colorMultiplier = 1.06;
+
+      const rawAluminumCost = billedAluminumKg * appSettings.aluPriceKg * colorMultiplier;
+      const discountedAluminumCost = rawAluminumCost * ((100 - matecoDiscountPct) / 100);
+
+      const areaM2 = (w * h) / 10000;
+      const glassM2Price = appSettings.glassPrices[glass] || 540;
+      const glassCost = (areaM2 * qty) * glassM2Price;
+
+      const hwList = model.hardware ? model.hardware(w, h, { mosquitero, felpa }) : [];
+      let hardwareCost = 0;
+      hwList.forEach(item => {
+        hardwareCost += item.qty * qty * getHardwareUnitPrice(item.name, item.unit);
+      });
+      const siliconTubes = Math.max(0.5, Number((((w + h) * 2) / 700).toFixed(1))) * qty;
+      hardwareCost += siliconTubes * (Number(appSettings.siliconPrice) || 115);
+
+      const costMaterials = Math.round(discountedAluminumCost + glassCost + hardwareCost);
+      const laborCost = Math.round(costMaterials * (profitMarginPct / 100));
+      const installCost = installFeePerPiece * qty;
+      const salePrice = costMaterials + laborCost + installCost;
+      return {
+        effectiveCuts,
+        netAluminumKg,
+        billedAluminumKg,
+        areaM2,
+        glassM2Price,
+        costMaterials,
+        laborCost,
+        installCost,
+        salePrice,
+        downPayment: Math.round(salePrice * 0.60)
+      };
+    }
+
+    let appSettings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+
+    const PROFILE_WEIGHT_KG_M = {
+      '7826': 0.92, '9957': 0.88, '9956': 0.85, '17848': 0.78, '17847': 0.76, '3036': 0.72, '7828': 0.65,
+      '7801': 0.62, '7802': 0.60, '7803': 0.58, '7804': 0.54, '7805': 0.52, '7806': 0.50,
+      '5001': 1.05, '5002': 0.98, '5003': 0.42,
+      '7001': 0.95, '7002': 0.90, '7003': 0.75, '7004': 0.72,
+      '7821': 1.35, '7822': 1.28, '7823': 1.42, '7824': 1.15, '7830': 0.85, '7825': 0.90,
+      '1540': 1.40, '7831': 0.55, '7833': 0.48,
+      '1205': 1.45, '2020': 1.60,
+      '4040': 1.30, '4041': 1.15, 'MH-06': 0.35,
+      '7836': 0.42
+    };
+
+    const SYSTEM_CATALOG = [
+      {
+        id: 'corr2h',
+        cat: 'ventanas',
+        name: 'Ventana Corrediza 2 Hojas (Línea 3")',
+        line: 'Línea 3" Cuprum / Eurovent',
+        factor: 1.0,
+        defaultW: 150,
+        defaultH: 120,
+        cuts: (w, h, cfg) => [
+          { name: 'Jamba Lateral', key: '7826', qty: 2, len: Number(h.toFixed(1)), formula: 'H (Alto)', type: 'Corte 90°' },
+          { name: 'Riel Inferior', key: '9957', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Cabezal Superior', key: '9956', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Traslape Central', key: '17848', qty: 2, len: Number((h - cfg.descCerco3).toFixed(1)), formula: `H - ${cfg.descCerco3} cm`, type: 'Corte 90°' },
+          { name: 'Cerco Lateral', key: '17847', qty: 2, len: Number((h - cfg.descCerco3).toFixed(1)), formula: `H - ${cfg.descCerco3} cm`, type: 'Corte 90°' },
+          { name: 'Zoclo / Cabezal Hoja', key: '3036', qty: 4, len: Number(((w / 2) - cfg.descZoclo3).toFixed(1)), formula: `(W/2) - ${cfg.descZoclo3} cm`, type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Hojas (Fija y Móvil)', qty: 2, w: Number(((w / 2) - 5.3).toFixed(1)), h: Number((h - 11.0).toFixed(1)), formula: '(W/2 - 5.3) × (H - 11.0)' }
+        ],
+        hardware: (w, h, opts) => {
+          const list = [
+            { name: 'Carretilla Balero Nylon (Cuprum 1024)', qty: 4, unit: 'pzas' },
+            { name: 'Jaladera Embutida con Contra', qty: 1, unit: 'pza' },
+            { name: 'Vinil Pata de Cochino #12 (6mm)', qty: Math.ceil((4 * ((w / 2) + h) / 100) * 1.15), unit: 'm' },
+            { name: 'Guías Antifricción y Calzas', qty: 4, unit: 'jgos' },
+            { name: 'Tornillería Inox #8×1/2" y #10×2"', qty: 16, unit: 'pzas' }
+          ];
+          if (opts.felpa) list.splice(2, 0, { name: 'Felpa Hermética Fin-Seal 7mm', qty: Math.ceil(((2 * h + 4 * (w / 2)) / 100) * 1.15), unit: 'm' });
+          if (opts.mosquitero) {
+            list.push({ name: 'Escuadra Plástica Mosquitero', qty: 4, unit: 'pzas' });
+            list.push({ name: 'Tela Mosquitera Fibra Vidrio', qty: Number((((w / 2) * h) / 10000).toFixed(2)), unit: 'm²' });
+            list.push({ name: 'Vinil Redondo Mosquitero', qty: Math.ceil((2 * (w / 2 + h)) / 100), unit: 'm' });
+          }
+          return list;
+        }
+      },
+      {
+        id: 'corr2h_2in',
+        cat: 'ventanas',
+        name: 'Ventana Corrediza 2 Hojas (Línea 2")',
+        line: 'Línea 2" Panorama Nacional',
+        factor: 0.82,
+        defaultW: 120,
+        defaultH: 100,
+        cuts: (w, h) => [
+          { name: 'Jamba Lateral 2"', key: '7801', qty: 2, len: Number(h.toFixed(1)), formula: 'H (Alto)', type: 'Corte 90°' },
+          { name: 'Riel Inferior 2"', key: '7802', qty: 1, len: Number((w - 2.0).toFixed(1)), formula: 'W - 2.0 cm', type: 'Corte 90°' },
+          { name: 'Cabezal Superior 2"', key: '7803', qty: 1, len: Number((w - 2.0).toFixed(1)), formula: 'W - 2.0 cm', type: 'Corte 90°' },
+          { name: 'Traslape 2"', key: '7804', qty: 2, len: Number((h - 3.2).toFixed(1)), formula: 'H - 3.2 cm', type: 'Corte 90°' },
+          { name: 'Cerco Lateral 2"', key: '7805', qty: 2, len: Number((h - 3.2).toFixed(1)), formula: 'H - 3.2 cm', type: 'Corte 90°' },
+          { name: 'Zoclo Hoja 2"', key: '7806', qty: 4, len: Number(((w / 2) - 5.2).toFixed(1)), formula: '(W/2) - 5.2 cm', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Hojas Línea 2"', qty: 2, w: Number(((w / 2) - 4.0).toFixed(1)), h: Number((h - 9.0).toFixed(1)), formula: '(W/2 - 4.0) × (H - 9.0)' }
+        ],
+        hardware: (w, h, opts) => {
+          const list = [
+            { name: 'Carretilla Corrediza 2" Balero', qty: 4, unit: 'pzas' },
+            { name: 'Cerradura Caracol / Jaladera', qty: 1, unit: 'pza' },
+            { name: 'Vinil perimetral Cristal', qty: Math.ceil((4 * ((w / 2) + h) / 100) * 1.15), unit: 'm' }
+          ];
+          if (opts.felpa) list.splice(2, 0, { name: 'Felpa Riel y Traslape', qty: Math.ceil(((2 * h + 4 * (w / 2)) / 100) * 1.15), unit: 'm' });
+          if (opts.mosquitero) {
+            list.push({ name: 'Escuadra Mosquitero', qty: 4, unit: 'pzas' });
+            list.push({ name: 'Tela Mosquitera', qty: Number((((w / 2) * h) / 10000).toFixed(2)), unit: 'm²' });
+          }
+          return list;
+        }
+      },
+      {
+        id: 'corr3h',
+        cat: 'ventanas',
+        name: 'Ventana Corrediza 3 Hojas OXO (Línea 3")',
+        line: 'Línea 3" Triple Hoja',
+        factor: 1.40,
+        defaultW: 210,
+        defaultH: 120,
+        cuts: (w, h, cfg) => [
+          { name: 'Jamba Lateral', key: '7826', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Riel Inferior', key: '9957', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Cabezal Superior', key: '9956', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Traslape Central', key: '17848', qty: 4, len: Number((h - cfg.descCerco3).toFixed(1)), formula: `H - ${cfg.descCerco3} cm`, type: 'Corte 90°' },
+          { name: 'Cerco Lateral', key: '17847', qty: 2, len: Number((h - cfg.descCerco3).toFixed(1)), formula: `H - ${cfg.descCerco3} cm`, type: 'Corte 90°' },
+          { name: 'Zoclo Ventana (3 Hojas)', key: '3036', qty: 6, len: Number(((w / 3) - 5.5).toFixed(1)), formula: '(W/3) - 5.5 cm', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal 3 Hojas (OXO)', qty: 3, w: Number(((w / 3) - 4.3).toFixed(1)), h: Number((h - 11.0).toFixed(1)), formula: '(W/3 - 4.3) × (H - 11.0)' }
+        ],
+        hardware: (w, h, opts) => {
+          const list = [
+            { name: 'Carretilla Balero Nylon', qty: 4, unit: 'pzas' },
+            { name: 'Jaladera Embutida con Contra', qty: 2, unit: 'pzas' },
+            { name: 'Vinil Cristal 6mm', qty: Math.ceil((6 * ((w / 3) + h) / 100) * 1.15), unit: 'm' }
+          ];
+          if (opts.felpa) list.push({ name: 'Felpa Fin-Seal', qty: Math.ceil(((3 * h + 6 * (w / 3)) / 100) * 1.15), unit: 'm' });
+          return list;
+        }
+      },
+      {
+        id: 'corr4h',
+        cat: 'ventanas',
+        name: 'Ventana Corrediza 4 Hojas OXXO (Línea 3")',
+        line: 'Línea 3" Cuprum Monumental',
+        factor: 1.85,
+        defaultW: 280,
+        defaultH: 180,
+        cuts: (w, h, cfg) => [
+          { name: 'Jamba Lateral', key: '7826', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Riel Inferior', key: '9957', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Cabezal Superior', key: '9956', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Traslape Central', key: '17848', qty: 4, len: Number((h - cfg.descCerco3).toFixed(1)), formula: `H - ${cfg.descCerco3} cm`, type: 'Corte 90°' },
+          { name: 'Cerco Lateral', key: '17847', qty: 4, len: Number((h - cfg.descCerco3).toFixed(1)), formula: `H - ${cfg.descCerco3} cm`, type: 'Corte 90°' },
+          { name: 'Zoclo Ventana', key: '3036', qty: 8, len: Number(((w / 4) - 4.8).toFixed(1)), formula: '(W/4) - 4.8 cm', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal 4 Hojas (OXXO)', qty: 4, w: Number(((w / 4) - 3.6).toFixed(1)), h: Number((h - 11.0).toFixed(1)), formula: '(W/4 - 3.6) × (H - 11.0)' }
+        ],
+        hardware: (w, h, opts) => {
+          const list = [
+            { name: 'Carretilla Balero Nylon Doble', qty: 8, unit: 'pzas' },
+            { name: 'Cerradura Central OXXO', qty: 1, unit: 'pza' },
+            { name: 'Vinil para Cristal 6mm', qty: Math.ceil((8 * ((w / 4) + h) / 100) * 1.15), unit: 'm' }
+          ];
+          if (opts.felpa) list.push({ name: 'Felpa Fin-Seal', qty: Math.ceil(((4 * h + 8 * (w / 4)) / 100) * 1.15), unit: 'm' });
+          return list;
+        }
+      },
+      {
+        id: 'fijo3',
+        cat: 'ventanas',
+        name: 'Ventanal Fijo Comercial (Bolsa 3")',
+        line: 'Línea 3" Escaparate / Fijo',
+        factor: 0.72,
+        defaultW: 160,
+        defaultH: 200,
+        cuts: (w, h) => [
+          { name: 'Bolsa Vertical 3"', key: '7826', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Bolsa Horizontal 3"', key: '7828', qty: 2, len: Number((w - 5.0).toFixed(1)), formula: 'W - 5.0 cm', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Fijo Único', qty: 1, w: Number((w - 3.5).toFixed(1)), h: Number((h - 3.5).toFixed(1)), formula: '(W - 3.5) × (H - 3.5)' }
+        ],
+        hardware: (w, h) => [
+          { name: 'Vinil Empaque Fijo', qty: Math.ceil((2 * (w + h) / 100) * 1.15), unit: 'm' },
+          { name: 'Calzas de Neopreno', qty: 4, unit: 'pzas' },
+          { name: 'Tornillos y Taquetes 1/4"', qty: 12, unit: 'pzas' }
+        ]
+      },
+      {
+        id: 'proyectable50',
+        cat: 'ventanas',
+        name: 'Proyectable / Abatible (Eurovent S50)',
+        line: 'Serie 50 Española (Corte 45°)',
+        factor: 1.48,
+        defaultW: 90,
+        defaultH: 110,
+        cuts: (w, h) => [
+          { name: 'Marco Perimetral S50 (W)', key: '5001', qty: 2, len: Number(w.toFixed(1)), formula: 'W (Inglete 45°)', type: 'Corte 45°' },
+          { name: 'Marco Perimetral S50 (H)', key: '5001', qty: 2, len: Number(h.toFixed(1)), formula: 'H (Inglete 45°)', type: 'Corte 45°' },
+          { name: 'Hoja Proyectable (W)', key: '5002', qty: 2, len: Number((w - 4.4).toFixed(1)), formula: 'W - 4.4 cm', type: 'Corte 45°' },
+          { name: 'Hoja Proyectable (H)', key: '5002', qty: 2, len: Number((h - 4.4).toFixed(1)), formula: 'H - 4.4 cm', type: 'Corte 45°' },
+          { name: 'Junquillo Cristal (W+H)', key: '5003', qty: 4, len: Number((((w + h) / 2) - 8.0).toFixed(1)), formula: 'Perímetro interior', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Hoja Proyectable', qty: 1, w: Number((w - 11.5).toFixed(1)), h: Number((h - 11.5).toFixed(1)), formula: '(W - 11.5) × (H - 11.5)' }
+        ],
+        hardware: (w, h) => [
+          { name: 'Brazos de Proyección Inox', qty: 1, unit: 'par' },
+          { name: 'Manija Cremona Española', qty: 1, unit: 'pza' },
+          { name: 'Escuadras de Inyección / Alineación', qty: 8, unit: 'pzas' },
+          { name: 'Empaque EPDM Doble', qty: Math.ceil((4 * (w + h) / 100) * 1.1), unit: 'm' }
+        ]
+      },
+      {
+        id: 'guillotina70',
+        cat: 'ventanas',
+        name: 'Guillotina Serie 70 Duo-Vent',
+        line: 'Serie 70 Cuprum',
+        factor: 1.35,
+        defaultW: 100,
+        defaultH: 150,
+        cuts: (w, h) => [
+          { name: 'Jamba Guillotina', key: '7001', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Riel/Cabezal Marco', key: '7002', qty: 2, len: Number((w - 2.4).toFixed(1)), formula: 'W - 2.4 cm', type: 'Corte 90°' },
+          { name: 'Cerco Hoja Móvil', key: '7003', qty: 4, len: Number(((h / 2) + 1.2).toFixed(1)), formula: '(H/2) + 1.2 cm', type: 'Corte 45°' },
+          { name: 'Zoclo/Cabezal Hoja', key: '7004', qty: 4, len: Number((w - 5.5).toFixed(1)), formula: 'W - 5.5 cm', type: 'Corte 45°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Hoja Fija y Móvil', qty: 2, w: Number((w - 11.0).toFixed(1)), h: Number(((h / 2) - 4.5).toFixed(1)), formula: '(W - 11) × (H/2 - 4.5)' }
+        ],
+        hardware: (w, h, opts) => {
+          const list = [
+            { name: 'Balancines Espiral Serie 70', qty: 2, unit: 'jgos' },
+            { name: 'Seguro Media Vuelta Guillotina', qty: 1, unit: 'pza' }
+          ];
+          if (opts.felpa) list.push({ name: 'Felpa Perimetral', qty: Math.ceil(((4 * h + 4 * w) / 100) * 1.1), unit: 'm' });
+          return list;
+        }
+      },
+      {
+        id: 'puerta3',
+        cat: 'puertas',
+        name: 'Puerta Batiente Residencial 3"',
+        line: 'Línea 3" Pesada + Contramarco',
+        factor: 1.45,
+        defaultW: 90,
+        defaultH: 210,
+        cuts: (w, h) => [
+          { name: 'Contramarco Vertical', key: '7825', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Contramarco Superior', key: '7825', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Cerco Chapa/Bisagra', key: '7821', qty: 2, len: Number((h - 2.2).toFixed(1)), formula: 'H - 2.2 cm', type: 'Corte 90°' },
+          { name: 'Cabezal Puerta', key: '7822', qty: 1, len: Number((w - 13.8).toFixed(1)), formula: 'W - 13.8 cm', type: 'Corte 90°' },
+          { name: 'Zoclo Puerta', key: '7823', qty: 1, len: Number((w - 13.8).toFixed(1)), formula: 'W - 13.8 cm', type: 'Corte 90°' },
+          { name: 'Intermedio (Peinazo)', key: '7824', qty: 1, len: Number((w - 13.8).toFixed(1)), formula: 'W - 13.8 cm', type: 'Corte 90°' },
+          { name: 'Duela Machihembrada', key: '7830', qty: 6, len: Number((w - 13.8).toFixed(1)), formula: 'W - 13.8 cm', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Superior Puerta', qty: 1, w: Number((w - 12.6).toFixed(1)), h: Number(((h * 0.52) - 8.5).toFixed(1)), formula: '(W - 12.6) × (0.52H - 8.5)' }
+        ],
+        hardware: () => [
+          { name: 'Bisagra Tubular 3" Aluminio', qty: 3, unit: 'pzas' },
+          { name: 'Cerradura Manija Llave Puntos', qty: 1, unit: 'jgo' },
+          { name: 'Jaladera Barra Inox 60cm', qty: 1, unit: 'jgo' },
+          { name: 'Tope Magnético de Piso', qty: 1, unit: 'pza' }
+        ]
+      },
+      {
+        id: 'puerta_duela',
+        cat: 'puertas',
+        name: 'Puerta Ciega Duela Completa 7830',
+        line: 'Línea 3" Privacidad Total',
+        factor: 1.55,
+        defaultW: 90,
+        defaultH: 215,
+        cuts: (w, h) => [
+          { name: 'Contramarco Vertical', key: '7825', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Contramarco Superior', key: '7825', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Cerco Lateral', key: '7821', qty: 2, len: Number((h - 2.2).toFixed(1)), formula: 'H - 2.2 cm', type: 'Corte 90°' },
+          { name: 'Cabezal / Zoclo', key: '7822', qty: 2, len: Number((w - 13.8).toFixed(1)), formula: 'W - 13.8 cm', type: 'Corte 90°' },
+          { name: 'Duela 7830 Completa', key: '7830', qty: 14, len: Number((w - 13.8).toFixed(1)), formula: 'W - 13.8 cm', type: 'Corte 90°' }
+        ],
+        glass: () => [],
+        hardware: () => [
+          { name: 'Bisagras de Carga 3"', qty: 3, unit: 'pzas' },
+          { name: 'Cerradura de Embutir Seguridad', qty: 1, unit: 'jgo' }
+        ]
+      },
+      {
+        id: 'puerta_doble',
+        cat: 'puertas',
+        name: 'Puerta Doble Hoja Residencial 3"',
+        line: 'Línea 3" Acceso Principal',
+        factor: 2.30,
+        defaultW: 180,
+        defaultH: 220,
+        cuts: (w, h) => [
+          { name: 'Contramarco Perimetral', key: '7825', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Contramarco Cabezal', key: '7825', qty: 1, len: Number((w - 2.6).toFixed(1)), formula: 'W - 2.6 cm', type: 'Corte 90°' },
+          { name: 'Cercos Verticales (2 Hojas)', key: '7821', qty: 4, len: Number((h - 2.2).toFixed(1)), formula: 'H - 2.2 cm', type: 'Corte 90°' },
+          { name: 'Cabezales / Zoclos (2 Hojas)', key: '7822', qty: 4, len: Number(((w / 2) - 13.0).toFixed(1)), formula: '(W/2) - 13.0 cm', type: 'Corte 90°' },
+          { name: 'Duela Inferior (2 Hojas)', key: '7830', qty: 12, len: Number(((w / 2) - 13.0).toFixed(1)), formula: '(W/2) - 13.0 cm', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Cristal Hojas Puerta Doble', qty: 2, w: Number(((w / 2) - 12.0).toFixed(1)), h: Number(((h * 0.55) - 8.0).toFixed(1)), formula: '(W/2 - 12) × (0.55H - 8)' }
+        ],
+        hardware: () => [
+          { name: 'Bisagras Tubulares 3"', qty: 6, unit: 'pzas' },
+          { name: 'Cerradura Principal + Pasador Piso', qty: 1, unit: 'kit' },
+          { name: 'Par de Jaladeras Inox 80cm', qty: 2, unit: 'pzas' }
+        ]
+      },
+      {
+        id: 'cancel_europa',
+        cat: 'canceles',
+        name: 'Cancel de Baño Templado 10mm Europa (Recto)',
+        line: 'Línea 10mm Herrajes Inox 304',
+        factor: 1.75,
+        defaultW: 140,
+        defaultH: 190,
+        cuts: (w, h) => [
+          { name: 'Riel Tubular Guía Inox', key: '1540', qty: 1, len: Number(w.toFixed(1)), formula: 'W', type: 'Corte 90°' },
+          { name: 'Jamba Lateral U Inox', key: '7831', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Sardinel Botaguas', key: '7833', qty: 1, len: Number(w.toFixed(1)), formula: 'W', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Templado Fijo 10mm', qty: 1, w: Number(((w / 2) + 2.0).toFixed(1)), h: Number(h.toFixed(1)), formula: '(W/2 + 2) × H' },
+          { name: 'Templado Corredizo 10mm', qty: 1, w: Number(((w / 2) + 4.0).toFixed(1)), h: Number((h - 5.0).toFixed(1)), formula: '(W/2 + 4) × (H - 5)' }
+        ],
+        hardware: () => [
+          { name: 'Kit Sistema Europa Inox 304', qty: 1, unit: 'kit' },
+          { name: 'Carretillas Excéntricas Inox', qty: 2, unit: 'pzas' },
+          { name: 'Jaladera Botón Acero Inox', qty: 1, unit: 'pza' },
+          { name: 'Sellos Magnéticos con Aleta', qty: 2, unit: 'tramos' }
+        ]
+      },
+      {
+        id: 'cancel_escuadra',
+        cat: 'canceles',
+        name: 'Cancel de Baño Escuadra 90° (Templado 10mm)',
+        line: 'Línea 10mm Escuadra Inox',
+        factor: 2.15,
+        defaultW: 180,
+        defaultH: 195,
+        cuts: (w, h) => [
+          { name: 'Riel Guía Frontal Inox', key: '1540', qty: 1, len: Number((w * 0.6).toFixed(1)), formula: 'Lado Frontal (0.6W)', type: 'Corte 90°' },
+          { name: 'Jamba Lateral U Inox', key: '7831', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Sardinel Botaguas Escuadra', key: '7833', qty: 1, len: Number(w.toFixed(1)), formula: 'W (L+L)', type: 'Corte 45°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Templado Fijo Lateral 10mm', qty: 1, w: Number((w * 0.4).toFixed(1)), h: Number(h.toFixed(1)), formula: '(0.4W) × H' },
+          { name: 'Templado Puerta/Corredizo 10mm', qty: 1, w: Number((w * 0.6).toFixed(1)), h: Number((h - 4.0).toFixed(1)), formula: '(0.6W) × (H - 4)' }
+        ],
+        hardware: () => [
+          { name: 'Conector Esquinero Inox 90°', qty: 2, unit: 'pzas' },
+          { name: 'Kit Corredizo / Bisagra Hidráulica Inox', qty: 1, unit: 'kit' },
+          { name: 'Jaladera H Acero Inox', qty: 1, unit: 'pza' }
+        ]
+      },
+      {
+        id: 'barandal_inox',
+        cat: 'barandales',
+        name: 'Barandal Templado 9mm Postes 2"',
+        line: 'Postes Aluminio 2" + Templado',
+        factor: 1.60,
+        defaultW: 200,
+        defaultH: 90,
+        cuts: (w, h) => [
+          { name: 'Pasamanos Superior', key: '1205', qty: 1, len: Number(w.toFixed(1)), formula: 'W', type: 'Corte 90°' },
+          { name: 'Poste Tubular Anclaje 2"', key: '2020', qty: 3, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Templado 9mm Cantos Pulidos', qty: 2, w: Number(((w / 2) - 10.0).toFixed(1)), h: Number((h - 15.0).toFixed(1)), formula: '(W/2 - 10) × (H - 15)' }
+        ],
+        hardware: () => [
+          { name: 'Brida Anclaje Piso Poste 2"', qty: 3, unit: 'pzas' },
+          { name: 'Conectores Pata de Araña Inox', qty: 6, unit: 'pzas' }
+        ]
+      },
+      {
+        id: 'domo_policarbonato',
+        cat: 'domos',
+        name: 'Domo Arqueado Policarbonato',
+        line: 'Estructura Aluminio Estructural',
+        factor: 1.50,
+        defaultW: 160,
+        defaultH: 140,
+        cuts: (w, h) => [
+          { name: 'Larguero Estructural', key: '4040', qty: 2, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' },
+          { name: 'Arco Calandrado', key: '4041', qty: 4, len: Number(w.toFixed(1)), formula: 'W', type: 'Curvado' },
+          { name: 'Moldura Unión H', key: 'MH-06', qty: 3, len: Number(h.toFixed(1)), formula: 'H', type: 'Corte 90°' }
+        ],
+        glass: (w, h) => [
+          { name: 'Policarbonato Celular 6mm UV', qty: 1, w: Number((w * 1.08).toFixed(1)), h: Number(h.toFixed(1)), formula: '(W*1.08) × H' }
+        ],
+        hardware: () => [
+          { name: 'Cinta Ventana y Aluminio', qty: 1, unit: 'rollo' },
+          { name: 'Pijas con Rondana EPDM', qty: 24, unit: 'pzas' }
+        ]
+      }
+    ];
+
+    let currentModel = SYSTEM_CATALOG[0];
+    let selectedColor = 'Negro Mate';
+    let selectedGlass = 'Claro 6mm';
+    let addMosquitero = false;
+    let addFelpa = true;
+    let barsScope = 'current';
+    let projectPieces = [];
+    let profitMarginPct = 50;
+    let matecoDiscountPct = 10;
+    let installFeePerPiece = 350;
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_STATE);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (data.appSettings) appSettings = { ...DEFAULT_SETTINGS, ...data.appSettings, glassPrices: { ...DEFAULT_SETTINGS.glassPrices, ...(data.appSettings.glassPrices || {}) } };
+        if (Array.isArray(data.projectPieces)) projectPieces = data.projectPieces;
+        if (typeof data.profitMarginPct === 'number') profitMarginPct = data.profitMarginPct;
+        if (typeof data.matecoDiscountPct === 'number') matecoDiscountPct = data.matecoDiscountPct;
+        if (typeof data.installFeePerPiece === 'number') installFeePerPiece = data.installFeePerPiece;
+        if (data.clientName) document.getElementById('docClientName').value = data.clientName;
+        if (data.projectName) {
+          document.getElementById('docProjectName').value = data.projectName;
+          document.getElementById('hdrActiveProjectBadge').textContent = data.projectName;
+        }
+        document.getElementById('docWorkshopName').value = appSettings.workshopName;
+        document.getElementById('selMatecoBranch').value = appSettings.supplierPhone;
+      } catch (e) { console.error('Error loading state:', e); }
+    }
+
+    function persistState() {
+      try {
+        const payload = {
+          appSettings,
+          projectPieces,
+          profitMarginPct,
+          matecoDiscountPct,
+          installFeePerPiece,
+          clientName: document.getElementById('docClientName').value,
+          projectName: document.getElementById('docProjectName').value
+        };
+        localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(payload));
+      } catch (e) {}
+    }
+
+    function getEffectiveCuts(model, w, h, qtyMultiplier, mosquiteroEnabled, tag) {
+      const baseCuts = model.cuts(w, h, appSettings).map(c => ({
+        ...c,
+        qty: c.qty * qtyMultiplier,
+        tag: tag || 'V-01'
+      }));
+      if (mosquiteroEnabled && model.cat === 'ventanas') {
+        const div = model.id === 'corr4h' ? 2 : (model.id === 'corr3h' ? 3 : (model.id === 'guillotina70' || model.id === 'fijo3' || model.id === 'proyectable50' ? 1 : 2));
+        const mosqW = Number(((w / div) - 3.5).toFixed(1));
+        const mosqH = Number((h - 4.2).toFixed(1));
+        baseCuts.push(
+          { name: 'Marco Mosquitero Vert.', key: '7836', qty: 2 * qtyMultiplier, len: mosqH, formula: 'H - 4.2 cm', type: 'Corte 45°', tag: tag || 'V-01' },
+          { name: 'Marco Mosquitero Horiz.', key: '7836', qty: 2 * qtyMultiplier, len: mosqW, formula: `(W/${div}) - 3.5 cm`, type: 'Corte 45°', tag: tag || 'V-01' }
+        );
+      }
+      return baseCuts;
+    }
+
+    // Bin-Packing 1D con etiquetas de ubicación
+    function optimizeBars1D(itemsArray) {
+      const BAR_USABLE_CM = Number(appSettings.barUsableCm) || 595;
+      const KERF_CM = (Number(appSettings.kerfMm) || 3.0) / 10;
+
+      const sorted = [...itemsArray].sort((a, b) => b.len - a.len);
+      const bins = [];
+
+      sorted.forEach(item => {
+        if (item.len <= 0) return;
+        let placed = false;
+        for (const bin of bins) {
+          const needed = bin.cuts.length === 0 ? item.len : (item.len + KERF_CM);
+          if (bin.remaining >= needed) {
+            bin.cuts.push(item);
+            bin.remaining = Number((bin.remaining - needed).toFixed(1));
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) {
+          bins.push({
+            cuts: [item],
+            remaining: Number((BAR_USABLE_CM - item.len).toFixed(1))
+          });
+        }
+      });
+
+      return bins;
+    }
+
+    let deferredPwaPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+      const btn = document.getElementById('btnInstallPwa');
+      if (btn) { btn.classList.remove('hidden'); btn.classList.add('flex'); }
+    });
+    async function installPwaApp() {
+      if (!deferredPwaPrompt) return;
+      deferredPwaPrompt.prompt();
+      await deferredPwaPrompt.userChoice;
+      deferredPwaPrompt = null;
+      const btn = document.getElementById('btnInstallPwa');
+      if (btn) { btn.classList.add('hidden'); btn.classList.remove('flex'); }
+    }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSavedState();
+      populateWorkshopSelect();
+      setupWorkshopControls();
+      setupEconomicControls();
+      if (new URLSearchParams(window.location.search).get('casa140') === '1') {
+        loadSampleCasa140(true);
+      }
+      updateProjectUI();
+      updateCalculations();
+    });
+
+    function loadSampleCasa140(silent) {
+      const sampleSpecs = [
+        { tag: 'V-01 Sala / Terraza', modelId: 'corr4h', w: 280, h: 210, qty: 1, glass: 'Filtrasol 6mm', mosquitero: true, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-02 Comedor', modelId: 'corr2h', w: 180, h: 120, qty: 1, glass: 'Claro 6mm', mosquitero: true, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-03 Cocina', modelId: 'corr2h_2in', w: 140, h: 100, qty: 1, glass: 'Claro 6mm', mosquitero: true, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-04 Rec. Principal', modelId: 'corr2h', w: 200, h: 140, qty: 1, glass: 'Filtrasol 6mm', mosquitero: true, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-05 Recámara 2', modelId: 'corr2h', w: 150, h: 120, qty: 1, glass: 'Claro 6mm', mosquitero: true, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-06 Recámara 3', modelId: 'corr2h', w: 150, h: 120, qty: 1, glass: 'Claro 6mm', mosquitero: true, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-07 Baños (x2)', modelId: 'proyectable50', w: 70, h: 60, qty: 2, glass: 'Esmerilado 6mm', mosquitero: false, felpa: true, color: 'Negro Mate' },
+        { tag: 'V-08 Cubo Escalera', modelId: 'fijo3', w: 100, h: 180, qty: 1, glass: 'Claro 6mm', mosquitero: false, felpa: true, color: 'Negro Mate' },
+        { tag: 'P-01 Puerta Patio', modelId: 'puerta3', w: 90, h: 210, qty: 1, glass: 'Esmerilado 6mm', mosquitero: false, felpa: true, color: 'Negro Mate' },
+        { tag: 'C-01 Baño Principal', modelId: 'cancel_europa', w: 120, h: 190, qty: 1, glass: 'Templado 9mm', mosquitero: false, felpa: false, color: 'Negro Mate' },
+        { tag: 'C-02 Baño Compartido', modelId: 'cancel_escuadra', w: 90, h: 190, qty: 1, glass: 'Templado 9mm', mosquitero: false, felpa: false, color: 'Negro Mate' }
+      ];
+      projectPieces = sampleSpecs.map((it, idx) => {
+        const m = SYSTEM_CATALOG.find(s => s.id === it.modelId) || SYSTEM_CATALOG[0];
+        const res = computePiecePricing(m, it.w, it.h, it.qty, it.color, it.glass, it.mosquitero, it.felpa, it.tag);
+        return {
+          id: Date.now() + idx,
+          tag: it.tag,
+          modelId: m.id,
+          model: m.name,
+          color: it.color,
+          glass: it.glass,
+          mosquitero: it.mosquitero,
+          felpa: it.felpa,
+          w: it.w,
+          h: it.h,
+          qty: it.qty,
+          unitPrice: Math.round(res.salePrice / it.qty),
+          subtotal: res.salePrice,
+          cuts: res.effectiveCuts
+        };
+      });
+      document.getElementById('docProjectName').value = 'Casa 3 Recámaras 140m²';
+      document.getElementById('hdrActiveProjectBadge').textContent = 'Casa 3 Recámaras 140m²';
+      persistState();
+      if (typeof setBarsScope === 'function') setBarsScope('project');
+      if (!silent) {
+        updateProjectUI();
+        updateCalculations();
+      }
+    }
+
+    function populateWorkshopSelect() {
+      const sel = document.getElementById('expSelModel');
+      if (!sel) return;
+      const categories = [
+        { key: 'ventanas', label: 'Ventanas de Aluminio' },
+        { key: 'puertas', label: 'Puertas de Taller' },
+        { key: 'canceles', label: 'Canceles de Baño' },
+        { key: 'barandales', label: 'Barandales Arquitectónicos' },
+        { key: 'domos', label: 'Domos y Cubiertas' }
+      ];
+
+      sel.innerHTML = categories.map(cat => {
+        const items = SYSTEM_CATALOG.filter(m => m.cat === cat.key);
+        return `<optgroup label="${cat.label}" class="bg-[#121511] text-[#d6c5b0] font-bold">
+          ${items.map(m => `<option value="${m.id}" class="text-white font-normal">${m.name}</option>`).join('')}
+        </optgroup>`;
+      }).join('');
+
+      sel.value = currentModel.id;
+    }
+
+    function setupWorkshopControls() {
+      const selModel = document.getElementById('expSelModel');
+      const inputW = document.getElementById('expInputW');
+      const inputH = document.getElementById('expInputH');
+      const inputQty = document.getElementById('expInputQty');
+      const rngW = document.getElementById('expRngW');
+      const rngH = document.getElementById('expRngH');
+      const selColor = document.getElementById('expSelColor');
+      const selGlass = document.getElementById('expSelGlass');
+      const chkMosq = document.getElementById('expChkMosquitero');
+      const chkFelpa = document.getElementById('expChkFelpa');
+
+      selModel.addEventListener('change', () => selectProduct(selModel.value));
+      inputW.addEventListener('input', () => syncWidth(parseFloat(inputW.value) || 150));
+      inputH.addEventListener('input', () => syncHeight(parseFloat(inputH.value) || 120));
+      inputQty.addEventListener('input', () => updateCalculations());
+      rngW.addEventListener('input', () => syncWidth(parseFloat(rngW.value) || 150));
+      rngH.addEventListener('input', () => syncHeight(parseFloat(rngH.value) || 120));
+      selColor.addEventListener('change', () => { selectedColor = selColor.value; updateCalculations(); });
+      selGlass.addEventListener('change', () => { selectedGlass = selGlass.value; updateCalculations(); });
+      chkMosq.addEventListener('change', () => { addMosquitero = chkMosq.checked; updateCalculations(); });
+      chkFelpa.addEventListener('change', () => { addFelpa = chkFelpa.checked; updateCalculations(); });
+    }
+
+    function setupEconomicControls() {
+      const expProfitRange = document.getElementById('expProfitRange');
+      const expProfitVal = document.getElementById('expProfitVal');
+      const expMatecoDiscount = document.getElementById('expMatecoDiscount');
+      const expMatecoDiscountVal = document.getElementById('expMatecoDiscountVal');
+      const expInstallFee = document.getElementById('expInstallFee');
+
+      expProfitRange.value = profitMarginPct;
+      expProfitVal.textContent = `${profitMarginPct}%`;
+      expMatecoDiscount.value = matecoDiscountPct;
+      expMatecoDiscountVal.textContent = `${matecoDiscountPct}%`;
+      expInstallFee.value = installFeePerPiece;
+
+      expProfitRange.addEventListener('input', () => {
+        profitMarginPct = parseInt(expProfitRange.value) || 50;
+        expProfitVal.textContent = `${profitMarginPct}%`;
+        persistState();
+        updateCalculations();
+      });
+      expMatecoDiscount.addEventListener('input', () => {
+        matecoDiscountPct = parseInt(expMatecoDiscount.value) || 10;
+        expMatecoDiscountVal.textContent = `${matecoDiscountPct}%`;
+        persistState();
+        updateCalculations();
+      });
+      expInstallFee.addEventListener('input', () => {
+        installFeePerPiece = parseInt(expInstallFee.value) || 0;
+        persistState();
+        updateCalculations();
+      });
+    }
+
+    function syncWidth(val) {
+      const inputW = document.getElementById('expInputW');
+      const rngW = document.getElementById('expRngW');
+      const badgeW = document.getElementById('expBadgeW');
+      if (inputW && document.activeElement !== inputW) inputW.value = val;
+      if (rngW) rngW.value = Math.min(350, Math.max(50, val));
+      if (badgeW) badgeW.textContent = `${val.toFixed(1)}`;
+      updateCalculations();
+    }
+
+    function syncHeight(val) {
+      const inputH = document.getElementById('expInputH');
+      const rngH = document.getElementById('expRngH');
+      const badgeH = document.getElementById('expBadgeH');
+      if (inputH && document.activeElement !== inputH) inputH.value = val;
+      if (rngH) rngH.value = Math.min(300, Math.max(40, val));
+      if (badgeH) badgeH.textContent = `${val.toFixed(1)}`;
+      updateCalculations();
+    }
+
+    function adjustDimension(axis, delta) {
+      if (axis === 'w') {
+        const current = parseFloat(document.getElementById('expInputW').value) || 150;
+        syncWidth(Math.max(30, Math.min(500, Number((current + delta).toFixed(1)))));
+      } else {
+        const current = parseFloat(document.getElementById('expInputH').value) || 120;
+        syncHeight(Math.max(30, Math.min(400, Number((current + delta).toFixed(1)))));
+      }
+    }
+
+    function adjustQty(delta) {
+      const inputQty = document.getElementById('expInputQty');
+      inputQty.value = Math.max(1, Math.min(100, (parseInt(inputQty.value) || 1) + delta));
+      updateCalculations();
+    }
+
+    function selectProduct(id) {
+      const m = SYSTEM_CATALOG.find(s => s.id === id);
+      if (m) {
+        currentModel = m;
+        syncWidth(currentModel.defaultW);
+        syncHeight(currentModel.defaultH);
+        updateCalculations();
+      }
+    }
+
+    function setBarsScope(scope) {
+      barsScope = scope;
+      const bCur = document.getElementById('btnScopeCurrent');
+      const bProj = document.getElementById('btnScopeProject');
+      if (scope === 'current') {
+        bCur.className = 'px-3 py-1 rounded-lg font-bold bg-[#d6c5b0] text-[#181b15]';
+        bProj.className = 'px-3 py-1 rounded-lg font-medium text-stone-300 hover:text-white';
+      } else {
+        bProj.className = 'px-3 py-1 rounded-lg font-bold bg-[#d6c5b0] text-[#181b15]';
+        bCur.className = 'px-3 py-1 rounded-lg font-medium text-stone-300 hover:text-white';
+      }
+      updateCalculations();
+    }
+
+    function updateCalculations() {
+      const w = parseFloat(document.getElementById('expInputW').value) || 150;
+      const h = parseFloat(document.getElementById('expInputH').value) || 120;
+      const qty = Math.max(1, parseInt(document.getElementById('expInputQty').value) || 1);
+      const tag = (document.getElementById('expInputTag').value || 'V-01').trim();
+
+      document.getElementById('expBadgeDimsTop').textContent = `${w.toFixed(1)} × ${h.toFixed(1)} cm`;
+      document.getElementById('lblTopKerf').textContent = `${Number(appSettings.kerfMm).toFixed(1)} mm`;
+
+      const res = computePiecePricing(currentModel, w, h, qty, selectedColor, selectedGlass, addMosquitero, addFelpa, tag);
+
+      document.getElementById('expMetricArea').textContent = `${(res.areaM2 * qty).toFixed(2)} m²`;
+      document.getElementById('expMetricKg').textContent = `${res.billedAluminumKg.toFixed(1)} kg`;
+      document.getElementById('expPieceQtyLabel').textContent = `${qty} pza${qty > 1 ? 's' : ''}`;
+      document.getElementById('expPiecePriceTag').textContent = `$${res.salePrice.toLocaleString()} MXN`;
+      document.getElementById('expCostMat').textContent = `$${res.costMaterials.toLocaleString()}`;
+      document.getElementById('expCostLabor').textContent = `$${res.laborCost.toLocaleString()}`;
+      document.getElementById('expCostInstall').textContent = `$${res.installCost.toLocaleString()}`;
+      document.getElementById('expPieceDownPayment').textContent = `$${res.downPayment.toLocaleString()} MXN`;
+      document.getElementById('lblSelectedGlassDesc').textContent = `${selectedGlass} ($${res.glassM2Price}/m²) • Medidas exactas.`;
+
+      renderParametricCAD(w, h, currentModel.id);
+      renderWorkshopTables(w, h, qty, tag, currentModel);
+    }
+
+    function buildCadSvgMarkup(modelId, w, h, color, hasMosquitero, compact) {
+      const availW = compact ? 96 : 260;
+      const availH = compact ? 64 : 168;
+      const vw = compact ? 110 : 320;
+      const vh = compact ? 76 : 210;
+      const ratio = (w || 150) / (h || 120);
+      let drawW, drawH;
+      if (ratio >= (availW / availH)) { drawW = availW; drawH = availW / ratio; }
+      else { drawH = availH; drawW = availH * ratio; }
+      const startX = (vw - drawW) / 2, startY = (vh - drawH) / 2;
+
+      let fFill = '#1b1f19', fStroke = '#d6c5b0', sashFill = '#242b23', sashStroke = '#e8efe6', accentCol = '#d6c5b0';
+      if (color === 'Blanco') { fFill = '#f0f2ee'; fStroke = '#94a3b8'; sashFill = '#e2e6de'; sashStroke = '#64748b'; accentCol = '#334155'; }
+      else if (color === 'Champagne') { fFill = '#9e9280'; fStroke = '#d6c5b0'; sashFill = '#867b6b'; sashStroke = '#eedfcb'; accentCol = '#f5ede2'; }
+      else if (color === 'Madera Nogal') { fFill = '#543621'; fStroke = '#c4895a'; sashFill = '#442b1a'; sashStroke = '#b3784b'; accentCol = '#d6c5b0'; }
+      else if (color === 'Natural Brillante') { fFill = '#707873'; fStroke = '#cbd5e1'; sashFill = '#5c6460'; sashStroke = '#94a3b8'; accentCol = '#ffffff'; }
+
+      const mod = SYSTEM_CATALOG.find(s => s.id === modelId) || currentModel;
+      const glasses = mod.glass ? mod.glass(w, h) : [];
+      const glassText = (!compact && glasses.length > 0) ? `${glasses[0].w}×${glasses[0].h}` : '';
+      const glassFill = compact ? 'rgba(56, 189, 248, 0.22)' : 'url(#cadGlassGrad)';
+      const pad = compact ? 2.5 : 5;
+      const gPad = compact ? 4 : 9;
+
+      let inner = '';
+      if (modelId === 'corr2h' || modelId === 'corr2h_2in') {
+        const midX = startX + drawW / 2;
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.6 : 2.5}" rx="2"/>
+          <rect x="${startX + pad}" y="${startY + pad}" width="${(drawW/2) - pad/2}" height="${drawH - pad*2}" fill="${sashFill}" stroke="${sashStroke}" stroke-width="${compact ? 0.9 : 1.5}" rx="1"/>
+          <rect x="${startX + gPad}" y="${startY + gPad}" width="${Math.max(4, (drawW/2) - gPad - 1)}" height="${Math.max(4, drawH - gPad*2)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.7"/>
+          <rect x="${midX - 1}" y="${startY + pad}" width="${(drawW/2) - pad/2}" height="${drawH - pad*2}" fill="${sashFill}" stroke="${accentCol}" stroke-width="${compact ? 1 : 1.8}" rx="1"/>
+          <rect x="${midX + 1}" y="${startY + gPad}" width="${Math.max(4, (drawW/2) - gPad - 1)}" height="${Math.max(4, drawH - gPad*2)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.7"/>
+          ${!compact && glassText ? `<text x="${startX + (drawW/4)}" y="${startY + drawH/2}" fill="#ffffff" font-size="7.5" font-family="monospace" font-weight="bold" text-anchor="middle">${glassText}</text><text x="${midX + (drawW/4)}" y="${startY + drawH/2}" fill="#ffffff" font-size="7.5" font-family="monospace" font-weight="bold" text-anchor="middle">${glassText}</text>` : ''}
+          ${hasMosquitero ? `<rect x="${midX + 1}" y="${startY + gPad}" width="${Math.max(4, (drawW/2) - gPad - 1)}" height="${Math.max(4, drawH - gPad*2)}" fill="${compact ? 'rgba(16,185,129,0.18)' : 'url(#mosqGrid)'}" stroke="#34d399" stroke-width="0.9" stroke-dasharray="2 2"/>` : ''}
+        `;
+      } else if (modelId === 'corr3h') {
+        const leafW = (drawW - pad*2) / 3;
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.6 : 2.5}" rx="2"/>
+          ${[0, 1, 2].map(i => `
+            <rect x="${startX + pad + (i * leafW)}" y="${startY + pad}" width="${Math.max(3, leafW - 1.5)}" height="${drawH - pad*2}" fill="${sashFill}" stroke="${sashStroke}" stroke-width="0.9" rx="1"/>
+            <rect x="${startX + gPad + (i * leafW)}" y="${startY + gPad}" width="${Math.max(2, leafW - gPad)}" height="${Math.max(4, drawH - gPad*2)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.6"/>
+          `).join('')}
+          ${!compact && glassText ? `<text x="${startX + drawW/2}" y="${startY + drawH/2}" fill="#ffffff" font-size="8" font-family="monospace" font-weight="bold" text-anchor="middle">O X O • ${glassText}</text>` : ''}
+        `;
+      } else if (modelId === 'corr4h') {
+        const leafW = (drawW - pad*2) / 4;
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.6 : 2.5}" rx="2"/>
+          ${[0, 1, 2, 3].map(i => `
+            <rect x="${startX + pad + (i * leafW)}" y="${startY + pad}" width="${Math.max(3, leafW - 1.5)}" height="${drawH - pad*2}" fill="${sashFill}" stroke="${sashStroke}" stroke-width="0.9" rx="1"/>
+            <rect x="${startX + gPad + (i * leafW)}" y="${startY + gPad}" width="${Math.max(2, leafW - gPad)}" height="${Math.max(4, drawH - gPad*2)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.6"/>
+          `).join('')}
+          ${!compact && glassText ? `<text x="${startX + drawW/2}" y="${startY + drawH/2}" fill="#ffffff" font-size="8" font-family="monospace" font-weight="bold" text-anchor="middle">O X X O • ${glassText}</text>` : ''}
+        `;
+      } else if (modelId === 'proyectable50') {
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.8 : 2.8}" rx="2"/>
+          <rect x="${startX + pad}" y="${startY + pad}" width="${drawW - pad*2}" height="${drawH - pad*2}" fill="${glassFill}" stroke="${accentCol}" stroke-width="1.2"/>
+          <line x1="${startX + pad}" y1="${startY + drawH - pad}" x2="${startX + drawW/2}" y2="${startY + pad}" stroke="#d6c5b0" stroke-width="1" stroke-dasharray="3 2"/>
+          <line x1="${startX + drawW - pad}" y1="${startY + drawH - pad}" x2="${startX + drawW/2}" y2="${startY + pad}" stroke="#d6c5b0" stroke-width="1" stroke-dasharray="3 2"/>
+          ${!compact && glassText ? `<text x="${startX + drawW/2}" y="${startY + drawH/2}" fill="#ffffff" font-size="8" font-family="monospace" font-weight="bold" text-anchor="middle">PROYECTABLE • ${glassText}</text>` : ''}
+        `;
+      } else if (modelId === 'fijo3') {
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.8 : 2.8}" rx="2"/>
+          <rect x="${startX + pad}" y="${startY + pad}" width="${drawW - pad*2}" height="${drawH - pad*2}" fill="${glassFill}" stroke="${accentCol}" stroke-width="1"/>
+          ${!compact && glassText ? `<text x="${startX + drawW/2}" y="${startY + drawH/2}" fill="#ffffff" font-size="8" font-family="monospace" font-weight="bold" text-anchor="middle">FIJO • ${glassText}</text>` : ''}
+        `;
+      } else if (modelId === 'guillotina70') {
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.6 : 2.5}" rx="2"/>
+          <rect x="${startX + pad}" y="${startY + pad}" width="${drawW - pad*2}" height="${(drawH/2) - pad}" fill="${sashFill}" stroke="${sashStroke}" stroke-width="1" rx="1"/>
+          <rect x="${startX + gPad}" y="${startY + gPad}" width="${Math.max(4, drawW - gPad*2)}" height="${Math.max(4, (drawH/2) - gPad*1.5)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.6"/>
+          <rect x="${startX + pad}" y="${startY + drawH/2}" width="${drawW - pad*2}" height="${(drawH/2) - pad}" fill="${sashFill}" stroke="${accentCol}" stroke-width="1.2" rx="1"/>
+          <rect x="${startX + gPad}" y="${startY + drawH/2 + pad}" width="${Math.max(4, drawW - gPad*2)}" height="${Math.max(4, (drawH/2) - gPad*1.5)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.7"/>
+          ${!compact && glassText ? `<text x="${startX + drawW/2}" y="${startY + drawH * 0.25}" fill="#ffffff" font-size="7.5" font-family="monospace" font-weight="bold" text-anchor="middle">${glassText}</text>` : ''}
+        `;
+      } else if (modelId === 'puerta3' || modelId === 'puerta_doble') {
+        const leaves = modelId === 'puerta_doble' ? 2 : 1;
+        const lw = (drawW - pad*2) / leaves;
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.8 : 2.8}" rx="2"/>
+          ${Array.from({length: leaves}).map((_, idx) => `
+            <rect x="${startX + pad + idx*lw}" y="${startY + pad}" width="${lw}" height="${drawH - pad*2}" fill="${sashFill}" stroke="${accentCol}" stroke-width="1.1" rx="1"/>
+            <rect x="${startX + gPad + idx*lw}" y="${startY + gPad}" width="${Math.max(4, lw - gPad)}" height="${drawH * 0.48}" fill="${glassFill}" stroke="${fStroke}" stroke-width="0.8"/>
+            <rect x="${startX + gPad + idx*lw}" y="${startY + drawH * 0.56}" width="${Math.max(4, lw - gPad)}" height="${drawH * 0.36}" fill="${fFill}" stroke="${fStroke}" stroke-width="0.9"/>
+          `).join('')}
+          ${!compact && glassText ? `<text x="${startX + drawW/2}" y="${startY + (drawH * 0.34)}" fill="#ffffff" font-size="7.5" font-family="monospace" font-weight="bold" text-anchor="middle">${glassText}</text>` : ''}
+        `;
+      } else if (modelId === 'puerta_duela') {
+        inner = `
+          <rect x="${startX}" y="${startY}" width="${drawW}" height="${drawH}" fill="${fFill}" stroke="${fStroke}" stroke-width="${compact ? 1.8 : 2.8}" rx="2"/>
+          <rect x="${startX + gPad}" y="${startY + gPad}" width="${Math.max(4, drawW - gPad*2)}" height="${Math.max(4, drawH - gPad*2)}" fill="${fFill}" stroke="${fStroke}" stroke-width="0.8" rx="1"/>
+          ${Array.from({length: compact ? 6 : 12}).map((_, i, arr) => `<line x1="${startX + gPad}" y1="${startY + gPad + 3 + (i * Math.max(4, drawH - gPad*2 - 6) / (arr.length - 1))}" x2="${startX + drawW - gPad}" y2="${startY + gPad + 3 + (i * Math.max(4, drawH - gPad*2 - 6) / (arr.length - 1))}" stroke="${accentCol}" stroke-width="0.7" opacity="0.65"/>`).join('')}
+        `;
+      } else if (modelId === 'cancel_europa' || modelId === 'cancel_escuadra') {
+        const barH = compact ? 3.5 : 7;
+        const rad = compact ? 2.2 : 5;
+        inner = `
+          <rect x="${startX}" y="${startY + 4}" width="${drawW}" height="${barH}" rx="2" fill="${accentCol}" stroke="#ffffff" stroke-width="0.6"/>
+          <rect x="${startX + 2}" y="${startY + barH + 6}" width="${(drawW/2) - 2}" height="${Math.max(6, drawH - barH - 9)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="1" rx="1"/>
+          <circle cx="${startX + (drawW * 0.58)}" cy="${startY + 4 + barH/2}" r="${rad}" fill="${accentCol}" stroke="#ffffff" stroke-width="0.7"/>
+          <circle cx="${startX + (drawW * 0.88)}" cy="${startY + 4 + barH/2}" r="${rad}" fill="${accentCol}" stroke="#ffffff" stroke-width="0.7"/>
+          <rect x="${startX + (drawW/2) - 2}" y="${startY + barH + 8}" width="${(drawW/2)}" height="${Math.max(6, drawH - barH - 11)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="1.3" rx="1"/>
+          ${!compact ? `<text x="${startX + drawW/2}" y="${startY + drawH/2}" fill="#ffffff" font-size="7.5" font-family="monospace" font-weight="bold" text-anchor="middle">TEMPLADO 10mm</text>` : ''}
+        `;
+      } else if (modelId === 'barandal_inox') {
+        inner = `
+          <rect x="${startX}" y="${startY + 4}" width="${drawW}" height="${compact ? 3 : 6}" rx="2" fill="${accentCol}" stroke="#ffffff" stroke-width="0.6"/>
+          <rect x="${startX + drawW * 0.12}" y="${startY + 8}" width="${compact ? 3 : 6}" height="${drawH - 8}" fill="${fFill}" stroke="${accentCol}" stroke-width="0.8"/>
+          <rect x="${startX + drawW/2 - (compact ? 1.5 : 3)}" y="${startY + 8}" width="${compact ? 3 : 6}" height="${drawH - 8}" fill="${fFill}" stroke="${accentCol}" stroke-width="0.8"/>
+          <rect x="${startX + drawW * 0.84}" y="${startY + 8}" width="${compact ? 3 : 6}" height="${drawH - 8}" fill="${fFill}" stroke="${accentCol}" stroke-width="0.8"/>
+          <rect x="${startX + drawW * 0.18}" y="${startY + 12}" width="${drawW * 0.28}" height="${Math.max(4, drawH - 16)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.9" rx="1"/>
+          <rect x="${startX + drawW * 0.54}" y="${startY + 12}" width="${drawW * 0.28}" height="${Math.max(4, drawH - 16)}" fill="${glassFill}" stroke="${accentCol}" stroke-width="0.9" rx="1"/>
+        `;
+      } else {
+        inner = `
+          <rect x="${startX}" y="${startY + drawH - (compact ? 8 : 16)}" width="${drawW}" height="${compact ? 8 : 16}" fill="${fFill}" stroke="${accentCol}" stroke-width="1.2" rx="1.5"/>
+          <path d="M ${startX} ${startY + drawH - (compact ? 8 : 16)} Q ${startX + drawW/2} ${startY + 6} ${startX + drawW} ${startY + drawH - (compact ? 8 : 16)}" fill="none" stroke="${accentCol}" stroke-width="${compact ? 2.5 : 4}"/>
+          <path d="M ${startX + 4} ${startY + drawH - (compact ? 8 : 16)} Q ${startX + drawW/2} ${startY + 10} ${startX + drawW - 4} ${startY + drawH - (compact ? 8 : 16)}" fill="${glassFill}" stroke="${fStroke}" stroke-width="0.8"/>
+        `;
+      }
+
+      return { inner, startX, startY, drawW, drawH, vw, vh };
+    }
+
+    function renderParametricCAD(w, h, modelId) {
+      const glasses = currentModel.glass ? currentModel.glass(w, h) : [];
+      document.getElementById('expGlassDimsCallout').textContent = glasses.length > 0
+        ? `${glasses[0].qty} pza${glasses[0].qty > 1 ? 's' : ''} de ${glasses[0].w} × ${glasses[0].h} cm (${selectedGlass})`
+        : 'Panel Ciego (No lleva cristal)';
+
+      const { inner, startX, startY, drawW, drawH } = buildCadSvgMarkup(modelId, w, h, selectedColor, addMosquitero, false);
+
+      document.getElementById('expCadCanvas').innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 210" width="100%" height="220" style="width: 100%; height: 220px; display: block;" preserveAspectRatio="xMidYMid meet" class="select-none">
+          <defs>
+            <linearGradient id="cadGlassGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
+              <stop offset="45%" stop-color="#9fc2b2" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#2d4237" stop-opacity="0.48"/>
+            </linearGradient>
+            <pattern id="cadGrid" width="16" height="16" patternUnits="userSpaceOnUse">
+              <circle cx="8" cy="8" r="0.8" fill="#ffffff" fill-opacity="0.22"/>
+            </pattern>
+            <pattern id="mosqGrid" width="4" height="4" patternUnits="userSpaceOnUse">
+              <path d="M 4 0 L 0 0 0 4" fill="none" stroke="#34d399" stroke-width="0.4" opacity="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="320" height="210" fill="#141813" rx="14" />
+          <rect width="320" height="210" fill="url(#cadGrid)" rx="14" />
+          ${inner}
+          <g>
+            <line x1="${startX}" y1="${startY - 8}" x2="${startX + drawW}" y2="${startY - 8}" stroke="#d6c5b0" stroke-width="1.4" stroke-dasharray="3 2"/>
+            <rect x="${startX + drawW/2 - 36}" y="${startY - 18}" width="72" height="16" rx="8" fill="#121612" stroke="#d6c5b0" stroke-width="1.2"/>
+            <text x="${startX + drawW/2}" y="${startY - 9}" fill="#ffffff" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle" dominant-baseline="central">↔ ${w.toFixed(1)} cm</text>
+          </g>
+          <g>
+            <line x1="${startX + drawW + 8}" y1="${startY}" x2="${startX + drawW + 8}" y2="${startY + drawH}" stroke="#d6c5b0" stroke-width="1.4" stroke-dasharray="3 2"/>
+            <g transform="translate(${startX + drawW + 18}, ${startY + drawH/2}) rotate(90)">
+              <rect x="-34" y="-8" width="68" height="16" rx="8" fill="#121612" stroke="#d6c5b0" stroke-width="1.2"/>
+              <text x="0" y="0" fill="#ffffff" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle" dominant-baseline="central">↕ ${h.toFixed(1)} cm</text>
+            </g>
+          </g>
+        </svg>
+      `;
+    }
+
+    function renderWorkshopTables(w, h, qty, tag, model) {
+      const useProject = (barsScope === 'project' && projectPieces.length > 0);
+      let sourceCuts = [];
+      let sourceGlasses = [];
+      let sourceHardware = {};
+
+      if (useProject) {
+        projectPieces.forEach(p => {
+          p.cuts.forEach(c => sourceCuts.push(c));
+          const m = SYSTEM_CATALOG.find(s => s.id === p.modelId) || currentModel;
+          const gl = m.glass ? m.glass(p.w, p.h) : [];
+          gl.forEach(g => sourceGlasses.push({ ...g, qty: g.qty * p.qty, glassType: p.glass, tag: p.tag }));
+          const hw = m.hardware ? m.hardware(p.w, p.h, { mosquitero: p.mosquitero, felpa: p.felpa }) : [];
+          hw.forEach(item => {
+            const norm = normalizeHardwareItem(item.name, item.unit);
+            const k = `${norm.name}__${norm.unit}`;
+            if (!sourceHardware[k]) sourceHardware[k] = { name: norm.name, unit: norm.unit, qty: 0 };
+            sourceHardware[k].qty += item.qty * p.qty;
+          });
+          const silKey = 'Silicón Neutro / Acético 300ml__cartuchos';
+          if (!sourceHardware[silKey]) sourceHardware[silKey] = { name: 'Silicón Neutro / Acético 300ml', unit: 'cartuchos', qty: 0 };
+          sourceHardware[silKey].qty += Math.max(0.5, Number((((p.w + p.h) * 2) / 700).toFixed(1))) * p.qty;
+        });
+      } else {
+        sourceCuts = getEffectiveCuts(model, w, h, qty, addMosquitero, tag);
+        const gl = model.glass ? model.glass(w, h) : [];
+        gl.forEach(g => sourceGlasses.push({ ...g, qty: g.qty * qty, glassType: selectedGlass, tag }));
+        const hw = model.hardware ? model.hardware(w, h, { mosquitero: addMosquitero, felpa: addFelpa }) : [];
+        hw.forEach(item => {
+          const norm = normalizeHardwareItem(item.name, item.unit);
+          const k = `${norm.name}__${norm.unit}`;
+          if (!sourceHardware[k]) sourceHardware[k] = { name: norm.name, unit: norm.unit, qty: 0 };
+          sourceHardware[k].qty += item.qty * qty;
+        });
+        sourceHardware['Silicón Neutro / Acético 300ml__cartuchos'] = {
+          name: 'Silicón Neutro / Acético 300ml',
+          unit: 'cartuchos',
+          qty: Math.ceil(Math.max(0.5, Number((((w + h) * 2) / 700).toFixed(1))) * qty)
+        };
+      }
+
+      // 1. Tabla Cortes
+      document.getElementById('tblExpCutsBody').innerHTML = sourceCuts.map(c => `
+        <tr class="hover:bg-white/[0.05]">
+          <td class="p-2 sm:p-2.5 text-[#d6c5b0] font-bold text-[11px]">${c.tag}</td>
+          <td class="p-2 sm:p-2.5 font-sans font-medium text-white">${c.name}</td>
+          <td class="p-2 sm:p-2.5 text-[#d6c5b0] font-bold">${c.key}</td>
+          <td class="p-2 sm:p-2.5 text-center font-bold text-white bg-white/5">${c.qty}</td>
+          <td class="p-2 sm:p-2.5 text-[#f3efe9] font-bold">${c.len} cm</td>
+          <td class="p-2 sm:p-2.5 hidden sm:table-cell text-stone-300 text-[11px]">${c.formula || '-'}</td>
+          <td class="p-2 sm:p-2.5 text-stone-200">${c.type}</td>
+        </tr>
+      `).join('');
+
+      // 2. Tabla Barras 6.00 m con etiquetas de ubicación
+      const grouped = {};
+      sourceCuts.forEach(c => {
+        if (!grouped[c.key]) grouped[c.key] = { name: c.name, key: c.key, items: [], totalCm: 0 };
+        for (let i = 0; i < c.qty; i++) {
+          grouped[c.key].items.push({ len: c.len, tag: c.tag });
+          grouped[c.key].totalCm += c.len;
+        }
+      });
+
+      document.getElementById('tblExpBarsBody').innerHTML = Object.values(grouped).map(g => {
+        const bins = optimizeBars1D(g.items);
+        const barsNeeded = bins.length;
+        const kgPerM = PROFILE_WEIGHT_KG_M[g.key] || 0.85;
+        const totalKg = (barsNeeded * 6.0 * kgPerM).toFixed(1);
+        const planSummary = bins.map((b, idx) =>
+          `B${idx + 1}: [${b.cuts.map(ct => `${ct.len}(${ct.tag})`).join(' + ')}] (sob: ${b.remaining}cm)`
+        ).join('<br>');
+
+        return `
+          <tr class="hover:bg-white/[0.05] align-top">
+            <td class="p-2 sm:p-2.5 font-sans font-medium text-white">${g.name} <span class="font-mono text-[#d6c5b0]">(${g.key})</span></td>
+            <td class="p-2 sm:p-2.5 text-stone-200">${(g.totalCm / 100).toFixed(2)} m</td>
+            <td class="p-2 sm:p-2.5 font-bold text-emerald-200">
+              <span class="px-2 py-0.5 rounded-lg bg-emerald-500/25 border border-emerald-400/40 whitespace-nowrap">
+                ${barsNeeded} barra${barsNeeded > 1 ? 's' : ''}
+              </span>
+            </td>
+            <td class="p-2 sm:p-2.5 hidden sm:table-cell text-[10px] text-stone-300 leading-relaxed">${planSummary}</td>
+            <td class="p-2 sm:p-2.5 text-right text-stone-200">${totalKg} kg</td>
+          </tr>
+        `;
+      }).join('');
+
+      // 3. Tabla Cristales consolidada
+      const tblGlass = document.getElementById('tblExpGlassBody');
+      if (sourceGlasses.length === 0) {
+        tblGlass.innerHTML = '<tr><td colspan="3" class="py-3 text-center text-stone-300 text-xs">No requiere cristal</td></tr>';
+      } else {
+        tblGlass.innerHTML = sourceGlasses.map(g => {
+          const area = ((g.w * g.h * g.qty) / 10000).toFixed(2);
+          return `
+            <tr class="hover:bg-white/[0.05]">
+              <td class="py-2 text-white font-bold">${g.qty} pza${g.qty > 1 ? 's' : ''} <span class="block text-[10px] font-normal text-stone-300">${g.glassType} (${g.tag})</span></td>
+              <td class="py-2 text-amber-300 font-bold">${g.w} × ${g.h} cm</td>
+              <td class="py-2 text-right text-[#d6c5b0]">${area} m²</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 4. Tabla Herrajes consolidada
+      document.getElementById('tblExpHwBody').innerHTML = Object.values(sourceHardware).map(hw => `
+        <tr class="hover:bg-white/[0.05]">
+          <td class="py-1.5 text-stone-200">${hw.name}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-[#d6c5b0]">${Number(hw.qty.toFixed(2))} ${hw.unit}</td>
+        </tr>
+      `).join('');
+    }
+
+    function addCurrentPieceToProject() {
+      const w = parseFloat(document.getElementById('expInputW').value) || 150;
+      const h = parseFloat(document.getElementById('expInputH').value) || 120;
+      const qty = Math.max(1, parseInt(document.getElementById('expInputQty').value) || 1);
+      const tag = (document.getElementById('expInputTag').value || `V-${String(projectPieces.length + 1).padStart(2, '0')}`).trim();
+      const totalStr = document.getElementById('expPiecePriceTag').textContent.replace(/[^0-9]/g, '');
+      const subtotal = parseInt(totalStr) || 2450;
+
+      projectPieces.push({
+        id: Date.now(),
+        tag: tag,
+        modelId: currentModel.id,
+        model: currentModel.name,
+        color: selectedColor,
+        glass: selectedGlass,
+        mosquitero: addMosquitero,
+        felpa: addFelpa,
+        w: w,
+        h: h,
+        qty: qty,
+        unitPrice: Math.round(subtotal / qty),
+        subtotal: subtotal,
+        cuts: getEffectiveCuts(currentModel, w, h, qty, addMosquitero, tag)
+      });
+
+      // Auto-incrementar sugerencia de etiqueta V-01 -> V-02
+      const match = tag.match(/^(.*?)(d+)(.*)$/);
+      if (match) {
+        const nextNum = String(parseInt(match[2]) + 1).padStart(match[2].length, '0');
+        document.getElementById('expInputTag').value = `${match[1]}${nextNum}${match[3]}`;
+      }
+
+      persistState();
+      updateProjectUI();
+
+      const toast = document.getElementById('toastAdded');
+      if (toast) {
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2000);
+      }
+    }
+
+    let activeAppTab = 'design';
+    function switchAppTab(tab) {
+      activeAppTab = tab;
+      const panels = {
+        design: document.getElementById('tabPanelDesign'),
+        cuts: document.getElementById('tabPanelCuts'),
+        supply: document.getElementById('tabPanelSupply'),
+        project: document.getElementById('tabPanelProject')
+      };
+      Object.entries(panels).forEach(([k, el]) => {
+        if (!el) return;
+        if (k === tab) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+      const scopeBanner = document.getElementById('scopeBanner');
+      if (scopeBanner) {
+        if (tab === 'cuts' || tab === 'supply') scopeBanner.classList.remove('hidden');
+        else scopeBanner.classList.add('hidden');
+      }
+      document.querySelectorAll('.app-tab-btn').forEach(btn => {
+        const isTarget = btn.getAttribute('data-apptab') === tab;
+        btn.classList.toggle('bg-[#d6c5b0]', isTarget);
+        btn.classList.toggle('text-[#181b15]', isTarget);
+        btn.classList.toggle('font-bold', isTarget);
+        btn.classList.toggle('text-stone-300', !isTarget);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProjectUI() {
+      const count = projectPieces.reduce((acc, p) => acc + p.qty, 0);
+      document.getElementById('expProjectCount').textContent = `${count} pza${count !== 1 ? 's' : ''}`;
+      document.querySelectorAll('.app-obra-badge').forEach(el => { el.textContent = count; });
+
+      let total = 0;
+      projectPieces.forEach(p => total += p.subtotal);
+      document.getElementById('expTotalProjectSale').textContent = `$${total.toLocaleString()} MXN`;
+
+      const listEl = document.getElementById('expProjectPiecesList');
+      if (projectPieces.length === 0) {
+        listEl.innerHTML = '<div class="text-center py-5 text-stone-300 text-xs bg-black/25 rounded-xl border border-white/5 px-3">Aún no agregas ventanas a la lista de obra. Presiona <strong>"Agregar al Proyecto"</strong> para sumar piezas.</div>';
+      } else {
+        listEl.innerHTML = projectPieces.map(p => `
+          <div class="p-2.5 rounded-xl bg-black/40 border border-white/15 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-white"><span class="text-[#d6c5b0]">[${p.tag}]</span> ${p.qty}× ${p.model}</p>
+              <p class="text-[11px] text-stone-300 font-mono">${p.w} × ${p.h} cm • ${p.color} • ${p.glass}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-[#d6c5b0] font-mono">$${p.subtotal.toLocaleString()}</span>
+              <button type="button" onclick="removePiece(${p.id})" title="Eliminar partida" class="text-stone-300 hover:text-red-400 text-xs px-2 py-1 rounded bg-white/10">✕</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      if (barsScope === 'project') updateCalculations();
+    }
+
+    function removePiece(id) {
+      projectPieces = projectPieces.filter(p => p.id !== id);
+      persistState();
+      updateProjectUI();
+    }
+
+    // ========================================================
+    // MODALES: HISTORIAL DE OBRAS, PRECIOS/FÓRMULAS, MATECO, PDF
+    // ========================================================
+    function openProjectsModal() {
+      renderSavedProjectsList();
+      document.getElementById('modalProjects').classList.remove('hidden');
+    }
+    function closeProjectsModal() { document.getElementById('modalProjects').classList.add('hidden'); }
+
+    function getSavedHistory() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || '[]'); } catch (e) { return []; }
+    }
+
+    function saveCurrentProjectToHistory() {
+      const name = (document.getElementById('inpSaveProjectName').value || document.getElementById('docProjectName').value || 'Obra Sin Nombre').trim();
+      if (projectPieces.length === 0) { alert('Agrega al menos una pieza al proyecto antes de guardar en historial.'); return; }
+      const history = getSavedHistory();
+      const total = projectPieces.reduce((acc, p) => acc + p.subtotal, 0);
+      history.unshift({
+        id: Date.now(),
+        name,
+        client: document.getElementById('docClientName').value,
+        date: new Date().toLocaleDateString('es-MX'),
+        total,
+        pieces: projectPieces
+      });
+      localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(history.slice(0, 30)));
+      document.getElementById('docProjectName').value = name;
+      document.getElementById('hdrActiveProjectBadge').textContent = name;
+      document.getElementById('inpSaveProjectName').value = '';
+      persistState();
+      renderSavedProjectsList();
+    }
+
+    function renderSavedProjectsList() {
+      const history = getSavedHistory();
+      const el = document.getElementById('savedProjectsList');
+      if (history.length === 0) {
+        el.innerHTML = '<div class="text-center py-6 text-stone-300 text-xs">No hay obras guardadas en el historial todavía.</div>';
+        return;
+      }
+      el.innerHTML = history.map(h => `
+        <div class="p-3 rounded-xl bg-black/45 border border-white/15 flex items-center justify-between gap-2 text-xs">
+          <div>
+            <p class="font-bold text-white">${h.name} <span class="text-stone-400 font-normal">(${h.date})</span></p>
+            <p class="text-[11px] text-stone-300">${h.pieces.length} partida(s) • Total: <strong class="text-emerald-300">$${h.total.toLocaleString()} MXN</strong></p>
+          </div>
+          <div class="flex gap-1.5">
+            <button type="button" onclick="loadProjectFromHistory(${h.id})" class="px-2.5 py-1 rounded-lg bg-[#d6c5b0] text-[#181b15] font-bold">Abrir</button>
+            <button type="button" onclick="deleteProjectFromHistory(${h.id})" class="px-2 py-1 rounded-lg bg-white/10 text-red-300 hover:bg-red-500/20">✕</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadProjectFromHistory(id) {
+      const h = getSavedHistory().find(x => x.id === id);
+      if (!h) return;
+      projectPieces = h.pieces;
+      document.getElementById('docProjectName').value = h.name;
+      document.getElementById('docClientName').value = h.client || 'Cliente Residencial';
+      document.getElementById('hdrActiveProjectBadge').textContent = h.name;
+      persistState();
+      updateProjectUI();
+      closeProjectsModal();
+    }
+
+    function deleteProjectFromHistory(id) {
+      const history = getSavedHistory().filter(x => x.id !== id);
+      localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(history));
+      renderSavedProjectsList();
+    }
+
+    function startNewBlankProject() {
+      projectPieces = [];
+      document.getElementById('docProjectName').value = 'Nueva Obra';
+      document.getElementById('hdrActiveProjectBadge').textContent = 'Nueva Obra';
+      document.getElementById('expInputTag').value = 'V-01';
+      persistState();
+      updateProjectUI();
+      closeProjectsModal();
+    }
+
+    function exportBackupJSON() {
+      const data = { appSettings, projectPieces, history: getSavedHistory() };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `AluPro_Respaldo_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+    }
+
+    function importBackupJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const data = JSON.parse(ev.target.result);
+          if (data.appSettings) appSettings = data.appSettings;
+          if (Array.isArray(data.projectPieces)) projectPieces = data.projectPieces;
+          if (Array.isArray(data.history)) localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(data.history));
+          persistState();
+          updateProjectUI();
+          updateCalculations();
+          renderSavedProjectsList();
+        } catch (err) { alert('Archivo de respaldo inválido.'); }
+      };
+      reader.readAsText(file);
+    }
+
+    // Modal Configuración Precios y Fórmulas
+    function openSettingsModal() {
+      document.getElementById('cfgAluPriceKg').value = appSettings.aluPriceKg;
+      document.getElementById('cfgAluBillingMode').value = appSettings.aluBillingMode || 'bars';
+      document.getElementById('cfgAluWastePct').value = appSettings.aluWastePct ?? 18;
+      document.getElementById('cfgSiliconPrice').value = appSettings.siliconPrice ?? 115;
+      document.getElementById('cfgWorkshopName').value = appSettings.workshopName;
+      document.getElementById('cfgSupplierPhone').value = appSettings.supplierPhone;
+      document.getElementById('cfgGlassClaro6').value = appSettings.glassPrices['Claro 6mm'];
+      document.getElementById('cfgGlassClaro4').value = appSettings.glassPrices['Claro 4mm'];
+      document.getElementById('cfgGlassFiltrasol').value = appSettings.glassPrices['Filtrasol 6mm'];
+      document.getElementById('cfgGlassTintex').value = appSettings.glassPrices['Tintex Verde 6mm'];
+      document.getElementById('cfgGlassEsmeril').value = appSettings.glassPrices['Esmerilado 6mm'];
+      document.getElementById('cfgGlassTemplado').value = appSettings.glassPrices['Templado 9mm'];
+      document.getElementById('cfgKerfMm').value = appSettings.kerfMm;
+      document.getElementById('cfgBarUsableCm').value = appSettings.barUsableCm;
+      document.getElementById('cfgDescCerco3').value = appSettings.descCerco3;
+      document.getElementById('cfgDescZoclo3').value = appSettings.descZoclo3;
+      document.getElementById('modalSettings').classList.remove('hidden');
+    }
+    function closeSettingsModal() { document.getElementById('modalSettings').classList.add('hidden'); }
+
+    function saveSettingsModal() {
+      appSettings.aluPriceKg = parseFloat(document.getElementById('cfgAluPriceKg').value) || 155;
+      appSettings.aluBillingMode = document.getElementById('cfgAluBillingMode').value || 'bars';
+      appSettings.aluWastePct = parseFloat(document.getElementById('cfgAluWastePct').value) || 18;
+      appSettings.siliconPrice = parseFloat(document.getElementById('cfgSiliconPrice').value) || 115;
+      appSettings.workshopName = document.getElementById('cfgWorkshopName').value || DEFAULT_SETTINGS.workshopName;
+      appSettings.supplierPhone = document.getElementById('cfgSupplierPhone').value || DEFAULT_SETTINGS.supplierPhone;
+      appSettings.glassPrices['Claro 6mm'] = parseFloat(document.getElementById('cfgGlassClaro6').value) || 540;
+      appSettings.glassPrices['Claro 4mm'] = parseFloat(document.getElementById('cfgGlassClaro4').value) || 410;
+      appSettings.glassPrices['Filtrasol 6mm'] = parseFloat(document.getElementById('cfgGlassFiltrasol').value) || 690;
+      appSettings.glassPrices['Tintex Verde 6mm'] = parseFloat(document.getElementById('cfgGlassTintex').value) || 680;
+      appSettings.glassPrices['Esmerilado 6mm'] = parseFloat(document.getElementById('cfgGlassEsmeril').value) || 750;
+      appSettings.glassPrices['Templado 9mm'] = parseFloat(document.getElementById('cfgGlassTemplado').value) || 1350;
+      appSettings.kerfMm = parseFloat(document.getElementById('cfgKerfMm').value) || 3.0;
+      appSettings.barUsableCm = parseFloat(document.getElementById('cfgBarUsableCm').value) || 595;
+      appSettings.descCerco3 = parseFloat(document.getElementById('cfgDescCerco3').value) || 4.2;
+      appSettings.descZoclo3 = parseFloat(document.getElementById('cfgDescZoclo3').value) || 6.5;
+
+      document.getElementById('docWorkshopName').value = appSettings.workshopName;
+      document.getElementById('selMatecoBranch').value = appSettings.supplierPhone;
+      persistState();
+      updateCalculations();
+      closeSettingsModal();
+    }
+
+    function resetSettingsToDefault() {
+      appSettings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+      openSettingsModal();
+    }
+
+    function getConsolidatedMatecoList() {
+      let list = projectPieces;
+      if (list.length === 0) {
+        const w = parseFloat(document.getElementById('expInputW').value) || 150;
+        const h = parseFloat(document.getElementById('expInputH').value) || 120;
+        const qty = Math.max(1, parseInt(document.getElementById('expInputQty').value) || 1);
+        const tag = document.getElementById('expInputTag').value || 'V-01';
+        list = [{ color: selectedColor, cuts: getEffectiveCuts(currentModel, w, h, qty, addMosquitero, tag) }];
+      }
+      const grouped = {};
+      list.forEach(p => {
+        p.cuts.forEach(c => {
+          const gk = `${c.key}__${p.color}`;
+          if (!grouped[gk]) grouped[gk] = { name: c.name, key: c.key, color: p.color, items: [] };
+          for (let i = 0; i < c.qty; i++) grouped[gk].items.push({ len: c.len, tag: c.tag });
+        });
+      });
+      return Object.values(grouped).map(g => {
+        const bins = optimizeBars1D(g.items);
+        const kgPerM = PROFILE_WEIGHT_KG_M[g.key] || 0.85;
+        return { name: g.name, key: g.key, color: g.color, bars6m: bins.length, kg: (bins.length * 6.0 * kgPerM).toFixed(1) };
+      });
+    }
+
+    function showMatecoModal() {
+      const items = getConsolidatedMatecoList();
+      document.getElementById('tblMatecoOrderBody').innerHTML = items.map(item => `
+        <tr>
+          <td class="p-2 font-sans font-medium text-white">${item.name} <span class="font-mono text-[#d6c5b0]">(${item.key})</span></td>
+          <td class="p-2 text-stone-200">${item.color}</td>
+          <td class="p-2 font-bold text-emerald-300">${item.bars6m} tramo${item.bars6m > 1 ? 's' : ''}</td>
+          <td class="p-2 text-right text-stone-200">${item.kg} kg</td>
+        </tr>
+      `).join('');
+      document.getElementById('modalMatecoOrder').classList.remove('hidden');
+    }
+    function closeMatecoModal() { document.getElementById('modalMatecoOrder').classList.add('hidden'); }
+
+    function getQuoteList() {
+      if (projectPieces.length > 0) return projectPieces;
+      const w = parseFloat(document.getElementById('expInputW').value) || 150;
+      const h = parseFloat(document.getElementById('expInputH').value) || 120;
+      const qty = Math.max(1, parseInt(document.getElementById('expInputQty').value) || 1);
+      const tag = document.getElementById('expInputTag').value || 'V-01';
+      const subtotal = parseInt(document.getElementById('expPiecePriceTag').textContent.replace(/[^0-9]/g, '')) || 2450;
+      return [{ tag, modelId: currentModel.id, model: currentModel.name, color: selectedColor, glass: selectedGlass, mosquitero: addMosquitero, w, h, qty, unitPrice: Math.round(subtotal / qty), subtotal }];
+    }
+
+    let currentQuoteRawTotal = 0;
+    function showLetterheadModal() {
+      const list = getQuoteList();
+      document.getElementById('docCurrentDate').textContent = 'Fecha: ' + new Date().toLocaleDateString('es-MX');
+      currentQuoteRawTotal = 0;
+      document.getElementById('tblLetterheadBody').innerHTML = list.map(p => {
+        currentQuoteRawTotal += p.subtotal;
+        const { inner, vw, vh } = buildCadSvgMarkup(p.modelId || 'corr2h', p.w, p.h, p.color, p.mosquitero, true);
+        const thumbSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" width="74" height="52" style="width:74px;height:52px;flex-shrink:0;background:#eef2ef;border:1px solid #cbd5e1;border-radius:6px;padding:2px;">${inner}</svg>`;
+        return `
+          <tr class="border-b border-slate-200">
+            <td class="py-2">
+              <div class="flex items-center gap-2.5">
+                ${thumbSvg}
+                <div>
+                  <span class="font-bold text-slate-900">[${p.tag}] ${p.model}</span>
+                  <p class="text-[11px] text-slate-600">Aluminio ${p.color} • Cristal ${p.glass}${p.mosquitero ? ' • Mosquitero' : ''}</p>
+                </div>
+              </div>
+            </td>
+            <td class="py-2 font-mono">${p.w} × ${p.h} cm</td>
+            <td class="py-2 font-bold text-center">${p.qty}</td>
+            <td class="py-2 text-right font-mono">$${p.unitPrice.toLocaleString()}</td>
+            <td class="py-2 text-right font-bold text-slate-900 font-mono">$${p.subtotal.toLocaleString()}</td>
+          </tr>
+        `;
+      }).join('');
+      renderLetterheadTotals();
+      document.getElementById('modalLetterhead').classList.remove('hidden');
+    }
+
+    function renderLetterheadTotals() {
+      const includeIva = document.getElementById('chkIncludeIva').checked;
+      if (includeIva) {
+        const sub = currentQuoteRawTotal;
+        const iva = Math.round(sub * 0.16);
+        const grandTotal = sub + iva;
+        document.getElementById('rowDocSubtotal').classList.remove('hidden');
+        document.getElementById('rowDocIva').classList.remove('hidden');
+        document.getElementById('docSubtotal').textContent = `$${sub.toLocaleString()} MXN`;
+        document.getElementById('docIva').textContent = `$${iva.toLocaleString()} MXN`;
+        document.getElementById('docTotal').textContent = `$${grandTotal.toLocaleString()} MXN`;
+      } else {
+        document.getElementById('rowDocSubtotal').classList.add('hidden');
+        document.getElementById('rowDocIva').classList.add('hidden');
+        document.getElementById('docTotal').textContent = `$${currentQuoteRawTotal.toLocaleString()} MXN`;
+      }
+    }
+    function closeLetterheadModal() { document.getElementById('modalLetterhead').classList.add('hidden'); }
+
+    function printWorkshopSheet(forceProject) {
+      const prevScope = barsScope;
+      if (forceProject && projectPieces.length > 0 && barsScope !== 'project') {
+        setBarsScope('project');
+      }
+      const w = parseFloat(document.getElementById('expInputW').value) || 150;
+      const h = parseFloat(document.getElementById('expInputH').value) || 120;
+      const cutsHtml = document.getElementById('tblExpCutsBody').innerHTML;
+      const barsHtml = document.getElementById('tblExpBarsBody').innerHTML;
+      const glassHtml = document.getElementById('tblExpGlassBody').innerHTML;
+      const hwHtml = document.getElementById('tblExpHwBody').innerHTML;
+      const svgHtml = barsScope === 'project' && projectPieces.length > 0 ? '' : document.getElementById('expCadCanvas').innerHTML;
+      const titleSub = barsScope === 'project' && projectPieces.length > 0
+        ? `OBRA COMPLETA: ${document.getElementById('docProjectName').value} (${projectPieces.length} partidas)`
+        : `${document.getElementById('expInputTag').value} • ${currentModel.name} (${w} × ${h} cm) • ${selectedColor}`;
+
+      document.getElementById('printContainer').innerHTML = `
+        <div class="p-6 max-w-4xl mx-auto text-slate-900 bg-white space-y-5 font-sans">
+          <div class="flex justify-between items-center border-b-2 border-slate-900 pb-3">
+            <div>
+              <h1 class="text-xl font-black">ORDEN DE CORTE Y FABRICACIÓN EN TALLER</h1>
+              <p class="text-xs text-slate-700 font-semibold">${titleSub}</p>
+            </div>
+            <div class="text-right font-mono text-xs">${new Date().toLocaleDateString('es-MX')}</div>
+          </div>
+          ${svgHtml ? `<div class="border border-slate-300 rounded-xl p-3 bg-slate-900 text-white">${svgHtml}</div>` : ''}
+          <div>
+            <h2 class="text-sm font-bold uppercase mb-1">1. Lista de Cortes Milimétricos (Disco ${appSettings.kerfMm} mm)</h2>
+            <table class="w-full text-left text-xs border border-slate-300">
+              <thead class="bg-slate-200 text-slate-900">
+                <tr><th class="p-1.5">Ubic.</th><th class="p-1.5">Perfil</th><th class="p-1.5">Clave</th><th class="p-1.5">Pzas</th><th class="p-1.5">Corte</th><th class="p-1.5">Fórmula</th><th class="p-1.5">Ángulo</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 [&_*]:!text-slate-900">${cutsHtml}</tbody>
+            </table>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold uppercase mb-1">2. Barras de 6.00 m y Plan de Corte</h2>
+            <table class="w-full text-left text-xs border border-slate-300">
+              <thead class="bg-slate-200 text-slate-900">
+                <tr><th class="p-1.5">Perfil</th><th class="p-1.5">Metros</th><th class="p-1.5">Barras 6m</th><th class="p-1.5">Plan de Corte</th><th class="p-1.5 text-right">Peso</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 [&_*]:!text-slate-900">${barsHtml}</tbody>
+            </table>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <h2 class="text-sm font-bold uppercase mb-1">3. Cristales</h2>
+              <table class="w-full text-left text-xs border border-slate-300"><tbody class="divide-y divide-slate-200 [&_*]:!text-slate-900">${glassHtml}</tbody></table>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold uppercase mb-1">4. Herrajes</h2>
+              <table class="w-full text-left text-xs border border-slate-300"><tbody class="divide-y divide-slate-200 [&_*]:!text-slate-900">${hwHtml}</tbody></table>
+            </div>
+          </div>
+        </div>
+      `;
+      window.print();
+      if (prevScope !== barsScope) setBarsScope(prevScope);
+    }
+
+    function printClientQuote() {
+      const printEl = document.getElementById('printContainer');
+      const modalContent = document.getElementById('printableLetterhead').cloneNode(true);
+      modalContent.querySelectorAll('input[type="text"]').forEach(inp => {
+        const span = document.createElement('span');
+        span.className = inp.className;
+        span.textContent = inp.value;
+        inp.parentNode.replaceChild(span, inp);
+      });
+      printEl.innerHTML = '';
+      printEl.appendChild(modalContent);
+      window.print();
+    }
+
+    ['modalProjects', 'modalSettings', 'modalMatecoOrder', 'modalLetterhead'].forEach(id => {
+      document.getElementById(id).addEventListener('click', e => {
+        if (e.target.id === id) document.getElementById(id).classList.add('hidden');
+      });
+    });
+
+    document.getElementById('btnConfirmSendMateco').addEventListener('click', () => {
+      const phone = document.getElementById('selMatecoBranch').value.replace(/[^0-9]/g, '');
+      const items = getConsolidatedMatecoList();
+      const lines = items.map(i => `• ${i.bars6m} barra(s) 6.0m - ${i.name} (Clave ${i.key}) - Color: ${i.color}`).join('\n');
+      const msg = `Hola Mostrador, solicito cotización y surtido de perfiles (tramos de 6.00 m):\n\n${lines}`;
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+
+    document.getElementById('btnLetterheadSendWa').addEventListener('click', () => {
+      const client = document.getElementById('docClientName').value;
+      const project = document.getElementById('docProjectName').value;
+      const total = document.getElementById('docTotal').textContent;
+      const list = getQuoteList();
+      const lines = list.map(p => `• [${p.tag}] ${p.qty}x ${p.model} (${p.w}×${p.h} cm, ${p.color}, ${p.glass}): $${p.subtotal.toLocaleString()}`).join('\n');
+      const msg = `Hola ${client}, le comparto la cotización para la obra "${project}":\n\n${lines}\n\nTotal: ${total}\nAnticipo 60% para inicio de obra.`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  </script>
+</body>
+</html>

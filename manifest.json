@@ -1,0 +1,18 @@
+{
+  "name": "AluPro Suite Industrial",
+  "short_name": "AluPro",
+  "description": "Cotizador, despiece milimétrico y optimización 1D de cancelería de aluminio y vidrio.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#181b15",
+  "theme_color": "#181b15",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
