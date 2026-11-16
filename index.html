@@ -92,10 +92,17 @@
       </div>
     </div>
 
-    <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white shadow-sm shrink-0">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
-      <span>Instalar App</span>
-    </button>
+    <div class="flex items-center gap-2 shrink-0">
+      <button type="button" onclick="openGuideModal()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition">
+        <svg class="w-4 h-4 text-sky-700" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
+        <span>Guía</span>
+      </button>
+
+      <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white shadow-sm shrink-0">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+        <span>Instalar App</span>
+      </button>
+    </div>
   </header>
 
   <!-- ================= CUERPO PRINCIPAL (ESTILO iPHONE 4 PESTAÑAS) ================= -->
@@ -813,14 +820,73 @@
 
       <div class="flex flex-wrap items-center justify-end gap-3 pt-4 border-t border-slate-200 no-print">
         <button type="button" onclick="closeLetterheadModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900">Cerrar</button>
-        <button type="button" onclick="printClientQuote()" class="px-5 py-2.5 rounded-xl bg-slate-900 text-slate-900 font-bold text-xs flex items-center gap-1.5 hover:bg-slate-800">
-          <span>🖨️ Imprimir / Guardar PDF</span>
+        <button type="button" onclick="printClientQuote()" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-slate-800">
+          <span>Imprimir / Guardar PDF</span>
         </button>
-        <button type="button" id="btnLetterheadSendWa" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-slate-900 font-bold text-xs flex items-center gap-1.5 hover:bg-emerald-700">
-          <span>📲 Enviar por WhatsApp</span>
+        <button type="button" id="btnLetterheadSendWa" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-emerald-700">
+          <span>Enviar por WhatsApp</span>
         </button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- MODAL: INSTRUCTOR PASO A PASO Y BITÁCORA DE PRUEBA -->
+  <div id="modalGuide" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="zen-glass rounded-3xl max-w-lg w-full p-5 sm:p-6 space-y-4 my-6">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div>
+          <h3 class="text-base font-bold text-slate-900">Guía Rápida de Uso (4 Pasos)</h3>
+          <p class="text-xs text-slate-500">Sigue estos pasos para cotizar tu obra sin trabarte.</p>
+        </div>
+        <button type="button" onclick="closeGuideModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:text-slate-900">✕</button>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <p class="font-bold text-slate-900">1. Registra tu Obra y Cliente</p>
+            <p class="text-slate-600">En <strong>Obras</strong> escribe el nombre del proyecto y cliente.</p>
+          </div>
+          <button type="button" onclick="closeGuideModal(); switchAppTab('project');" class="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white font-semibold shrink-0">Ir</button>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <p class="font-bold text-slate-900">2. Pon tus Precios y Mano de Obra</p>
+            <p class="text-slate-600">En <strong>Mi Taller</strong> ajusta $/kg de aluminio, cristal, % mano de obra y tu logo.</p>
+          </div>
+          <button type="button" onclick="closeGuideModal(); switchAppTab('settings');" class="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white font-semibold shrink-0">Ir</button>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <p class="font-bold text-slate-900">3. Agrega Ventanas o Puertas</p>
+            <p class="text-slate-600">En <strong>Agregar</strong> elige línea, medidas en cm y presiona <strong>+ Agregar a la Obra</strong>.</p>
+          </div>
+          <button type="button" onclick="closeGuideModal(); switchAppTab('design');" class="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white font-semibold shrink-0">Ir</button>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <p class="font-bold text-slate-900">4. Saca Cortes, Barras 6m y PDF</p>
+            <p class="text-slate-600">En <strong>Taller</strong> ves despiece y barras; en <strong>Obras</strong> sacas tu <strong>Cotización PDF</strong>.</p>
+          </div>
+          <button type="button" onclick="closeGuideModal(); switchAppTab('cuts');" class="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white font-semibold shrink-0">Ir</button>
+        </div>
+      </div>
+
+      <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-slate-900">Tu Progreso en esta Prueba</span>
+          <span id="guideProgressBadge" class="font-mono font-bold text-emerald-700">0/5 pasos</span>
+        </div>
+        <div id="guideChecklist" class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600"></div>
+        <textarea id="inpGuideFeedback" rows="2" placeholder="¿Te trabaste en algo o qué precio/perfil te faltó? Escríbelo aquí..." class="w-full p-2.5 rounded-xl bg-white border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-slate-900"></textarea>
+        <button type="button" onclick="sendFeedbackReportWhatsApp()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
+          Enviar Reporte de Prueba por WhatsApp
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1461,6 +1527,59 @@
       });
     }
 
+    const TELEMETRY_KEY = 'alupro_telemetry_v1';
+    function getTelemetry() {
+      try {
+        return JSON.parse(localStorage.getItem(TELEMETRY_KEY) || '{"steps":{},"events":[]}');
+      } catch (e) { return { steps: {}, events: [] }; }
+    }
+    function trackEvent(stepKey, detail) {
+      try {
+        const t = getTelemetry();
+        if (stepKey) t.steps[stepKey] = true;
+        t.events.push({ at: new Date().toLocaleTimeString('es-MX'), action: stepKey, detail: detail || '' });
+        if (t.events.length > 40) t.events = t.events.slice(-40);
+        localStorage.setItem(TELEMETRY_KEY, JSON.stringify(t));
+      } catch (e) {}
+    }
+    function openGuideModal() {
+      const t = getTelemetry();
+      const labels = [
+        ['obra_nombrada', 'Nombró obra/cliente'],
+        ['precios_editados', 'Ajustó precios/taller'],
+        ['pieza_agregada', 'Agregó ventana/puerta'],
+        ['taller_visto', 'Revisó cortes/barras'],
+        ['pdf_abierto', 'Abrió Cotización PDF']
+      ];
+      let done = 0;
+      const listHtml = labels.map(([k, lbl]) => {
+        const ok = !!t.steps[k];
+        if (ok) done++;
+        return `<div class="flex items-center gap-1.5 ${ok ? 'text-emerald-700 font-semibold' : 'text-slate-500'}"><span>${ok ? '✓' : '○'}</span><span>${lbl}</span></div>`;
+      }).join('');
+      document.getElementById('guideChecklist').innerHTML = listHtml;
+      document.getElementById('guideProgressBadge').textContent = `${done}/${labels.length} pasos`;
+      document.getElementById('modalGuide').classList.remove('hidden');
+    }
+    function closeGuideModal() {
+      localStorage.setItem('alupro_seen_guide_v1', '1');
+      document.getElementById('modalGuide').classList.add('hidden');
+    }
+    function sendFeedbackReportWhatsApp() {
+      const t = getTelemetry();
+      const note = (document.getElementById('inpGuideFeedback').value || 'Sin comentarios extra').trim();
+      const stepsDone = Object.keys(t.steps).filter(k => t.steps[k]).join(', ') || 'ninguno aún';
+      const msg = [
+        `*REPORTE DE PRUEBA - ALUPRO*`,
+        `Taller: ${appSettings.workshopName}`,
+        `Aluminio $/kg: $${appSettings.aluPriceKg} | Mano obra: ${profitMarginPct}% | Desc: ${matecoDiscountPct}%`,
+        `Piezas en obra: ${projectPieces.length}`,
+        `Pasos completados: ${stepsDone}`,
+        `Comentarios / Donde se trabó: ${note}`
+      ].join('\n');
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       loadSavedState();
       applyWorkshopBranding();
@@ -1469,6 +1588,8 @@
       setupEconomicControls();
       if (new URLSearchParams(window.location.search).get('casa140') === '1') {
         loadSampleCasa140(true);
+      } else if (!localStorage.getItem('alupro_seen_guide_v1')) {
+        setTimeout(openGuideModal, 400);
       }
       updateProjectUI();
       updateCalculations();
@@ -1997,6 +2118,7 @@
       }
 
       persistState();
+      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
       updateProjectUI();
 
       const toast = document.getElementById('toastAdded');
@@ -2017,6 +2139,7 @@
       const dc = document.getElementById('designActiveClientLabel');
       if (dw) dw.textContent = pName;
       if (dc) dc.textContent = cName;
+      trackEvent('obra_nombrada', pName);
       persistState();
     }
     function startNewWorkFromHome() {
@@ -2058,6 +2181,7 @@
         btn.classList.toggle('text-slate-500', !isTarget);
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (tab === 'cuts') trackEvent('taller_visto', '');
     }
 
     function switchTallerSubTab(sub) {
@@ -2135,6 +2259,7 @@
       addFelpa = !!p.felpa;
       projectPieces = projectPieces.filter(item => item.id !== id);
       persistState();
+      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
       updateProjectUI();
       updateCalculations();
       switchAppTab('design');
@@ -2149,6 +2274,7 @@
       copy.cuts = (copy.cuts || []).map(c => ({ ...c, tag: copy.tag }));
       projectPieces.push(copy);
       persistState();
+      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
       updateProjectUI();
       updateCalculations();
     }
@@ -2156,6 +2282,7 @@
     function removePiece(id) {
       projectPieces = projectPieces.filter(p => p.id !== id);
       persistState();
+      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
       updateProjectUI();
     }
 
@@ -2227,6 +2354,7 @@
       document.getElementById('docClientName').value = h.client || 'Cliente Residencial';
       document.getElementById('hdrActiveProjectBadge').textContent = h.name;
       persistState();
+      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
       updateProjectUI();
       closeProjectsModal();
     }
@@ -2243,6 +2371,7 @@
       document.getElementById('hdrActiveProjectBadge').textContent = 'Nueva Obra';
       document.getElementById('expInputTag').value = 'V-01';
       persistState();
+      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
       updateProjectUI();
       closeProjectsModal();
     }
@@ -2381,6 +2510,7 @@
       applyWorkshopBranding();
       document.getElementById('selMatecoBranch').value = appSettings.supplierPhone;
       persistState();
+      trackEvent('precios_editados', `$${appSettings.aluPriceKg}/kg`);
       updateCalculations();
       closeSettingsModal();
     }
@@ -2466,6 +2596,7 @@
         `;
       }).join('');
       renderLetterheadTotals();
+      trackEvent('pdf_abierto', `${list.length} partidas`);
       document.getElementById('modalLetterhead').classList.remove('hidden');
     }
 
