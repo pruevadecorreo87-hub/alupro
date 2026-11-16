@@ -503,6 +503,18 @@
             </button>
           </div>
         </div>
+
+        <!-- Récord de Obras Guardadas directo en Inicio -->
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Récord de Obras Guardadas</h3>
+              <p class="text-[11px] text-slate-500">Guarda tus cotizaciones para abrirlas o editarlas después.</p>
+            </div>
+            <button type="button" onclick="saveCurrentProjectToHistory()" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold shrink-0">Guardar Actual</button>
+          </div>
+          <div id="homeSavedProjectsList" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar"></div>
+        </div>
         </div> <!-- /tabPanelProject -->
 
         <!-- PESTAÑA 4: MI TALLER Y PRECIOS -->
@@ -541,6 +553,20 @@
               <input type="number" id="expInstallFee" min="0" step="50" value="350" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-mono text-slate-900">
             </div>
           </div>
+
+          <!-- Candado PIN de 4 dígitos -->
+          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">PIN de Seguridad (Opcional)</h3>
+              <p class="text-xs text-slate-500">Protege tus precios y obras con un PIN de 4 dígitos por si reenvían tu enlace.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="password" inputmode="numeric" maxlength="4" id="inpWorkshopPin" placeholder="4 dígitos (ej. 1234)" class="flex-1 p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm font-mono text-slate-900 tracking-widest">
+              <button type="button" onclick="saveWorkshopPin()" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-semibold">Guardar PIN</button>
+              <button type="button" onclick="clearWorkshopPin()" class="px-3 py-2.5 rounded-xl bg-slate-100 text-slate-600 text-xs font-semibold">Quitar</button>
+            </div>
+            <p id="lblPinStatus" class="text-[11px] text-slate-500">Sin PIN activo.</p>
+          </div>
         </div> <!-- /tabPanelSettings -->
 
   </main>
@@ -567,6 +593,17 @@
       </button>
     </div>
   </footer>
+
+  <!-- MODAL: CANDADO PIN 4 DÍGITOS -->
+  <div id="modalPinLock" class="hidden fixed inset-0 z-[60] bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="zen-glass rounded-3xl max-w-xs w-full p-6 space-y-4 text-center">
+      <h3 class="text-base font-bold text-slate-900">Acceso Protegido</h3>
+      <p class="text-xs text-slate-500">Ingresa tu PIN de 4 dígitos para abrir tus obras y precios.</p>
+      <input type="password" inputmode="numeric" maxlength="4" id="inpPinUnlock" placeholder="••••" class="w-full p-3 text-center text-xl font-mono tracking-[0.5em] rounded-xl bg-slate-50 border border-slate-300 text-slate-900">
+      <p id="lblPinError" class="hidden text-xs text-red-600 font-semibold">PIN incorrecto. Intenta de nuevo.</p>
+      <button type="button" onclick="verifyWorkshopPin()" class="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-sm">Desbloquear</button>
+    </div>
+  </div>
 
   <div id="printContainer" class="hidden"></div>
 
@@ -1624,6 +1661,45 @@
       }
     }
 
+    const PIN_STORAGE_KEY = 'alupro_pin_v1_' + TALLER_ID;
+    function refreshPinUI() {
+      const saved = localStorage.getItem(PIN_STORAGE_KEY);
+      const lbl = document.getElementById('lblPinStatus');
+      if (lbl) lbl.textContent = saved ? 'PIN de 4 dígitos activo en este taller.' : 'Sin PIN activo.';
+    }
+    function saveWorkshopPin() {
+      const val = (document.getElementById('inpWorkshopPin').value || '').trim();
+      if (!/^\d{4}$/.test(val)) { alert('Ingresa exactamente 4 números.'); return; }
+      localStorage.setItem(PIN_STORAGE_KEY, val);
+      sessionStorage.setItem('alupro_pin_ok_' + TALLER_ID, '1');
+      document.getElementById('inpWorkshopPin').value = '';
+      refreshPinUI();
+      alert('PIN guardado.');
+    }
+    function clearWorkshopPin() {
+      localStorage.removeItem(PIN_STORAGE_KEY);
+      sessionStorage.removeItem('alupro_pin_ok_' + TALLER_ID);
+      refreshPinUI();
+    }
+    function checkPinOnLoad() {
+      refreshPinUI();
+      const saved = localStorage.getItem(PIN_STORAGE_KEY);
+      if (saved && sessionStorage.getItem('alupro_pin_ok_' + TALLER_ID) !== '1') {
+        document.getElementById('modalPinLock').classList.remove('hidden');
+      }
+    }
+    function verifyWorkshopPin() {
+      const saved = localStorage.getItem(PIN_STORAGE_KEY);
+      const entered = (document.getElementById('inpPinUnlock').value || '').trim();
+      if (entered === saved) {
+        sessionStorage.setItem('alupro_pin_ok_' + TALLER_ID, '1');
+        document.getElementById('modalPinLock').classList.add('hidden');
+        document.getElementById('lblPinError').classList.add('hidden');
+      } else {
+        document.getElementById('lblPinError').classList.remove('hidden');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       loadSavedState();
       applyWorkshopBranding();
@@ -1632,7 +1708,9 @@
       setupEconomicControls();
       updateProjectUI();
       updateCalculations();
+      renderSavedProjectsList();
       updateInstructorBar();
+      checkPinOnLoad();
     });
 
     function loadSampleCasa140(silent) {
@@ -2367,23 +2445,23 @@
 
     function renderSavedProjectsList() {
       const history = getSavedHistory();
-      const el = document.getElementById('savedProjectsList');
-      if (history.length === 0) {
-        el.innerHTML = '<div class="text-center py-6 text-slate-600 text-xs">No hay obras guardadas en el historial todavía.</div>';
-        return;
-      }
-      el.innerHTML = history.map(h => `
+      const emptyHtml = '<div class="text-center py-4 text-slate-500 text-xs">Aún no tienes obras guardadas.</div>';
+      const cardsHtml = history.map(h => `
         <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2 text-xs">
-          <div>
-            <p class="font-bold text-slate-900">${h.name} <span class="text-slate-500 font-normal">(${h.date})</span></p>
+          <div class="min-w-0">
+            <p class="font-bold text-slate-900 truncate">${h.name} <span class="text-slate-500 font-normal">(${h.date})</span></p>
             <p class="text-[11px] text-slate-600">${h.pieces.length} partida(s) • Total: <strong class="text-emerald-700">$${h.total.toLocaleString()} MXN</strong></p>
           </div>
-          <div class="flex gap-1.5">
+          <div class="flex gap-1.5 shrink-0">
             <button type="button" onclick="loadProjectFromHistory(${h.id})" class="px-2.5 py-1 rounded-lg bg-slate-900 text-white font-bold">Abrir</button>
-            <button type="button" onclick="deleteProjectFromHistory(${h.id})" class="px-2 py-1 rounded-lg bg-slate-100 text-red-300 hover:bg-red-500/20">✕</button>
+            <button type="button" onclick="deleteProjectFromHistory(${h.id})" class="px-2 py-1 rounded-lg bg-slate-100 text-red-600 hover:bg-red-50">✕</button>
           </div>
         </div>
       `).join('');
+      const el = document.getElementById('savedProjectsList');
+      if (el) el.innerHTML = history.length === 0 ? emptyHtml : cardsHtml;
+      const homeEl = document.getElementById('homeSavedProjectsList');
+      if (homeEl) homeEl.innerHTML = history.length === 0 ? emptyHtml : cardsHtml;
     }
 
     function loadProjectFromHistory(id) {
@@ -2393,8 +2471,12 @@
       document.getElementById('docProjectName').value = h.name;
       document.getElementById('docClientName').value = h.client || 'Cliente Residencial';
       document.getElementById('hdrActiveProjectBadge').textContent = h.name;
+      const qp = document.getElementById('inpQuickProjectName');
+      const qc = document.getElementById('inpQuickClientName');
+      if (qp) qp.value = h.name;
+      if (qc) qc.value = h.client || 'Cliente Residencial';
       persistState();
-      trackEvent('pieza_agregada', `${tag} (${currentModel.id})`);
+      trackEvent('obra_abierta', h.name);
       updateProjectUI();
       closeProjectsModal();
     }
