@@ -39,45 +39,38 @@
     }
 
     body {
-      background-color: #252a23;
-      background-image:
-        radial-gradient(circle at 15% 15%, rgba(214, 197, 176, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 85% 30%, rgba(160, 185, 155, 0.10) 0%, transparent 50%),
-        linear-gradient(180deg, #252a23 0%, #1a1e18 100%);
-      background-attachment: fixed;
-      color: #f3efe9;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      transition: background-color 0.3s ease;
+      background-color: #0b0d10;
+      color: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .zen-glass {
-      background: rgba(22, 26, 21, 0.92);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.60);
+      background: rgba(28, 28, 30, 0.96);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
     }
 
     .zen-card {
-      background: rgba(24, 28, 23, 0.76);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.42);
+      background: #1c1c1e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32);
     }
 
     .btn-zen-cream {
-      background: #e8dfd2;
-      color: #1a1d17;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-      transition: all 0.2s ease;
+      background: #e5c99b;
+      color: #111315;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(229, 201, 155, 0.20);
+      transition: transform 0.15s ease, background-color 0.15s ease;
     }
     .btn-zen-cream:hover {
-      background: #f5eee4;
-      transform: translateY(-1px);
+      background: #f0d7ad;
     }
     .btn-zen-cream:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -86,43 +79,43 @@
 </head>
 <body class="min-h-screen antialiased relative overflow-x-hidden pb-12">
 
-  <!-- ================= BARRA SUPERIOR LIMPIA (TU MARCA) ================= -->
-  <header class="relative z-30 w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3 border-b border-white/10 bg-[#151813]/95 backdrop-blur-md sticky top-0">
+  <!-- ================= BARRA SUPERIOR LIMPIA ESTILO iOS ================= -->
+  <header class="relative z-30 w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3 border-b border-white/10 bg-[#121214]/90 backdrop-blur-xl sticky top-0">
     <div class="flex items-center gap-3 min-w-0">
-      <div id="hdrLogoBox" class="w-9 h-9 rounded-xl bg-[#d6c5b0] text-[#181b15] flex items-center justify-center font-bold text-sm shadow shrink-0 overflow-hidden">
+      <div id="hdrLogoBox" class="w-10 h-10 rounded-2xl bg-[#e5c99b] text-[#111315] flex items-center justify-center font-bold text-sm shadow shrink-0 overflow-hidden">
         <img id="hdrWorkshopLogo" src="" alt="Logo" class="hidden w-full h-full object-contain bg-white p-0.5">
         <svg id="hdrDefaultIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h1m3-4v8m3-12v16m3-10v4m3-8v12m3-6h1"/>
         </svg>
       </div>
       <div class="min-w-0">
-        <span id="hdrWorkshopName" class="text-sm font-bold tracking-tight text-white block truncate">Taller de Cancelería</span>
-        <span id="hdrActiveProjectBadge" class="text-[11px] font-medium text-[#d6c5b0] block truncate">Obra Actual</span>
+        <span id="hdrWorkshopName" class="text-[15px] font-bold tracking-tight text-white block truncate">Mi Taller de Cancelería</span>
+        <span id="hdrActiveProjectBadge" class="text-xs font-medium text-[#e5c99b] block truncate">Obra Actual</span>
       </div>
     </div>
 
-    <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/25 hover:bg-amber-500/40 text-amber-200 border border-amber-400/40 transition shrink-0">
+    <button type="button" id="btnInstallPwa" onclick="installPwaApp()" class="hidden items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-[#0A84FF] text-white shadow shrink-0">
       <span>📲 Instalar</span>
     </button>
   </header>
 
-  <!-- ================= CUERPO PRINCIPAL (MODO APP POR PESTAÑAS) ================= -->
-  <main class="relative z-10 w-full max-w-7xl mx-auto p-2.5 sm:p-5 pb-24 md:pb-8 space-y-3 sm:space-y-4">
+  <!-- ================= CUERPO PRINCIPAL (ESTILO iPHONE 4 PESTAÑAS) ================= -->
+  <main class="relative z-10 w-full max-w-5xl mx-auto p-3.5 sm:p-6 pb-28 md:pb-10 space-y-4">
 
     <!-- BARRA DE PESTAÑAS DE APP (SOLO ESCRITORIO) -->
-    <nav class="hidden md:grid zen-card rounded-2xl p-1.5 grid-cols-4 gap-1.5 text-xs font-semibold">
-      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-2 px-2 rounded-xl bg-[#d6c5b0] text-[#181b15] font-bold flex items-center justify-center gap-1.5 transition">
-        <span>🏠</span><span class="truncate">Obras</span>
-        <span class="app-obra-badge px-1.5 py-0.5 rounded-full bg-emerald-500/25 text-emerald-900 text-[10px] font-mono">0</span>
+    <nav class="hidden md:grid bg-[#1c1c1e] border border-white/10 rounded-2xl p-1.5 grid-cols-4 gap-1.5 text-xs font-semibold">
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-2.5 px-3 rounded-xl bg-[#e5c99b] text-[#111315] font-bold flex items-center justify-center gap-2 transition">
+        <span>🏠</span><span>Obras</span>
+        <span class="app-obra-badge px-2 py-0.5 rounded-full bg-black/15 text-[11px] font-mono">0</span>
       </button>
-      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-2 px-2 rounded-xl text-stone-300 hover:text-white hover:bg-white/5 flex items-center justify-center gap-1.5 transition">
-        <span>📐</span><span class="truncate">Diseñar</span>
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-2.5 px-3 rounded-xl text-stone-300 hover:text-white flex items-center justify-center gap-2 transition">
+        <span>📐</span><span>Agregar</span>
       </button>
-      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-2 px-2 rounded-xl text-stone-300 hover:text-white hover:bg-white/5 flex items-center justify-center gap-1.5 transition">
-        <span>✂️</span><span class="truncate">Cortes</span>
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-2.5 px-3 rounded-xl text-stone-300 hover:text-white flex items-center justify-center gap-2 transition">
+        <span>✂️</span><span>Taller</span>
       </button>
-      <button type="button" data-apptab="supply" onclick="switchAppTab('supply')" class="app-tab-btn py-2 px-2 rounded-xl text-stone-300 hover:text-white hover:bg-white/5 flex items-center justify-center gap-1.5 transition">
-        <span>🪟</span><span class="truncate">Vidrio/Herraje</span>
+      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-2.5 px-3 rounded-xl text-stone-300 hover:text-white flex items-center justify-center gap-2 transition">
+        <span>⚙️</span><span>Mi Taller</span>
       </button>
     </nav>
 
@@ -324,144 +317,147 @@
       </div>
     </div>
 
-    <!-- PESTAÑA 2: CORTES Y BARRAS 6.00 M -->
+    <!-- PESTAÑA 3: TALLER (SEGMENTED CONTROL ESTILO iPHONE) -->
     <div id="tabPanelCuts" class="hidden space-y-4">
-        
-        <!-- TABLA 1: GUÍA DE CORTE MILIMÉTRICO EN TALLER -->
-        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+      <div class="bg-[#1c1c1e] border border-white/10 rounded-2xl p-1.5 grid grid-cols-4 gap-1 text-xs font-semibold">
+        <button type="button" data-tallertab="cuts" onclick="switchTallerSubTab('cuts')" class="taller-sub-btn py-2 rounded-xl bg-[#e5c99b] text-[#111315] font-bold transition">Cortes</button>
+        <button type="button" data-tallertab="bars" onclick="switchTallerSubTab('bars')" class="taller-sub-btn py-2 rounded-xl text-stone-300 hover:text-white transition">Barras 6m</button>
+        <button type="button" data-tallertab="glass" onclick="switchTallerSubTab('glass')" class="taller-sub-btn py-2 rounded-xl text-stone-300 hover:text-white transition">Cristales</button>
+        <button type="button" data-tallertab="hw" onclick="switchTallerSubTab('hw')" class="taller-sub-btn py-2 rounded-xl text-stone-300 hover:text-white transition">Herrajes</button>
+      </div>
+
+      <!-- SUB-VISTA 1: CORTES -->
+      <div id="tallerSubCuts" class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
             <div>
-              <h3 class="text-sm font-bold text-white">✂️ 1. Lista Exacta de Cortes en Taller</h3>
-              <p class="text-xs text-stone-300">Despiece con descuentos calibrados y ángulo de sierra.</p>
+              <h3 class="text-sm font-bold text-white">✂️ Cortes en Taller</h3>
+              <p class="text-xs text-stone-400">Medidas exactas y ángulo de sierra.</p>
             </div>
-            <button type="button" onclick="printWorkshopSheet(barsScope === 'project')" class="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-semibold text-white flex items-center gap-1.5 border border-white/15 transition">
-              <span>🖨️ Imprimir Hoja de Corte</span>
+            <button type="button" onclick="printWorkshopSheet(barsScope === 'project')" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white flex items-center gap-1.5 transition">
+              <span>🖨️ Imprimir Hoja</span>
             </button>
           </div>
 
-          <div class="overflow-x-auto rounded-xl border border-white/15 bg-black/45 max-h-80 overflow-y-auto">
+          <div class="overflow-x-auto rounded-xl border border-white/10 bg-black/30 max-h-96 overflow-y-auto">
             <table class="w-full text-left text-xs">
-              <thead class="bg-[#111410] text-stone-300 font-semibold border-b border-white/15 sticky top-0">
+              <thead class="bg-[#141416] text-stone-300 font-semibold border-b border-white/10 sticky top-0">
                 <tr>
-                  <th class="p-2 sm:p-2.5">Ubic.</th>
-                  <th class="p-2 sm:p-2.5">Perfil</th>
-                  <th class="p-2 sm:p-2.5">Clave</th>
-                  <th class="p-2 sm:p-2.5 text-center">Pzas</th>
-                  <th class="p-2 sm:p-2.5">Corte</th>
-                  <th class="p-2 sm:p-2.5 hidden sm:table-cell">Fórmula</th>
-                  <th class="p-2 sm:p-2.5">Ángulo</th>
+                  <th class="p-2.5">Ubic.</th>
+                  <th class="p-2.5">Perfil</th>
+                  <th class="p-2.5">Clave</th>
+                  <th class="p-2.5 text-center">Pzas</th>
+                  <th class="p-2.5">Corte</th>
+                  <th class="p-2.5 hidden sm:table-cell">Fórmula</th>
+                  <th class="p-2.5">Ángulo</th>
                 </tr>
               </thead>
               <tbody id="tblExpCutsBody" class="divide-y divide-white/10 text-stone-100 font-mono">
               </tbody>
             </table>
           </div>
-        </div>
+      </div>
 
-        <!-- TABLA 2: MATERIAL A COMPRAR EN BARRAS DE 6.00 M -->
-        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+      <!-- SUB-VISTA 2: BARRAS 6.00 M -->
+      <div id="tallerSubBars" class="hidden zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
             <div>
-              <h3 class="text-sm font-bold text-white">📦 2. Material a Comprar (Barras de 6.00 m)</h3>
-              <p class="text-xs text-stone-300">Optimización 1D barra por barra con etiquetas de ubicación para el cortador.</p>
+              <h3 class="text-sm font-bold text-white">📦 Barras de 6.00 m a Comprar</h3>
+              <p class="text-xs text-stone-400">Optimización barra por barra.</p>
             </div>
+            <button type="button" onclick="showMatecoModal()" class="px-3.5 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              📋 Pedir por WhatsApp
+            </button>
           </div>
 
-          <div class="overflow-x-auto rounded-xl border border-white/15 bg-black/45">
+          <div class="overflow-x-auto rounded-xl border border-white/10 bg-black/30">
             <table class="w-full text-left text-xs">
-              <thead class="bg-[#111410] text-stone-300 font-semibold border-b border-white/15">
+              <thead class="bg-[#141416] text-stone-300 font-semibold border-b border-white/10">
                 <tr>
-                  <th class="p-2 sm:p-2.5">Perfil (Clave)</th>
-                  <th class="p-2 sm:p-2.5">Metros</th>
-                  <th class="p-2 sm:p-2.5">A Comprar</th>
-                  <th class="p-2 sm:p-2.5 hidden sm:table-cell">Plan de Corte por Barra</th>
-                  <th class="p-2 sm:p-2.5 text-right">Peso</th>
+                  <th class="p-2.5">Perfil (Clave)</th>
+                  <th class="p-2.5">Metros</th>
+                  <th class="p-2.5">A Comprar</th>
+                  <th class="p-2.5 hidden sm:table-cell">Plan de Corte</th>
+                  <th class="p-2.5 text-right">Peso</th>
                 </tr>
               </thead>
               <tbody id="tblExpBarsBody" class="divide-y divide-white/10 text-stone-100 font-mono">
               </tbody>
             </table>
           </div>
-        </div>
+      </div>
 
-        </div> <!-- /tabPanelCuts -->
-
-        <!-- PESTAÑA 3: VIDRIO Y HERRAJES -->
-        <div id="tabPanelSupply" class="hidden space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 space-y-2.5">
-            <div class="border-b border-white/10 pb-2">
-              <h4 class="text-xs font-bold text-white">🪟 3. Cristales a Medida (Vidriería)</h4>
-              <p class="text-[11px] text-stone-300" id="lblSelectedGlassDesc">Medidas exactas de corte + m² totales.</p>
+      <!-- SUB-VISTA 3: CRISTALES -->
+      <div id="tallerSubGlass" class="hidden zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+            <div class="border-b border-white/10 pb-2.5">
+              <h4 class="text-sm font-bold text-white">🪟 Cristales a Medida (Vidriería)</h4>
+              <p class="text-xs text-stone-400" id="lblSelectedGlassDesc">Medidas exactas de corte + m² totales.</p>
             </div>
-            <div class="overflow-x-auto max-h-60 overflow-y-auto">
+            <div class="overflow-x-auto max-h-96 overflow-y-auto">
               <table class="w-full text-left text-xs">
-                <thead class="text-stone-300 text-[11px] border-b border-white/10">
+                <thead class="text-stone-400 text-[11px] border-b border-white/10">
                   <tr>
-                    <th class="py-1.5">Pzas / Tipo</th>
-                    <th class="py-1.5">Medida (W × H)</th>
-                    <th class="py-1.5 text-right">Área</th>
+                    <th class="py-2">Pzas / Tipo</th>
+                    <th class="py-2">Medida (W × H)</th>
+                    <th class="py-2 text-right">Área</th>
                   </tr>
                 </thead>
                 <tbody id="tblExpGlassBody" class="divide-y divide-white/10 text-stone-100 font-mono">
                 </tbody>
               </table>
             </div>
-          </div>
+      </div>
 
-          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 space-y-2.5">
-            <div class="border-b border-white/10 pb-2">
-              <h4 class="text-xs font-bold text-white">🔩 4. Herrajes y Accesorios</h4>
-              <p class="text-[11px] text-stone-300">Consolidado de carretillas, jaladeras, felpa y vinil.</p>
+      <!-- SUB-VISTA 4: HERRAJES -->
+      <div id="tallerSubHw" class="hidden zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+            <div class="border-b border-white/10 pb-2.5">
+              <h4 class="text-sm font-bold text-white">🔩 Herrajes y Consumibles</h4>
+              <p class="text-xs text-stone-400">Carretillas, jaladeras, felpa, vinil y silicón.</p>
             </div>
-            <div class="overflow-x-auto max-h-60 overflow-y-auto">
+            <div class="overflow-x-auto max-h-96 overflow-y-auto">
               <table class="w-full text-left text-xs">
-                <thead class="text-stone-300 text-[11px] border-b border-white/10">
+                <thead class="text-stone-400 text-[11px] border-b border-white/10">
                   <tr>
-                    <th class="py-1.5">Insumo / Herraje</th>
-                    <th class="py-1.5 text-right">Cant.</th>
+                    <th class="py-2">Insumo / Herraje</th>
+                    <th class="py-2 text-right">Cant.</th>
                   </tr>
                 </thead>
                 <tbody id="tblExpHwBody" class="divide-y divide-white/10 text-stone-100">
                 </tbody>
               </table>
             </div>
-          </div>
+      </div>
+    </div> <!-- /tabPanelCuts -->
 
-        </div>
-        </div> <!-- /tabPanelSupply -->
-
-        <!-- PESTAÑA 1: OBRAS Y CLIENTES (INICIO) -->
+        <!-- PESTAÑA 1: OBRAS Y CLIENTES (INICIO LIMPIO ESTILO iPHONE) -->
         <div id="tabPanelProject" class="space-y-4">
 
-        <!-- Registrar o Editar Obra Activa -->
-        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between gap-2 border-b border-white/10 pb-2">
-            <div>
-              <h2 class="text-sm sm:text-base font-bold text-white">1. Registrar Trabajo / Obra</h2>
-              <p class="text-[11px] text-stone-300">Pon el nombre de la obra y del cliente antes de agregar ventanas.</p>
+        <!-- Tarjeta Obra Activa -->
+        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3.5">
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-base font-bold text-white">Obra Activa</h2>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="openProjectsModal()" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold text-white">📂 Mis Obras</button>
+              <button type="button" onclick="startNewWorkFromHome()" class="px-3 py-1.5 rounded-full bg-[#0A84FF] hover:bg-[#0A84FF]/90 text-xs font-semibold text-white">＋ Nueva</button>
             </div>
-            <button type="button" onclick="startNewWorkFromHome()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white border border-white/15 shrink-0">🆕 Nueva Obra</button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
             <div>
-              <label for="inpQuickProjectName" class="text-[11px] font-semibold text-stone-300 block mb-1">Nombre de la Obra / Proyecto:</label>
-              <input type="text" id="inpQuickProjectName" oninput="syncQuickWorkInputs()" placeholder="Ej. Casa Familia Pérez" class="w-full p-2.5 rounded-xl bg-[#121511] border border-white/20 text-white font-semibold focus:outline-none focus:border-[#d6c5b0]">
+              <label for="inpQuickProjectName" class="text-[11px] font-medium text-stone-400 block mb-1">Nombre de la Obra</label>
+              <input type="text" id="inpQuickProjectName" oninput="syncQuickWorkInputs()" placeholder="Ej. Casa Familia Pérez" class="w-full p-3 rounded-xl bg-[#111214] border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-[#e5c99b]">
             </div>
             <div>
-              <label for="inpQuickClientName" class="text-[11px] font-semibold text-stone-300 block mb-1">Nombre del Cliente:</label>
-              <input type="text" id="inpQuickClientName" oninput="syncQuickWorkInputs()" placeholder="Ej. Arq. Juan Pérez" class="w-full p-2.5 rounded-xl bg-[#121511] border border-white/20 text-white focus:outline-none focus:border-[#d6c5b0]">
+              <label for="inpQuickClientName" class="text-[11px] font-medium text-stone-400 block mb-1">Cliente</label>
+              <input type="text" id="inpQuickClientName" oninput="syncQuickWorkInputs()" placeholder="Ej. Arq. Juan Pérez" class="w-full p-3 rounded-xl bg-[#111214] border border-white/10 text-white text-sm focus:outline-none focus:border-[#e5c99b]">
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-            <button type="button" onclick="switchAppTab('design')" class="py-3 px-4 rounded-xl btn-zen-cream font-bold text-xs flex items-center justify-center gap-2 shadow">
-              <span>📐 Agregar Ventana o Puerta a esta Obra</span>
+          <div class="grid grid-cols-2 gap-2.5 pt-1">
+            <button type="button" onclick="switchAppTab('design')" class="py-3.5 px-3 rounded-2xl btn-zen-cream text-xs sm:text-sm flex items-center justify-center gap-1.5">
+              <span>＋ Agregar Ventana</span>
             </button>
-            <button type="button" onclick="openProjectsModal()" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold text-xs flex items-center justify-center gap-2 transition">
-              <span>📂 Mis Obras Guardadas / Ejemplo 140m²</span>
+            <button type="button" onclick="showLetterheadModal()" class="py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5">
+              <span>📄 Cotización PDF</span>
             </button>
           </div>
         </div>
@@ -470,80 +466,81 @@
         <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
           <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
             <div class="flex items-center gap-2">
-              <span class="text-sm font-bold text-white">Partidas en Obra</span>
-              <span id="expProjectCount" class="text-xs font-bold px-2 py-0.5 rounded-full bg-white/15 text-[#e8dfd2]">0 pzas</span>
+              <span class="text-sm font-bold text-white">Partidas</span>
+              <span id="expProjectCount" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-[#e5c99b]">0 pzas</span>
             </div>
-            <span id="expTotalProjectSale" class="text-sm font-bold text-emerald-300 font-mono">$0 MXN</span>
+            <span id="expTotalProjectSale" class="text-base font-bold text-[#30D158] font-mono">$0 MXN</span>
           </div>
 
           <div id="expProjectPiecesList" class="space-y-2 max-h-96 overflow-y-auto no-scrollbar">
           </div>
 
-          <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
-            <button type="button" onclick="printWorkshopSheet(true)" class="py-2.5 px-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-[11px] flex items-center justify-center gap-1 transition">
-              <span>🖨️ Corte Obra</span>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+            <button type="button" onclick="printWorkshopSheet(true)" class="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs flex items-center justify-center gap-1.5">
+              <span>🖨️ Hoja de Corte</span>
             </button>
-            <button type="button" onclick="showMatecoModal()" class="py-2.5 px-2 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/45 border border-emerald-400/40 text-emerald-100 font-bold text-[11px] flex items-center justify-center gap-1 transition">
-              <span>📋 Surtido 6m</span>
+            <button type="button" onclick="showMatecoModal()" class="py-2.5 px-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 font-semibold text-xs flex items-center justify-center gap-1.5">
+              <span>📋 Pedir Barras 6m</span>
             </button>
-            <button type="button" onclick="showLetterheadModal()" class="py-2.5 px-2 rounded-xl btn-zen-cream font-bold text-[11px] flex items-center justify-center gap-1">
-              <span>📄 PDF Cliente</span>
-            </button>
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="openProjectsModal()" class="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition">
-              <span>📂 Mis Obras Guardadas</span>
-            </button>
-            <button type="button" onclick="openSettingsModal()" class="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-[#d6c5b0] font-semibold text-xs flex items-center justify-center gap-1.5 transition">
-              <span>⚙️ Mi Taller, Logo y Precios</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Parámetros Económicos Rápidos -->
-        <div class="zen-card rounded-2xl sm:rounded-3xl p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <div class="flex items-center justify-between text-xs">
-              <label for="expProfitRange" class="text-stone-200 font-medium">Mano de Obra (%):</label>
-              <span id="expProfitVal" class="font-bold text-[#d6c5b0]">50%</span>
-            </div>
-            <input type="range" id="expProfitRange" min="15" max="150" value="50" class="w-full accent-[#d6c5b0] bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
-          </div>
-
-          <div>
-            <div class="flex items-center justify-between text-xs">
-              <label for="expMatecoDiscount" class="text-stone-200 font-medium">Desc. Proveedor:</label>
-              <span id="expMatecoDiscountVal" class="font-bold text-emerald-300">10%</span>
-            </div>
-            <input type="range" id="expMatecoDiscount" min="0" max="35" value="10" class="w-full accent-emerald-400 bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
-          </div>
-
-          <div>
-            <div class="flex items-center justify-between text-xs">
-              <label for="expInstallFee" class="text-stone-200 font-medium">Instalación/Flete (pza):</label>
-            </div>
-            <input type="number" id="expInstallFee" min="0" step="50" value="350" class="w-full mt-1.5 p-1.5 rounded-lg bg-[#121511] border border-white/20 text-xs font-mono text-white">
           </div>
         </div>
         </div> <!-- /tabPanelProject -->
 
+        <!-- PESTAÑA 4: MI TALLER Y PRECIOS -->
+        <div id="tabPanelSettings" class="hidden space-y-4">
+          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-3">
+            <h2 class="text-base font-bold text-white">Mi Negocio y Marca</h2>
+            <p class="text-xs text-stone-400">Personaliza tu logo, nombre, precios por kg de aluminio y precios de cristal para tus cotizaciones PDF.</p>
+            <button type="button" onclick="openSettingsModal()" class="w-full py-3.5 rounded-2xl btn-zen-cream text-sm flex items-center justify-center gap-2">
+              <span>⚙️ Editar Logo, Nombre y Precios</span>
+            </button>
+          </div>
+
+          <!-- Márgenes y Costos Rápidos -->
+          <div class="zen-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white">Márgenes de Ganancia e Instalación</h3>
+            <div>
+              <div class="flex items-center justify-between text-xs">
+                <label for="expProfitRange" class="text-stone-200 font-medium">Mano de Obra (%):</label>
+                <span id="expProfitVal" class="font-bold text-[#e5c99b]">50%</span>
+              </div>
+              <input type="range" id="expProfitRange" min="15" max="150" value="50" class="w-full accent-[#e5c99b] bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-xs">
+                <label for="expMatecoDiscount" class="text-stone-200 font-medium">Descuento Proveedor (%):</label>
+                <span id="expMatecoDiscountVal" class="font-bold text-[#30D158]">10%</span>
+              </div>
+              <input type="range" id="expMatecoDiscount" min="0" max="35" value="10" class="w-full accent-[#30D158] bg-white/15 h-1.5 rounded mt-2 cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <label for="expInstallFee" class="text-stone-200 font-medium">Instalación / Flete por pieza ($ MXN):</label>
+              </div>
+              <input type="number" id="expInstallFee" min="0" step="50" value="350" class="w-full p-2.5 rounded-xl bg-[#111214] border border-white/15 text-sm font-mono text-white">
+            </div>
+          </div>
+        </div> <!-- /tabPanelSettings -->
+
   </main>
 
-  <!-- BARRA INFERIOR TIPO APP NATIVA (MÓVIL / VENTANA ANGOSTA) -->
-  <footer class="no-print md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#141712]/95 backdrop-blur-xl border-t border-white/15 px-2 py-1.5">
+  <!-- BARRA INFERIOR TIPO APP NATIVA IPHONE -->
+  <footer class="no-print md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#121214]/95 backdrop-blur-2xl border-t border-white/10 px-2 pt-1.5 pb-2">
     <div class="max-w-3xl mx-auto grid grid-cols-4 gap-1 text-[10px] font-semibold">
-      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-xl bg-[#d6c5b0] text-[#181b15] font-bold flex flex-col items-center justify-center gap-0.5 relative transition">
-        <span class="text-sm">🏠</span><span>Obras</span>
-        <span class="app-obra-badge absolute top-0.5 right-3 px-1.5 rounded-full bg-emerald-500 text-[#121511] text-[9px] font-bold font-mono">0</span>
+      <button type="button" data-apptab="project" onclick="switchAppTab('project')" class="app-tab-btn py-1.5 px-1 rounded-xl bg-[#e5c99b] text-[#111315] font-bold flex flex-col items-center justify-center gap-0.5 relative transition">
+        <span class="text-base leading-none">🏠</span><span>Obras</span>
+        <span class="app-obra-badge absolute top-0.5 right-3 px-1.5 rounded-full bg-[#30D158] text-[#111315] text-[9px] font-bold font-mono">0</span>
       </button>
-      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-300 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
-        <span class="text-sm">📐</span><span>Diseñar</span>
+      <button type="button" data-apptab="design" onclick="switchAppTab('design')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-400 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+        <span class="text-base leading-none">📐</span><span>Agregar</span>
       </button>
-      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-300 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
-        <span class="text-sm">✂️</span><span>Cortes</span>
+      <button type="button" data-apptab="cuts" onclick="switchAppTab('cuts')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-400 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+        <span class="text-base leading-none">✂️</span><span>Taller</span>
       </button>
-      <button type="button" data-apptab="supply" onclick="switchAppTab('supply')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-300 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
-        <span class="text-sm">🪟</span><span>Vidrio</span>
+      <button type="button" data-apptab="settings" onclick="switchAppTab('settings')" class="app-tab-btn py-1.5 px-1 rounded-xl text-stone-400 hover:text-white flex flex-col items-center justify-center gap-0.5 transition">
+        <span class="text-base leading-none">⚙️</span><span>Mi Taller</span>
       </button>
     </div>
   </footer>
@@ -2033,7 +2030,7 @@
       const panels = {
         design: document.getElementById('tabPanelDesign'),
         cuts: document.getElementById('tabPanelCuts'),
-        supply: document.getElementById('tabPanelSupply'),
+        settings: document.getElementById('tabPanelSettings'),
         project: document.getElementById('tabPanelProject')
       };
       Object.entries(panels).forEach(([k, el]) => {
@@ -2043,17 +2040,38 @@
       });
       const scopeBanner = document.getElementById('scopeBanner');
       if (scopeBanner) {
-        if (tab === 'cuts' || tab === 'supply') scopeBanner.classList.remove('hidden');
+        if (tab === 'cuts') scopeBanner.classList.remove('hidden');
         else scopeBanner.classList.add('hidden');
       }
       document.querySelectorAll('.app-tab-btn').forEach(btn => {
         const isTarget = btn.getAttribute('data-apptab') === tab;
-        btn.classList.toggle('bg-[#d6c5b0]', isTarget);
-        btn.classList.toggle('text-[#181b15]', isTarget);
+        btn.classList.toggle('bg-[#e5c99b]', isTarget);
+        btn.classList.toggle('text-[#111315]', isTarget);
+        btn.classList.toggle('font-bold', isTarget);
+        btn.classList.toggle('text-stone-400', !isTarget);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchTallerSubTab(sub) {
+      const subs = {
+        cuts: document.getElementById('tallerSubCuts'),
+        bars: document.getElementById('tallerSubBars'),
+        glass: document.getElementById('tallerSubGlass'),
+        hw: document.getElementById('tallerSubHw')
+      };
+      Object.entries(subs).forEach(([k, el]) => {
+        if (!el) return;
+        if (k === sub) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+      document.querySelectorAll('.taller-sub-btn').forEach(btn => {
+        const isTarget = btn.getAttribute('data-tallertab') === sub;
+        btn.classList.toggle('bg-[#e5c99b]', isTarget);
+        btn.classList.toggle('text-[#111315]', isTarget);
         btn.classList.toggle('font-bold', isTarget);
         btn.classList.toggle('text-stone-300', !isTarget);
       });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function updateProjectUI() {
