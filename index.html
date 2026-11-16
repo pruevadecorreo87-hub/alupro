@@ -1990,7 +1990,7 @@
       });
 
       // Auto-incrementar sugerencia de etiqueta V-01 -> V-02
-      const match = tag.match(/^(.*?)(d+)(.*)$/);
+      const match = tag.match(/^(.*?)(\d+)(.*)$/);
       if (match) {
         const nextNum = String(parseInt(match[2]) + 1).padStart(match[2].length, '0');
         document.getElementById('expInputTag').value = `${match[1]}${nextNum}${match[3]}`;
@@ -2163,6 +2163,11 @@
     // MODALES: HISTORIAL DE OBRAS, PRECIOS/FÓRMULAS, MATECO, PDF
     // ========================================================
     function openProjectsModal() {
+      const inp = document.getElementById('inpSaveProjectName');
+      const curName = (document.getElementById('docProjectName').value || '').trim();
+      if (inp && !inp.value && curName && curName !== 'Obra Actual') {
+        inp.value = curName;
+      }
       renderSavedProjectsList();
       document.getElementById('modalProjects').classList.remove('hidden');
     }
