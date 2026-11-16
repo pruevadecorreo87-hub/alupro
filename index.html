@@ -33,6 +33,11 @@
       margin: 0;
     }
 
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       background-color: #252a23;
       background-image:
@@ -91,8 +96,8 @@
       </div>
       <div class="min-w-0">
         <div class="flex items-center gap-1.5">
-          <span class="text-xs sm:text-sm font-bold tracking-tight text-white truncate">AluPro</span>
-          <span id="hdrActiveProjectBadge" class="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-[#d6c5b0]/20 text-[#e8dfd2] border border-[#d6c5b0]/30 truncate max-w-[110px] sm:max-w-none">Obra Actual</span>
+          <span class="text-xs sm:text-sm font-bold tracking-tight text-white">AluPro</span>
+          <span id="hdrActiveProjectBadge" class="text-[10px] font-bold tracking-wide px-1.5 py-0.5 rounded-full bg-[#d6c5b0]/20 text-[#e8dfd2] border border-[#d6c5b0]/30 truncate max-w-[72px] sm:max-w-none">Obra Actual</span>
         </div>
         <p class="hidden sm:block text-[11px] text-stone-300">Despiece Milimétrico • Optimización 6.00 m • Costeo Real</p>
       </div>
@@ -142,9 +147,9 @@
     </nav>
 
     <!-- PESTAÑA 1: DISEÑAR (CONFIGURADOR + CAD + PRECIO) -->
-    <div id="tabPanelDesign" class="space-y-4">
+    <div id="tabPanelDesign" class="space-y-4 max-w-full overflow-hidden">
     <!-- PANEL 1: CONFIGURADOR DE VANO Y LÍNEA -->
-    <section class="zen-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 space-y-3">
+    <section class="zen-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 space-y-3 max-w-full overflow-hidden">
       <div class="flex items-center justify-between gap-2 border-b border-white/10 pb-2">
         <div>
           <h2 class="text-xs sm:text-base font-bold text-white">1. Configuración de Vano</h2>
